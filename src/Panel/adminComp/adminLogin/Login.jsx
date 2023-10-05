@@ -46,7 +46,7 @@ const Login = () => {
         confirmButtonColor: "#e25829",
       });
       localStorage.setItem("token-admin", res.data?.results.token);
-      navigate("/admin/dashboard");
+      navigate("/restaurant/dashboard");
     } 
   };
 
@@ -142,7 +142,7 @@ const Login = () => {
                 <a
                   className="forgot_pass"
                   onClick={() => {
-                    navigate("/admin/login/forgot-Password");
+                    navigate("/restaurant/login/forgot-Password");
                   }}>
                   Forgot Password?
                 </a>

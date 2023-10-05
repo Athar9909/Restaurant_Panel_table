@@ -38,7 +38,7 @@ const ForgotPass = () => {
               <div className="col-12 form-group mt-4 mb-0">
                 <a
                   onClick={() => {
-                    navigate("/admin/login/forgot-Password/OTP-verification");
+                    navigate("/restaurant/login/forgot-Password/OTP-verification");
                   }}
                   className="comman_btn">
                   Send OTP

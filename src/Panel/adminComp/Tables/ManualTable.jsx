@@ -137,22 +137,31 @@ const ManualTable = () => {
                           <tr>
                             <th>S. No</th>
                             <th>Restaurant Address</th>
-                            <th>Branch Manger Name</th>
+                            <th>Restaurant Name</th>
                             <th>Email Id</th>
                             <th>Mobile Number</th>
-                            <th>restaurant description</th>
+                            <th>QR code</th>
                             <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
                           {(tables || [])?.map((itm, idx) => (
                             <tr>
-                              <td>05</td>
-                              <td>Alexandria, Egypt</td>
-                              <td>Mohan Salah</td>
-                              <td>Mohan@gmail.com</td>
-                              <td>+20 989 8888888</td>
-                              <td>Lorem ipsum dolor site...</td>
+                              <td>{idx + 1}</td>
+                              <td>
+                                {itm?.restaurantId.restaurant_address?.slice(
+                                  0,
+                                  15
+                                )}
+                              </td>
+                              <td>{itm?.name}</td>
+                              <td>{itm?.restaurantId.email}</td>
+                              <td>{itm?.restaurantId.phone_number}</td>
+                              <td>
+                                <img 
+                                width={40}
+                                src={itm?.QRCode}></img>
+                              </td>
                               <td>
                                 <form className="table_btns d-flex align-items-center">
                                   <div className="check_toggle">

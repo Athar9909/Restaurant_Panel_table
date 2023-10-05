@@ -15,35 +15,35 @@ function App() {
     <div className="App">
        <BrowserRouter>
       <Routes>
-        <Route path="/admin/login" element={<Login />} />
-        <Route path="/admin/login/forgot-Password" element={<ForgotPass />} />
+        <Route path="/restaurant/login" element={<Login />} />
+        <Route path="/restaurant/login/forgot-Password" element={<ForgotPass />} />
         <Route
-          path="/admin/login/forgot-Password/OTP-verification"
+          path="/restaurant/login/forgot-Password/OTP-verification"
           element={<OtpVerify />}
         />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/restaurant/dashboard" element={<Dashboard />} />
         <Route
-          path="/admin/dashboard/branch-management"
+          path="/restaurant/dashboard/branch-management"
           element={<BranchManage />}
         />
         <Route
-          path="/admin/dashboard/category-management"
+          path="/restaurant/dashboard/category-management"
           element={<CategoryManage />}
         />
         <Route
-          path="/admin/dashboard/cuisines-management"
+          path="/restaurant/dashboard/cuisines-management"
           element={<CuisineManage />}
         />
         <Route
-          path="/admin/dashboard/table/manual-table"
+          path="/restaurant/dashboard/table/manual-table"
           element={<ManualTable />}
         />
         <Route
-          path="/admin/dashboard/booking/takeaway"
+          path="/restaurant/dashboard/booking/takeaway"
           element={<TakeAway />}
         />
-        <Route path="/admin/dashboard/booking/dinings" element={<Dining />} />
-        <Route path="/admin/dashboard/booking/AddOn" element={<AddOn />} />
+        <Route path="/restaurant/dashboard/booking/dinings" element={<Dining />} />
+        <Route path="/restaurant/dashboard/booking/AddOn" element={<AddOn />} />
       </Routes>
     </BrowserRouter>
     </div>

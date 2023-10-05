@@ -32,7 +32,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
 
   const Logout = () => {
     localStorage.removeItem("token-admin");
-    navigate("/admin/Login");
+    navigate("/restaurant/Login");
     window.location.reload();
   };
 
@@ -50,7 +50,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               type="button"
               data-bs-toggle="collapse"
               onClick={() => {
-                navigate("/admin/dashboard");
+                navigate("/restaurant/dashboard");
               }}
               data-bs-target="#collapseOne"
               aria-expanded="true"
@@ -98,7 +98,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               <div className="siderbar_menus">
                 <a
                   onClick={() => {
-                    navigate("/admin/dashboard/branch-management");
+                    navigate("/restaurant/dashboard/branch-management");
                   }}>
                   Branch Manager
                 </a>
@@ -136,19 +136,19 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               <div className="siderbar_menus">
                 <a
                   onClick={() => {
-                    navigate("/admin/dashboard/category-management");
+                    navigate("/restaurant/dashboard/category-management");
                   }}>
                   Category Management
                 </a>
                 <a
                   onClick={() => {
-                    navigate("/admin/dashboard/cuisines-management");
+                    navigate("/restaurant/dashboard/cuisines-management");
                   }}>
                   Cuisines Management
                 </a>
                 <a
                   onClick={() => {
-                    navigate("/admin/dashboard/booking/AddOn");
+                    navigate("/restaurant/dashboard/booking/AddOn");
                   }}>
                   Add On
                 </a>
@@ -186,13 +186,13 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               <div className="siderbar_menus">
                 <a
                   onClick={() => {
-                    navigate("/admin/dashboard/booking/takeaway");
+                    navigate("/restaurant/dashboard/booking/takeaway");
                   }}>
                   Takeaway
                 </a>
                 <a
                   onClick={() => {
-                    navigate("/admin/dashboard/booking/dinings");
+                    navigate("/restaurant/dashboard/booking/dinings");
                   }}>
                   Dining
                 </a>
@@ -232,7 +232,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               <div className="siderbar_menus">
                 <a
                   onClick={() => {
-                    navigate("/admin/dashboard/table/manual-table");
+                    navigate("/restaurant/dashboard/table/manual-table");
                   }}>
                   Manual Table Management
                 </a>
@@ -314,7 +314,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               className="accordion-button collapsed arrow_remove"
               onClick={() => {
                 localStorage.removeItem("token-admin");
-                navigate("/admin/Login");
+                navigate("/restaurant/Login");
                 window.location.reload();
               }}>
               <img src={require("../../assets/img/logout.png")} alt="" /> Logout
