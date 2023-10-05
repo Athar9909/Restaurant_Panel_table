@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.da8dc04c.css",
+    "main.js": "/static/js/main.ed8f2846.js",
+    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.d75e3fd1eb12e9bd6655.ttf",
+    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.016b4a6cdced82ab3aa1.ttf",
+    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.b6879d41b0852f01ed5b.woff2",
+    "static/media/onboarding_bg.png": "/static/media/onboarding_bg.54c1a6246c9138d96c36.png",
+    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.878f31251d960bd6266f.woff2",
+    "static/media/head_img.png": "/static/media/head_img.edb380553423c71a54b1.png",
+    "static/media/verify.png": "/static/media/verify.f36f24dcc0dcdf37ba84.png",
+    "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.50701fbb8177c2dde530.ttf",
+    "static/media/loggo.png": "/static/media/loggo.157685ced10ade399a83.png",
+    "static/media/take_away.png": "/static/media/take_away.02bfb26ac0f6170ef929.png",
+    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.b041b1fa4fe241b23445.woff2",
+    "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.c6a0c95b0a95c4553700.ttf",
+    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.1bac2991f3dbfa237aec.woff2",
+    "index.html": "/index.html",
+    "main.da8dc04c.css.map": "/static/css/main.da8dc04c.css.map",
+    "main.ed8f2846.js.map": "/static/js/main.ed8f2846.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da8dc04c.css",
+    "static/js/main.ed8f2846.js"
+  ]
+}
