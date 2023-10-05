@@ -15,6 +15,7 @@ function App() {
     <div className="App">
        <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/restaurant/login" element={<Login />} />
         <Route path="/restaurant/login/forgot-Password" element={<ForgotPass />} />
         <Route
