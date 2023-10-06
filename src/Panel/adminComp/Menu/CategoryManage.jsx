@@ -80,7 +80,7 @@ const CategoryManage = () => {
                       className="comman_btn"
                       data-bs-toggle="modal"
                       data-bs-target="#promocode">
-                      <strong>Add Category</strong>
+                      <strong>+Add Category</strong>
                     </a>
                   </div>
                 </div>

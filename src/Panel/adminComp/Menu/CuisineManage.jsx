@@ -431,9 +431,9 @@ const CuisineManage = () => {
                       name="price"
                       placeholder="Enter Price"
                     />
-                    {errors.name && (
+                    {errors.price && (
                       <small className="errorText  ">
-                        {errors.name?.message}
+                        {errors.price?.message}
                       </small>
                     )}
                   </div>

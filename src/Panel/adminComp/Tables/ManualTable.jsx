@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Dashboard/Sidebar";
-import { AllManTables } from "../adminLogin/httpServicesAdmin/adminApis";
+import {
+  AddNewQR,
+  AllBranches,
+  AllManTables,
+} from "../adminLogin/httpServicesAdmin/adminApis";
 import Profile from "../Dashboard/Profile";
+import Swal from "sweetalert2";
 
 const ManualTable = () => {
   const [slide, setSlide] = useState("TableM");
   const [sideBar, setSideBar] = useState();
   const [tables, setTables] = useState([]);
+  const [tableName, setTableName] = useState([]);
+  const [branch, setBranch] = useState([]);
+  const [selectBranch, setSelectBranch] = useState([]);
+
   useEffect(() => {
     getAllTables();
+    getAllBranches();
   }, []);
 
   const getAllTables = async (key) => {
@@ -18,6 +28,32 @@ const ManualTable = () => {
     if (!data?.error) {
       let values = data?.results?.tables;
       setTables(values);
+    }
+  };
+  const getAllBranches = async () => {
+    const { data } = await AllBranches();
+    if (!data?.error) {
+      setBranch(data?.results?.restaurants);
+    }
+  };
+
+  const GenerateQR = async () => {
+    const { data } = await AddNewQR({
+      name: tableName,
+      branchId: selectBranch,
+    });
+    if (!data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+        timer: "2000",
+      });
+      getAllTables();
+      setTableName("");
+      document.getElementById("modalClose").click();
+      document.getElementById("reset1").click();
     }
   };
 
@@ -47,6 +83,16 @@ const ManualTable = () => {
                         alt=""
                       />
                     </button>
+                  </div>
+                  <div className="col-3">
+                    <div className="">
+                      <a
+                        className="comman_btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#promocode">
+                        <strong>+Add Category</strong>
+                      </a>
+                    </div>
                   </div>
                   <div className="col-3">
                     <div className="dropdown fliter_dropdown">
@@ -136,8 +182,8 @@ const ManualTable = () => {
                         <thead>
                           <tr>
                             <th>S. No</th>
-                            <th>Restaurant Address</th>
-                            <th>Restaurant Name</th>
+                            {/* <th>Restaurant Address</th> */}
+                            <th>Table Name</th>
                             <th>Email Id</th>
                             <th>Mobile Number</th>
                             <th>QR code</th>
@@ -148,19 +194,25 @@ const ManualTable = () => {
                           {(tables || [])?.map((itm, idx) => (
                             <tr>
                               <td>{idx + 1}</td>
-                              <td>
+                              {/* <td>
                                 {itm?.restaurantId.restaurant_address?.slice(
                                   0,
                                   15
                                 )}
-                              </td>
+                              </td> */}
                               <td>{itm?.name}</td>
                               <td>{itm?.restaurantId.email}</td>
                               <td>{itm?.restaurantId.phone_number}</td>
                               <td>
-                                <img 
-                                width={40}
-                                src={itm?.QRCode}></img>
+                                <a
+                                  style={{
+                                    cursor: "zoom-in",
+                                  }}
+                                  href={itm?.QRCode}
+                                  target="_blank"
+                                  >
+                                  <img width={50} src={itm?.QRCode}></img>
+                                </a>
                               </td>
                               <td>
                                 <form className="table_btns d-flex align-items-center">
@@ -192,6 +244,85 @@ const ManualTable = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade comman_modal add_item"
+        id="promocode"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex={-1}
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                Add New Table
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                id="modalClose"
+              />
+            </div>
+            <div className="modal-body">
+              <div className="add_item_form">
+                <form className="row comman_dashboard_form" action="#">
+                  <div className="col-12 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      Table Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Table Name"
+                      onChange={(e) => {
+                        setTableName(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="col-12 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      Select Branch
+                    </label>
+
+                    <select
+                      className=" form-select form-control"
+                      name="categoryId"
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setSelectBranch(e.target.value);
+                      }}>
+                      <option selected="">Select Branch</option>
+                      {branch?.map((itm, id) => (
+                        <option value={itm?._id}>
+                          {itm?.restaurantId?.restaurant_name +
+                            "-" +
+                            itm?.username}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="col-4 form-group mb-0 position-relative">
+                    <a
+                      className="small_bts_bg text-center"
+                      onClick={() => {
+                        GenerateQR();
+                      }}>
+                      Generate QR
+                    </a>
+                    <button className="d-none" type="reset" id="reset1">
+                      reset
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
