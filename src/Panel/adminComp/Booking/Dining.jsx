@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
 import { GetOrders } from "../adminLogin/httpServicesAdmin/adminApis";
+import { useNavigate } from "react-router-dom";
 
 const Dining = () => {
   const [slide, setSlide] = useState("BookM");
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     getAllDinings();
   }, []);
@@ -214,7 +217,7 @@ const Dining = () => {
                           {list?.map((item, index) => (
                             <tr>
                               <td>{index + 1}</td>
-                              <td>{item?.tableId}</td>
+                              <td>{item?.tableId?.name}</td>
                               <td>{item?.orderId}</td>
                               <td>
                                 <div className="d-flex align-items-center">
@@ -227,7 +230,15 @@ const Dining = () => {
                                 </div>
                               </td>
                               <td>
-                                <a className="table_btn">View</a>
+                                <a
+                                  onClick={() => {
+                                    navigate(
+                                      `/restaurant/dashboard/booking/View/${item?.orderId}`
+                                    );
+                                  }}
+                                  className="table_btn">
+                                  View
+                                </a>
                               </td>
                             </tr>
                           ))}

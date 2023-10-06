@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
 import { GetOrders } from "../adminLogin/httpServicesAdmin/adminApis";
+import { useNavigate } from "react-router-dom";
 
 const TakeAway = () => {
   const [slide, setSlide] = useState("BookM");
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     getAllTakeaways();
   }, []);
@@ -142,44 +144,6 @@ const TakeAway = () => {
                               <option value={3}>Three</option>
                             </select>
                           </div>
-                          {/* <div className="form-group">
-                            <label htmlFor="">Status</label>
-                            <div className="row">
-                              <div className="col-auto">
-                                <div className="radio_bts">
-                                  <input
-                                    type="radio"
-                                    id={01}
-                                    name="radio"
-                                    className="d-none"
-                                  />
-                                  <label htmlFor={01}>Active</label>
-                                </div>
-                              </div>
-                              <div className="col-auto">
-                                <div className="radio_bts">
-                                  <input
-                                    type="radio"
-                                    id={02}
-                                    name="radio"
-                                    className="d-none"
-                                  />
-                                  <label htmlFor={02}>Complete</label>
-                                </div>
-                              </div>
-                              <div className="col-auto">
-                                <div className="radio_bts">
-                                  <input
-                                    type="radio"
-                                    id={03}
-                                    name="radio"
-                                    className="d-none"
-                                  />
-                                  <label htmlFor={03}>All</label>
-                                </div>
-                              </div>
-                            </div>
-                          </div> */}
                         </div>
                         <div className="filter_data_bottom">
                           <a className="small_bts_bg" href="javascript:;">
@@ -215,7 +179,7 @@ const TakeAway = () => {
                           {list?.map((item, index) => (
                             <tr>
                               <td>{index + 1}</td>
-                              <td>{item?.tableId}</td>
+                              <td>{item?.tableId?.name}</td>
                               <td>{item?.orderId}</td>
                               <td>13:30</td>
                               <td>
@@ -229,7 +193,15 @@ const TakeAway = () => {
                                 </div>
                               </td>
                               <td>
-                                <a className="table_btn">View</a>
+                                <a
+                                  className="table_btn"
+                                  onClick={() => {
+                                    navigate(
+                                      `/restaurant/dashboard/booking/View/${item?.orderId}`
+                                    );
+                                  }}>
+                                  View
+                                </a>
                               </td>
                             </tr>
                           ))}

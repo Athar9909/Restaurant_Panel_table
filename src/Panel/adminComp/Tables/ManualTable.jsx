@@ -184,8 +184,8 @@ const ManualTable = () => {
                             <th>S. No</th>
                             {/* <th>Restaurant Address</th> */}
                             <th>Table Name</th>
-                            <th>Email Id</th>
-                            <th>Mobile Number</th>
+                            {/* <th>Email Id</th>
+                            <th>Mobile Number</th> */}
                             <th>QR code</th>
                             <th>Status</th>
                           </tr>
@@ -201,8 +201,8 @@ const ManualTable = () => {
                                 )}
                               </td> */}
                               <td>{itm?.name}</td>
-                              <td>{itm?.restaurantId.email}</td>
-                              <td>{itm?.restaurantId.phone_number}</td>
+                              {/* <td>{itm?.restaurantId.email}</td>
+                              <td>{itm?.restaurantId.phone_number}</td> */}
                               <td>
                                 <a
                                   style={{
