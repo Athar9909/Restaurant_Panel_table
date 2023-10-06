@@ -197,7 +197,7 @@ const TakeAway = () => {
                                   className="table_btn"
                                   onClick={() => {
                                     navigate(
-                                      `/restaurant/dashboard/booking/View/${item?.orderId}`
+                                      `/restaurant/dashboard/booking/View/${item?._id}`
                                     );
                                   }}>
                                   View

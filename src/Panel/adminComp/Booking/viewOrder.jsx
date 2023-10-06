@@ -15,7 +15,7 @@ const ViewOrder = () => {
   const ViewOrder = async (key) => {
     const { data } = await ViewNewOrders(id);
     if (!data?.error) {
-      let values = data?.results?.orders;
+      let values = data?.results?.order;
       setOrder(values);
     }
   };
@@ -36,39 +36,16 @@ const ViewOrder = () => {
                   <div className="col-12">
                     <div className="row Customer_infotop align-items-center">
                       <div className="col">
-                        <h3>Customer Information:</h3>
+                        <h3>Order Information:</h3>
                       </div>
                       <div className="col-auto"></div>
                     </div>
                     <div className="row Customer_details">
-                      <div className="col-3 mb-5">
-                        <div className="Customer_boxx">
-                          <strong>Customer Name</strong>
-                          <span>Phill Mathews</span>
-                        </div>
-                      </div>
-                      <div className="col-3 mb-5">
-                        <div className="Customer_boxx">
-                          <strong>Mobile Number</strong>
-                          <span>+15 7859852566</span>
-                        </div>
-                      </div>
-                      <div className="col-3 mb-5">
-                        <div className="Customer_boxx">
-                          <strong>Mail Id</strong>
-                          <span>ex@gmail.com</span>
-                        </div>
-                      </div>
-                      <div className="col-3 mb-5">
-                        <div className="Customer_boxx">
-                          <strong>Address</strong>
-                          <span>Alexandria, Egypt</span>
-                        </div>
-                      </div>
+                     
                       <div className="col-3">
                         <div className="Customer_boxx">
-                          <strong>Pickup Date/Time</strong>
-                          <span>29 Aug 2023 13:30</span>
+                          <strong>Order Id</strong>
+                          <span>{order?.orderId}</span>
                         </div>
                       </div>
                     </div>
@@ -87,8 +64,8 @@ const ViewOrder = () => {
                     <div className="row Customer_details">
                       <div className="col-3">
                         <div className="Customer_boxx">
-                          <strong>Restaurant branch</strong>
-                          <span>Alexandria, Egypt</span>
+                          <strong>Table Name</strong>
+                          <span>{order?.tableId?.name}</span>
                         </div>
                       </div>
                       <div className="col-3">
@@ -114,15 +91,22 @@ const ViewOrder = () => {
                       <div className="col-3">
                         <div className="Customer_boxx">
                           <strong>Items</strong>
-                          <span>Ful Wa Ta’ameya</span>
-                          <span>Hamam Mahshi</span>
+                          {order?.cuisines?.map((itm, ind) => (
+                            <div className="d-flex">
+                              <span>{itm?.cuisineId?.name}</span>
+                              {/* <span>-EGP{itm?.cuisineId?.price}</span> */}
+                            </div>
+                          ))}
                         </div>
                       </div>
                       <div className="col-3">
                         <div className="Customer_boxx">
                           <strong>Quantity</strong>
-                          <span>02</span>
-                          <span>01</span>
+                          {order?.cuisines?.map((itm, ind) => (
+                            <div className="d-flex text-center  ">
+                              <span>{itm?.quantity}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
