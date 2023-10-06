@@ -51,7 +51,6 @@ const CuisineManage = () => {
     }
   };
 
-  console.log(options);
   const getAllAddons = async (key) => {
     const { data } = await AllAddOns({
       search: key ? key : "",
@@ -76,14 +75,13 @@ const CuisineManage = () => {
       setCuisines(values);
     }
   };
-  console.log(files);
 
   const handleChange = (selected) => {
     setSelectedAddon({
       optionSelected: selected,
     });
   };
-  console.log(selectedAddon);
+  
   const onSubmit = async (data) => {
     let addons = [];
     (selectedAddon.optionSelected || [])?.map((item) => {
@@ -485,6 +483,7 @@ const CuisineManage = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

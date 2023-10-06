@@ -70,7 +70,12 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
             data-bs-parent="#accordionExample">
             <div className="accordion-body">
               <div className="siderbar_menus">
-                <a>Restaurant</a>
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard");
+                  }}>
+                  Restaurant
+                </a>
                 {/* <a>Survey</a> */}
               </div>
             </div>
@@ -169,8 +174,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse3n"
               aria-expanded="true"
               aria-controls="collapse3n">
-              <img src={require("../../assets/img/booking.png")} alt="" />{" "}
-              Order Management
+              <img src={require("../../assets/img/booking.png")} alt="" /> Order
+              Management
             </button>
           </h2>
           <div
@@ -221,7 +226,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
           </h2>
           <div
             id="collapse4"
-             className={
+            className={
               slide === "TableM"
                 ? "accordion-collapse collapse show"
                 : "accordion-collapse collapse"

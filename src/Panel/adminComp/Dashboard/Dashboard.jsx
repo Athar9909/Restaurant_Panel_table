@@ -11,117 +11,56 @@ import Sidebar from "./Sidebar";
 // import AnimatedNumber from "react-animated-number/build/AnimatedNumber";
 import { Link } from "react-router-dom";
 import Profile from "./Profile";
+import { useForm } from "react-hook-form";
+import classNames from "classnames";
 // import { MDBDataTable } from "mdbreact";
 // import moment from "moment";
 
 const Dashboard = () => {
   const [slide, setSlide] = useState("Dash");
   const [sideBar, setSideBar] = useState();
-  const initialValue = 0.0;
+  const [files, setFiles] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // useEffect(() => {
-  //   getTotalData();
-  //   getRecentOrders();
-  // }, []);
-  // const [allBook, setAllBook] = useState({
-  //   columns: [
-  //     {
-  //       label: "S.NO.",
-  //       field: "sn",
-  //       sort: "asc",
-  //       width: 50,
-  //     },
-  //     {
-  //       label: "BOOKING ID",
-  //       field: "booking_id",
-  //       sort: "asc",
-  //       width: 100,
-  //     },
+  const onFileSelection = (e, key) => {
+    setFiles({ ...files, [key]: e.target.files[0] });
+  };
 
-  //     {
-  //       label: "BUYER NAME",
-  //       field: "name_buyer",
-  //       sort: "asc",
-  //       width: 100,
-  //     },
-  //     {
-  //       label: "VENDOR NAME",
-  //       field: "name_vendor",
-  //       sort: "asc",
-  //       width: 100,
-  //     },
-  //     {
-  //       label: "AMOUNT",
-  //       field: "number",
-  //       sort: "asc",
-  //       width: 100,
-  //     },
-  //     {
-  //       label: "SCHEDULED FOR",
-  //       field: "date",
-  //       sort: "asc",
-  //       width: 100,
-  //     },
-  //     {
-  //       label: "ACTION",
-  //       field: "action",
-  //       sort: "asc",
-  //       width: 100,
-  //     },
-  //   ],
-  //   rows: [],
-  // });
+  const onSubmit = async (data) => {
+    let addons = [];
+    // (selectedAddon.optionSelected || [])?.map((item) => {
+    //   addons.push(item?.value);
+    // });
+    // let formData = new FormData();
+    // formData.append("name", data?.name);
+    // formData.append("categoryId", data?.categoryId);
+    // formData.append("mainIngredients", JSON.stringify(data?.mainIngredients));
+    // formData.append("addOns", JSON.stringify(addons));
+    // formData.append("price", data?.price);
+    // formData.append("image", files?.cuisineImg);
 
-  // const getRecentOrders = async () => {
-  //   const { data } = await RecentOrders();
-  //   const newRows = [];
-  //   if (!data.error) {
-  //     let values = data?.results?.bookings;
-  //     console.log(values);
-  //     values?.map((list, index) => {
-  //       const returnData = {};
-  //       returnData.sn = index + 1 + ".";
-  //       returnData.booking_id = list?.bookingID;
-  //       returnData.name_buyer = list?.buyer?.full_name;
-  //       returnData.name_vendor = list?.vendor?.full_name;
-  //       returnData.number = list?.total;
-  //       returnData.date = moment(list?.event_date).format("L");
-  //       returnData.action = (
-  //         <>
-  //           <Link
-  //             className="comman_btn2 table_viewbtn"
-  //             to={`/Admin/Dashboard/Booking-Management/Booking-Details/${list?._id}`}
-  //             // state={{ id: list?._id }}
-  //           >
-  //             View
-  //           </Link>
-  //         </>
-  //       );
-  //       newRows.push(returnData);
-  //     });
-
-  //     setAllBook({ ...allBook, rows: newRows });
-  //   }
-  // };
-
-  // const getTotalData = async () => {
-  //   const dataBuyer = await totalBuyers();
-  //   const dataEarning = await totalEarning();
-  //   const dataVendor = await totalVendors();
-  //   const dataOrder = await totalOrders();
-  //   localStorage.setItem("buyers", dataBuyer?.data?.results.buyers);
-  //   localStorage.setItem(
-  //     "earning",
-  //     dataEarning?.data?.results.earning[0]?.total
-  //   );
-  //   localStorage.setItem("vendor", dataVendor?.data?.results.vendors);
-  //   localStorage.setItem("orders", dataOrder?.data?.results.orders);
-  // };
-
-  // let buyers = localStorage.getItem("buyers");
-  // let earning = localStorage.getItem("earning");
-  // let vendors = localStorage.getItem("vendor");
-  // let orders = localStorage.getItem("orders");
+    // const res = await AddNewCuisine(formData);
+    // if (!res?.data?.error) {
+    //   Swal.fire({
+    //     title: res?.data?.message,
+    //     icon: "success",
+    //     confirmButtonText: "Okay",
+    //     confirmButtonColor: "#e25829",
+    //   });
+    //   document.getElementById("modalClose").click();
+    //   document.getElementById("reset1").click();
+    //   getAllCuisines();
+    //   setSelectedAddon([
+    //     {
+    //       optionSelected: [],
+    //     },
+    //   ]);
+    // }
+  };
 
   const getBarClick = (val) => {
     console.log(val);
@@ -129,10 +68,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div
-      className="admin_main"
-      // className={sideBar === "click" ? "expanded_main" : "admin_main"}
-    >
+    <div className="admin_main">
       <Profile />
       <div className="admin_innermain d-flex">
         <Sidebar slide={slide} getBarClick={getBarClick} />
@@ -224,10 +160,16 @@ const Dashboard = () => {
                   </button>
                 </div>
                 <div className="col-3">
-                  <a className="comman_btns w-100">Add New Restaurant</a>
+                  <a
+                    data-bs-toggle="modal"
+                    data-bs-target="#additem"
+                    className="comman_btns w-100">
+                    +Add New Restaurant
+                  </a>
                 </div>
               </form>
             </div>
+
             <div className="col-12">
               <div className="row">
                 <div className="col-9"></div>
@@ -528,6 +470,186 @@ const Dashboard = () => {
                     </a>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal  fade comman_modal add_item"
+        id="additem"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex={-1}
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div className="modal-dialog modal-lg modal-dialog-centered ">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                Add New Restaurant
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                id="modalClose"
+              />
+            </div>
+            <div className="modal-body">
+              <div className="add_item_form">
+                <form
+                  className="row comman_dashboard_form "
+                  onSubmit={handleSubmit(onSubmit)}>
+                  <div className="col-12 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      Display Name
+                    </label>
+                    <input
+                      {...register("name", { required: true })}
+                      type="text"
+                      className={classNames("form-control", {
+                        "is-invalid": errors.name,
+                      })}
+                      name="name"
+                      placeholder="Enter Display Name"
+                    />
+                    {errors.name && (
+                      <small className="errorText  ">
+                        {errors.name?.message}
+                      </small>
+                    )}
+                  </div>
+                  <div className="col-12 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      Main Ingredients.
+                    </label>
+                    <input
+                      {...register("mainIngredients", { required: true })}
+                      type="text"
+                      className={classNames("form-control", {
+                        "is-invalid": errors.mainIngredients,
+                      })}
+                      name="mainIngredients"
+                      placeholder="Enter mainIngredients"
+                    />
+                    {errors.mainIngredients && (
+                      <small className="errorText  ">
+                        {errors.mainIngredients?.message}
+                      </small>
+                    )}
+                  </div>
+
+                  {/* <div className="col-12 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      Select Category
+                    </label>
+
+                    <select
+                      {...register("categoryId", {
+                        required: true,
+                        onChange: () => setCateId(""),
+                      })}
+                      className={classNames(" form-select form-control", {
+                        "is-invalid": errors.categoryId,
+                      })}
+                      name="categoryId"
+                      aria-label="Default select example">
+                      <option selected="">Select Category</option>
+                      {cates?.map((itm, id) => (
+                        <option value={itm?._id}>{itm?.name}</option>
+                      ))}
+                    </select>
+                    {errors.categoryId && (
+                      <small className="errorText  ">
+                        {errors.categoryId?.message}
+                      </small>
+                    )}
+                  </div> */}
+                  {/* <div className="col-12 form-group position-relative">
+                    <label className=" mb-1" htmlFor="">
+                      Select Addon
+                    </label>
+                    <Select
+                      isMulti
+                      name="colors"
+                      options={options}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      onChange={handleChange}
+                    />
+                    
+                    {errors.addOn && (
+                      <small className="errorText  ">
+                        {errors.addOn?.message}
+                      </small>
+                    )}
+                  </div> */}
+
+                  <div className="col-6 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      Price
+                    </label>
+                    <input
+                      {...register("price", { required: true })}
+                      type="text"
+                      className={classNames("form-control", {
+                        "is-invalid": errors.price,
+                      })}
+                      name="price"
+                      placeholder="Enter Price"
+                    />
+                    {errors.price && (
+                      <small className="errorText  ">
+                        {errors.price?.message}
+                      </small>
+                    )}
+                  </div>
+                  <div className="col-6 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      Compare Price
+                    </label>
+                    <input
+                      {...register("Cprice", { required: true })}
+                      type="text"
+                      className={classNames("form-control", {
+                        "is-invalid": errors.Cprice,
+                      })}
+                      name="Cprice"
+                      placeholder="Enter Price"
+                    />
+                    {errors.Cprice && (
+                      <small className="errorText  ">
+                        {errors.Cprice?.message}
+                      </small>
+                    )}
+                  </div>
+
+                  <div className="form-group col-12 choose_file position-relative">
+                    <label htmlFor="upload_video"> Upload Image</label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      defaultValue=""
+                      name="cuisineImg"
+                      id="upload_video"
+                      onChange={(e) => onFileSelection(e, "cuisineImg")}
+                    />
+                  </div>
+                  <div className="col-4 form-group mb-0 position-relative">
+                    <button className="small_bts_bg" type="submit">
+                      Add
+                    </button>
+                    <button
+                      className="small_bts_bg d-none"
+                      type="reset"
+                      id="reset1">
+                      reser
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

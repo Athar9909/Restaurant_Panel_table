@@ -49,7 +49,11 @@ const Profile = ({ slide, getBarClick, getBar }) => {
             </a>
           </div>
           <div className="col-auto">
-            <a className="user_profile">
+            <a
+              onClick={() => {
+                navigate("/restaurant/dashboard/profile");
+              }}
+              className="user_profile">
               <div className="name">DA</div>
             </a>
           </div>

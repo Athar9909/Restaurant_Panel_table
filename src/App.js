@@ -11,6 +11,7 @@ import AddOn from "./Panel/adminComp/Menu/AddOn";
 import TakeAway from "./Panel/adminComp/Booking/TakeAway";
 import Dining from "./Panel/adminComp/Booking/Dining";
 import ViewOrder from "./Panel/adminComp/Booking/viewOrder";
+import EditProfile from "./Panel/adminComp/Dashboard/EditProfile";
 function App() {
   return (
     <div className="App">
@@ -58,6 +59,10 @@ function App() {
           <Route
             path="/restaurant/dashboard/booking/AddOn"
             element={<AddOn />}
+          />
+           <Route
+            path="/restaurant/dashboard/profile"
+            element={<EditProfile />}
           />
         </Routes>
       </BrowserRouter>
