@@ -170,7 +170,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               aria-expanded="true"
               aria-controls="collapse3n">
               <img src={require("../../assets/img/booking.png")} alt="" />{" "}
-              Booking
+              Order Management
             </button>
           </h2>
           <div

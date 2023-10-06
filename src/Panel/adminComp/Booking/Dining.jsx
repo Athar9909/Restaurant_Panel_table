@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
+import { GetOrders } from "../adminLogin/httpServicesAdmin/adminApis";
 
 const Dining = () => {
   const [slide, setSlide] = useState("BookM");
   const [list, setList] = useState([]);
   useEffect(() => {
-    getAllTakeaways();
+    getAllDinings();
   }, []);
 
-  const getAllTakeaways = async (key) => {
-    const { data } = await {
+  const getAllDinings = async (key) => {
+    const { data } = await GetOrders({
       search: key ? key : "",
-    };
+      type: "Dining",
+    });
     if (!data?.error) {
-      let values = data?.results?.tables;
+      let values = data?.results?.orders;
       setList(values);
     }
   };
@@ -25,7 +27,6 @@ const Dining = () => {
         <Profile />
         <div className="admin_innermain d-flex">
           <Sidebar slide={slide} />
-
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
@@ -41,7 +42,10 @@ const Dining = () => {
                       </div>
                       <div className="statics_icon">
                         <span>
-                          <img src="assets/img/branch_icon.png" alt="" />
+                          <img
+                            src={require("../../assets/img/branch_icon.png")}
+                            alt=""
+                          />
                         </span>
                       </div>
                     </div>
@@ -54,7 +58,10 @@ const Dining = () => {
                       </div>
                       <div className="statics_icon">
                         <span>
-                          <img src="assets/img/incommingorder.png" alt="" />
+                          <img
+                            src={require("../../assets/img/incommingorder.png")}
+                            alt=""
+                          />
                         </span>
                       </div>
                     </div>
@@ -67,7 +74,10 @@ const Dining = () => {
                       </div>
                       <div className="statics_icon">
                         <span>
-                          <img src="assets/img/complete_order.png" alt="" />
+                          <img
+                            src={require("../../assets/img/complete_order.png")}
+                            alt=""
+                          />
                         </span>
                       </div>
                     </div>
@@ -80,7 +90,10 @@ const Dining = () => {
                       </div>
                       <div className="statics_icon">
                         <span>
-                          <img src="assets/img/cancel_order.png" alt="" />
+                          <img
+                            src={require("../../assets/img/cancel_order.png")}
+                            alt=""
+                          />
                         </span>
                       </div>
                     </div>
@@ -97,7 +110,10 @@ const Dining = () => {
                       placeholder="Search by restaurant name, order Id and mobile number"
                     />
                     <button className="search_bt">
-                      <img src="assets/img/search.png" alt="" />
+                      <img
+                        src={require("../../assets/img/search.png")}
+                        alt=""
+                      />
                     </button>
                   </div>
                   <div className="col-3">
@@ -188,166 +204,33 @@ const Dining = () => {
                         <thead>
                           <tr>
                             <th>Order Id</th>
-                            <th>Restaurant Address</th>
-                            <th>Customer Name</th>
-                            <th>Mobile Number</th>
-                            <th>Order Details</th>
-                            <th>Pickup Time</th>
+                            <th>Table ID</th>
+                            <th>Order ID</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>01</td>
-                            <td>Alexandria, Egypt</td>
-                            <td>Sonam Malik</td>
-                            <td>+20 989 8888888</td>
-                            <td>French,Italian,Mexi...</td>
-                            <td>13:30</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <img
-                                  className="status_img"
-                                  src="assets/img/accpted.png"
-                                  alt=""
-                                />{" "}
-                                Complete
-                              </div>
-                            </td>
-                            <td>
-                              <a
-                                className="table_btn"
-                                href="takeaway-view.html">
-                                View
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>02</td>
-                            <td>Alexandria, Egypt</td>
-                            <td>Sonam Malik</td>
-                            <td>+20 989 8888888</td>
-                            <td>French,Italian,Mexi...</td>
-                            <td>13:30</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <img
-                                  className="status_img"
-                                  src="assets/img/pending.png"
-                                  alt=""
-                                />{" "}
-                                Pending
-                              </div>
-                            </td>
-                            <td>
-                              <a
-                                className="table_btn"
-                                href="takeaway-view.html">
-                                View
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>03</td>
-                            <td>Alexandria, Egypt</td>
-                            <td>Sonam Malik</td>
-                            <td>+20 989 8888888</td>
-                            <td>French,Italian,Mexi...</td>
-                            <td>13:30</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <img
-                                  className="status_img"
-                                  src="assets/img/pending.png"
-                                  alt=""
-                                />{" "}
-                                Pending
-                              </div>
-                            </td>
-                            <td>
-                              <a
-                                className="table_btn"
-                                href="takeaway-view.html">
-                                View
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>04</td>
-                            <td>Alexandria, Egypt</td>
-                            <td>Sonam Malik</td>
-                            <td>+20 989 8888888</td>
-                            <td>French,Italian,Mexi...</td>
-                            <td>13:30</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <img
-                                  className="status_img"
-                                  src="assets/img/accpted.png"
-                                  alt=""
-                                />{" "}
-                                Complete
-                              </div>
-                            </td>
-                            <td>
-                              <a
-                                className="table_btn"
-                                href="takeaway-view.html">
-                                View
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>05</td>
-                            <td>Alexandria, Egypt</td>
-                            <td>Sonam Malik</td>
-                            <td>+20 989 8888888</td>
-                            <td>French,Italian,Mexi...</td>
-                            <td>13:30</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <img
-                                  className="status_img"
-                                  src="assets/img/pending.png"
-                                  alt=""
-                                />{" "}
-                                Pending
-                              </div>
-                            </td>
-                            <td>
-                              <a
-                                className="table_btn"
-                                href="takeaway-view.html">
-                                View
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>06</td>
-                            <td>Alexandria, Egypt</td>
-                            <td>Sonam Malik</td>
-                            <td>+20 989 8888888</td>
-                            <td>French,Italian,Mexi...</td>
-                            <td>13:30</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <img
-                                  className="status_img"
-                                  src="assets/img/pending.png"
-                                  alt=""
-                                />{" "}
-                                Pending
-                              </div>
-                            </td>
-                            <td>
-                              <a
-                                className="table_btn"
-                                href="takeaway-view.html">
-                                View
-                              </a>
-                            </td>
-                          </tr>
+                          {list?.map((item, index) => (
+                            <tr>
+                              <td>{index + 1}</td>
+                              <td>{item?.tableId}</td>
+                              <td>{item?.orderId}</td>
+                              <td>
+                                <div className="d-flex align-items-center">
+                                  <img
+                                    className="status_img"
+                                    src="assets/img/pending.png"
+                                    alt=""
+                                  />{" "}
+                                  Pending
+                                </div>
+                              </td>
+                              <td>
+                                <a className="table_btn">View</a>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
