@@ -50,7 +50,7 @@ const Dining = () => {
                             alt=""
                           />
                         </span>
-                      </div>
+                      </div>  
                     </div>
                   </div>
                   <div className="col-md-3">
@@ -105,12 +105,12 @@ const Dining = () => {
               </div>
               <div className="col-12 mb-4">
                 <form action="#" className="row search_part">
-                  <div className="form-group col-9 position-relative">
+                  <div className="form-group col-12 position-relative">
                     <input
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search by restaurant name, order Id and mobile number"
+                      placeholder="Search Order Id"
                     />
                     <button className="search_bt">
                       <img
@@ -119,84 +119,7 @@ const Dining = () => {
                       />
                     </button>
                   </div>
-                  <div className="col-3">
-                    <div className="dropdown fliter_dropdown">
-                      <a
-                        className="btn btn-secondary dropdown-toggle"
-                        href="#"
-                        role="button"
-                        id="dropdownMenuLink"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Filter: <strong>Not Applied</strong>
-                      </a>
-                      <div
-                        className="dropdown-menu p-0"
-                        aria-labelledby="dropdownMenuLink">
-                        <div className="filter_data_top">
-                          <div className="form-group mb-5">
-                            <label htmlFor="">Restaurant Address</label>
-                            <select
-                              className="form-select form-control"
-                              aria-label="Default select example">
-                              <option selected="">Alexandria, Egypt</option>
-                              <option value={1}>One</option>
-                              <option value={2}>Two</option>
-                              <option value={3}>Three</option>
-                            </select>
-                          </div>
-                          {/* <div className="form-group">
-                            <label htmlFor="">Status</label>
-                            <div className="row">
-                              <div className="col-auto">
-                                <div className="radio_bts">
-                                  <input
-                                    type="radio"
-                                    id={01}
-                                    name="radio"
-                                    className="d-none"
-                                  />
-                                  <label htmlFor={01}>Active</label>
-                                </div>
-                              </div>
-                              <div className="col-auto">
-                                <div className="radio_bts">
-                                  <input
-                                    type="radio"
-                                    id={02}
-                                    name="radio"
-                                    className="d-none"
-                                  />
-                                  <label htmlFor={02}>Complete</label>
-                                </div>
-                              </div>
-                              <div className="col-auto">
-                                <div className="radio_bts">
-                                  <input
-                                    type="radio"
-                                    id={03}
-                                    name="radio"
-                                    className="d-none"
-                                  />
-                                  <label htmlFor={03}>All</label>
-                                </div>
-                              </div>
-                            </div>
-                          </div> */}
-                        </div>
-                        <div className="filter_data_bottom">
-                          <a className="small_bts_bg" href="javascript:;">
-                            Apply Filter
-                          </a>
-                          <a
-                            className="small_bts_border ms-3"
-                            href="javascript:;">
-                            Reset
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  
                 </form>
               </div>
               <div className="col-12">

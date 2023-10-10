@@ -12,6 +12,7 @@ import TakeAway from "./Panel/adminComp/Booking/TakeAway";
 import Dining from "./Panel/adminComp/Booking/Dining";
 import ViewOrder from "./Panel/adminComp/Booking/viewOrder";
 import EditProfile from "./Panel/adminComp/Dashboard/EditProfile";
+import WaitingList from "./Panel/adminComp/Tables/WaitingList";
 function App() {
   return (
     <div className="App">
@@ -43,6 +44,10 @@ function App() {
           <Route
             path="/restaurant/dashboard/table/manual-table"
             element={<ManualTable />}
+          />
+          <Route
+            path="/restaurant/dashboard/table/waiting-table"
+            element={<WaitingList />}
           />
           <Route
             path="/restaurant/dashboard/booking/takeaway"

@@ -94,7 +94,6 @@ export async function AllCategories(formData) {
   }
 }
 
-
 export async function CsvImport(formData) {
   try {
     const { data } = await adminHttpService.post(
@@ -222,6 +221,36 @@ export async function AllManTables(formData) {
   try {
     const { data } = await adminHttpService.post(
       `${process.env.REACT_APP_APIENDPOINT}api/restaurant/getQRCodes`,
+      formData
+    );
+    console.log(data);
+    if (data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { data };
+  } catch (error) {
+    if (error.response) {
+      console.log(error?.response);
+      Swal.fire({
+        title: "Error!",
+        text: "",
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { error };
+  }
+}
+export async function WaitingTables(formData) {
+  try {
+    const { data } = await adminHttpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/getWaitingList`,
       formData
     );
     console.log(data);
@@ -490,6 +519,38 @@ export async function AddNewQR(formData) {
     return { error };
   }
 }
+
+export async function AddNewWaitQR(id) {
+  try {
+    const { data } = await adminHttpService.get(
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/generateWaitingQRCode/` +
+        id
+    );
+    console.log(data);
+    if (data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { data };
+  } catch (error) {
+    if (error?.response) {
+      console.log(error?.response);
+      Swal.fire({
+        title: "Error!",
+        text: "",
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { error };
+  }
+}
+
 export async function UpdateRestaurant(formData) {
   try {
     const { data } = await adminHttpService.post(

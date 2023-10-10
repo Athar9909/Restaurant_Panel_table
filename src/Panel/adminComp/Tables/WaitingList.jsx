@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Dashboard/Sidebar";
 import {
   AddNewQR,
+  AddNewWaitQR,
   AllBranches,
   AllManTables,
+  WaitingTables,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Profile from "../Dashboard/Profile";
 import Swal from "sweetalert2";
 
-const ManualTable = () => {
+const WaitingList = () => {
   const [slide, setSlide] = useState("TableM");
   const [sideBar, setSideBar] = useState();
   const [tables, setTables] = useState([]);
@@ -16,13 +18,14 @@ const ManualTable = () => {
   const [branch, setBranch] = useState([]);
   const [selectBranch, setSelectBranch] = useState([]);
   const [previewImg, setPreviewImg] = useState("");
+
   useEffect(() => {
-    getAllTables();
+    getAllWaitingTables();
     getAllBranches();
   }, []);
 
-  const getAllTables = async (key) => {
-    const { data } = await AllManTables({
+  const getAllWaitingTables = async (key) => {
+    const { data } = await WaitingTables({
       search: key ? key : "",
     });
     if (!data?.error) {
@@ -38,10 +41,7 @@ const ManualTable = () => {
   };
 
   const GenerateQR = async () => {
-    const { data } = await AddNewQR({
-      name: tableName,
-      branchId: selectBranch,
-    });
+    const { data } = await AddNewWaitQR(selectBranch);
     if (!data?.error) {
       Swal.fire({
         title: data?.message,
@@ -50,9 +50,10 @@ const ManualTable = () => {
         confirmButtonColor: "#e25829",
         timer: "2000",
       });
-      getAllTables();
-      setTableName("");
+      setPreviewImg(data?.results?.branch?.QRCode)
+      getAllWaitingTables();
       document.getElementById("modalClose").click();
+      document.getElementById("modalOpen").click();
       document.getElementById("reset1").click();
     }
   };
@@ -66,7 +67,7 @@ const ManualTable = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>Manual Table Management</h2>
+                <h2>Waiting Table List</h2>
               </div>
               <div className="col-12 mb-4">
                 <form action="#" className="row search_part">
@@ -87,10 +88,18 @@ const ManualTable = () => {
                   <div className="col-3">
                     <div className="">
                       <a
-                        className="comman_btn"
                         data-bs-toggle="modal"
-                        data-bs-target="#promocode">
-                        <strong>+Add Table</strong>
+                        data-bs-target="#promocode"
+                        className="comman_btn">
+                        <strong>Generate Waiting QR</strong>
+                      </a>
+
+                      <a
+                        data-bs-toggle="modal"
+                        data-bs-target="#preview"
+                        id="modalOpen"
+                        className="comman_btn d-none">
+                        <strong>Generate Waiting QR</strong>
                       </a>
                     </div>
                   </div>
@@ -127,14 +136,11 @@ const ManualTable = () => {
                               <td>{itm?.restaurantId.phone_number}</td> */}
                               <td>
                                 <a
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#preview"
                                   style={{
                                     cursor: "zoom-in",
                                   }}
-                                  onClick={() => {
-                                    setPreviewImg(itm?.QRCode);
-                                  }}>
+                                  href={itm?.QRCode}
+                                  target="_blank">
                                   <img width={50} src={itm?.QRCode}></img>
                                 </a>
                               </td>
@@ -199,19 +205,6 @@ const ManualTable = () => {
             <div className="modal-body">
               <div className="add_item_form">
                 <form className="row comman_dashboard_form" action="#">
-                  <div className="col-12 form-group position-relative">
-                    <label className="set_label" htmlFor="">
-                      Table Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter Table Name"
-                      onChange={(e) => {
-                        setTableName(e.target.value);
-                      }}
-                    />
-                  </div>
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
                       Select Branch
@@ -286,8 +279,9 @@ const ManualTable = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
 
-export default ManualTable;
+export default WaitingList;

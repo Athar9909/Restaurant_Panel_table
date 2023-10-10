@@ -165,25 +165,25 @@ const Dashboard = () => {
             </div>
             <div className="col-12 mb-4">
               <form action="#" className="row search_part">
-                <div className="form-group col-9 position-relative">
+                <div className="form-group col-12 position-relative">
                   <input
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by restaurant name"
+                    placeholder="Search by Order ID"
                   />
                   <button className="search_bt">
                     <img src={require("../../assets/img/search.png")} alt="" />
                   </button>
                 </div>
-                <div className="col-3">
+                {/* <div className="col-3">
                   <a
                     data-bs-toggle="modal"
                     data-bs-target="#additem"
                     className="comman_btns w-100">
                     +Add New Restaurant
                   </a>
-                </div>
+                </div> */}
               </form>
             </div>
 
@@ -291,7 +291,7 @@ const Dashboard = () => {
                             <td>{item?.orderId}</td>
                             <td>{item?.createdAt?.slice(0, 10)}</td>
                             <td>
-                              <div className="d-flex align-items-center">
+                              <div className="d-flex align-items-center justify-content-center">
                                 <img
                                   className="status_img"
                                   src="assets/img/pending.png"

@@ -94,9 +94,9 @@ const TakeAway = () => {
                         <span>
                           <img
                             src={require("../../assets/img/cancel_order.png")}
-                            alt=""
+                            lt=""
                           />
-                        </span>
+                       </span>
                       </div>
                     </div>
                   </div>
@@ -104,12 +104,12 @@ const TakeAway = () => {
               </div>
               <div className="col-12 mb-4">
                 <form action="#" className="row search_part">
-                  <div className="form-group col-9 position-relative">
+                  <div className="form-group col-12 position-relative">
                     <input
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search by restaurant name, order Id and mobile number"
+                      placeholder="Search by Order Id"
                     />
                     <button className="search_bt">
                       <img
@@ -118,7 +118,7 @@ const TakeAway = () => {
                       />
                     </button>
                   </div>
-                  <div className="col-3">
+                  {/* <div className="col-3">
                     <div className="dropdown fliter_dropdown">
                       <a
                         className="btn btn-secondary dropdown-toggle"
@@ -157,7 +157,7 @@ const TakeAway = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </form>
               </div>
               <div className="col-12">
@@ -183,7 +183,7 @@ const TakeAway = () => {
                               <td>{item?.orderId}</td>
                               <td>{item?.createdAt?.slice(0, 10)}</td>
                               <td>
-                                <div className="d-flex align-items-center">
+                                <div className="d-flex align-items-center justify-content-center">
                                   <img
                                     className="status_img"
                                     src="assets/img/pending.png"

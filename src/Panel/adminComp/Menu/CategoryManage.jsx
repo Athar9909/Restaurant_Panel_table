@@ -63,12 +63,12 @@ const CategoryManage = () => {
             </div>
             <div className="col-12 mb-4">
               <form action="#" className="row search_part">
-                <div className="form-group col-6 position-relative">
+                <div className="form-group col-9 position-relative">
                   <input
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by Customer name"
+                    placeholder="Search by Category name"
                   />
                   <button className="search_bt">
                     <img src={require("../../assets/img/search.png")} alt="" />
@@ -84,7 +84,7 @@ const CategoryManage = () => {
                     </a>
                   </div>
                 </div>
-                <div className="col-3">
+                {/* <div className="col-3">
                   <div className="dropdown fliter_dropdown">
                     <a
                       className="dropdown-toggle"
@@ -161,7 +161,7 @@ const CategoryManage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </form>
             </div>
             <div className="col-12">
@@ -172,7 +172,6 @@ const CategoryManage = () => {
                       <thead>
                         <tr>
                           <th>S. No</th>
-                          <th>Restaurant Address</th>
                           <th>Category</th>
                           <th>Status</th>
                           <th>action</th>
@@ -182,15 +181,10 @@ const CategoryManage = () => {
                         {(cates || [])?.map((itm, ind) => (
                           <tr>
                             <td>{ind + 1}</td>
-                            <td>
-                              {itm?.restaurantId?.restaurant_address?.slice(
-                                0,
-                                15
-                              )}
-                            </td>
+                          
                             <td>{itm?.name}</td>
                             <td>
-                              <form className="table_btns d-flex align-items-center">
+                              <form className="table_btns d-flex align-items-center justify-content-center">
                                 <div className="check_toggle">
                                   <input
                                     type="checkbox"

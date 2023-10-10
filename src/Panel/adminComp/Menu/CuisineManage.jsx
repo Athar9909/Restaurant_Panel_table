@@ -44,7 +44,6 @@ const CuisineManage = () => {
   const onFileSelection = (e, key) => {
     setFiles({ ...files, [key]: e.target.files[0] });
   };
-  console.log(files?.bulkMenu);
 
   const onBulkUpload = async (e, key) => {
     setLoader(true);
@@ -146,6 +145,7 @@ const CuisineManage = () => {
     console.log(val);
     setSideBar(val);
   };
+
   return (
     <div className="admin_main">
       <Profile />
@@ -164,7 +164,7 @@ const CuisineManage = () => {
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by Customer name"
+                    placeholder="Search by Cuisine name"
                   />
                   <button className="search_bt">
                     <img src={require("../../assets/img/search.png")} alt="" />

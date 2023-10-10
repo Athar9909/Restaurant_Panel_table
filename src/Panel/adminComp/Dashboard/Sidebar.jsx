@@ -25,7 +25,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
       confirmButtonText: "Login",
       confirmButtonColor: "#e25829",
     }).then((res) => {
-      navigate("/admin/Login");
+      navigate("/restaurant/Login");
     });
   }
   // console.log(width);
@@ -240,6 +240,12 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                     navigate("/restaurant/dashboard/table/manual-table");
                   }}>
                   Manual Table Management
+                </a>
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/table/waiting-table");
+                  }}>
+                  Wating Tables Management
                 </a>
                 {/* <a>Floor Plan Management</a>
                 <a>Slots Management</a> */}
