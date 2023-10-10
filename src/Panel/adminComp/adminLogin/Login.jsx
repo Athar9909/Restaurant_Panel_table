@@ -60,7 +60,7 @@ const Login = () => {
           <div className="onboarding_slider owl-carousel">
             <Carousel autoplay>
               <div className="onboarding_slider_box text-center">
-                <img src={require("../../assets/img/take_away.png")} alt="" />
+                <img src={require("../../assets/img/take.png")} alt="" />
                 <h3>Takeaway</h3>
                 <p className="mb-2">
                   Lorem Ipsum is simply dummy text of the printing and
@@ -68,16 +68,16 @@ const Login = () => {
                 </p>
               </div>
               <div className="onboarding_slider_box text-center">
-                <img src={require("../../assets/img/take_away.png")} alt="" />
-                <h3>Takeaway</h3>
+                <img src={require("../../assets/img/Dine.png")} alt="" />
+                <h3>Dining</h3>
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's .
                 </p>
-              </div>
+              </div>  
               <div className="onboarding_slider_box text-center">
-                <img src={require("../../assets/img/take_away.png")} alt="" />
-                <h3>Takeaway</h3>
+                <img src={require("../../assets/img/dineWith.png")} alt="" />
+                <h3>Dining With Food</h3>
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's .

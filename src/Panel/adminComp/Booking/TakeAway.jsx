@@ -181,7 +181,7 @@ const TakeAway = () => {
                               <td>{index + 1}</td>
                               <td>{item?.tableId?.name}</td>
                               <td>{item?.orderId}</td>
-                              <td>13:30</td>
+                              <td>{item?.createdAt?.slice(0, 10)}</td>
                               <td>
                                 <div className="d-flex align-items-center">
                                   <img

@@ -7,18 +7,22 @@ import {
   AllAddOns,
   AllCategories,
   AllCousines,
+  CsvImport,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Select from "react-select";
+import { Button } from "antd";
 
 const CuisineManage = () => {
   const [slide, setSlide] = useState("MenuM");
   const [sideBar, setSideBar] = useState();
   const [cates, setCates] = useState([]);
   const [cateId, setCateId] = useState("");
+  const [loader, setLoader] = useState(false);
+  const [load, setLoad] = useState(false);
   const [cuisines, setCuisines] = useState([]);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
@@ -39,6 +43,30 @@ const CuisineManage = () => {
 
   const onFileSelection = (e, key) => {
     setFiles({ ...files, [key]: e.target.files[0] });
+  };
+  console.log(files?.bulkMenu);
+
+  const onBulkUpload = async (e, key) => {
+    setLoader(true);
+    let formData = new FormData();
+    formData.append("csv", e.target.files[0]);
+    const { data } = await CsvImport(formData);
+    if (!data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+      getAllCuisines();
+      setLoader(false);
+      setFiles([])
+      // window.location.reload(false);
+    }
+
+    setTimeout(() => {
+      setLoader(false);
+    }, [2000]);
   };
 
   const getAllCategories = async (key) => {
@@ -81,7 +109,7 @@ const CuisineManage = () => {
       optionSelected: selected,
     });
   };
-  
+
   const onSubmit = async (data) => {
     let addons = [];
     (selectedAddon.optionSelected || [])?.map((item) => {
@@ -142,7 +170,7 @@ const CuisineManage = () => {
                     <img src={require("../../assets/img/search.png")} alt="" />
                   </button>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                   <div className="">
                     <a
                       className="comman_btn"
@@ -152,7 +180,27 @@ const CuisineManage = () => {
                     </a>
                   </div>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
+                  <div className="">
+                    <Button
+                      onClick={() => {
+                        document.getElementById("bulk").click();
+                      }}
+                      className="comman_btn"
+                      type="primary"
+                      loading={loader}>
+                      + Bulk Upload
+                    </Button>
+
+                    <input
+                      className="d-none"
+                      type="file"
+                      id="bulk"
+                      name="bulkMenu"
+                      onChange={(e) => onBulkUpload(e, "bulkMenu")}></input>
+                  </div>
+                </div>
+                {/* <div className="col-3">
                   <div className="dropdown fliter_dropdown">
                     <a
                       className="dropdown-toggle"
@@ -229,7 +277,7 @@ const CuisineManage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </form>
             </div>
             <div className="col-12">
@@ -474,7 +522,7 @@ const CuisineManage = () => {
                       className="small_bts_bg d-none"
                       type="reset"
                       id="reset1">
-                    reser
+                      reser
                     </button>
                   </div>
                 </form>
@@ -483,7 +531,6 @@ const CuisineManage = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

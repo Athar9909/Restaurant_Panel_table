@@ -9,10 +9,11 @@ import Sidebar from "./Sidebar";
 //   totalVendors,
 // } from "../httpServices/dashHttpService";
 // import AnimatedNumber from "react-animated-number/build/AnimatedNumber";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
+import { GetOrders } from "../adminLogin/httpServicesAdmin/adminApis";
 // import { MDBDataTable } from "mdbreact";
 // import moment from "moment";
 
@@ -20,6 +21,8 @@ const Dashboard = () => {
   const [slide, setSlide] = useState("Dash");
   const [sideBar, setSideBar] = useState();
   const [files, setFiles] = useState([]);
+  const [list, setList] = useState([]);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -30,6 +33,20 @@ const Dashboard = () => {
     setFiles({ ...files, [key]: e.target.files[0] });
   };
 
+  useEffect(() => {
+    getAllTakeaways();
+  }, []);
+
+  const getAllTakeaways = async (key) => {
+    const { data } = await GetOrders({
+      search: key ? key : "",
+      type: "Take Away",
+    });
+    if (!data?.error) {
+      let values = data?.results?.orders;
+      setList(values);
+    }
+  };
   const onSubmit = async (data) => {
     let addons = [];
     // (selectedAddon.optionSelected || [])?.map((item) => {
@@ -174,7 +191,7 @@ const Dashboard = () => {
               <div className="row">
                 <div className="col-9"></div>
                 <div className="col-3">
-                  <div className="dropdown fliter_dropdown">
+                  {/* <div className="dropdown fliter_dropdown">
                     <a
                       className="btn btn-secondary dropdown-toggle"
                       href="#"
@@ -251,212 +268,51 @@ const Dashboard = () => {
                         </a>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-12 table_comman mt-3">
                   <div className="table-responsive">
                     <table className="table">
                       <thead>
                         <tr>
-                          <th>S. No</th>
-                          <th>Restaurant Address</th>
-                          <th>Branch Manager</th>
-                          <th>Email ID</th>
-                          <th>Mobile Number</th>
-                          <th>Cuisine</th>
+                          <th>Order Id</th>
+                          <th>Table ID</th>
+                          <th>Order ID</th>
+                          <th>Pickup Time</th>
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>01</td>
-                          <td>Alexandria, Egypt</td>
-                          <td>Sonam Malik</td>
-                          <td>ex@gmail.com</td>
-                          <td>+20 989 8888888</td>
-                          <td>French,Italian,Mexi...</td>
-                          <td>
-                            <form className="table_btns d-flex align-items-center">
-                              <div className="check_toggle">
-                                <input
-                                  type="checkbox"
-                                  defaultChecked=""
-                                  name="check1"
-                                  id="check1"
-                                  className="d-none"
-                                />
-                                <label htmlFor="check1" />
+                        {list?.map((item, index) => (
+                          <tr>
+                            <td>{index + 1}</td>
+                            <td>{item?.tableId?.name}</td>
+                            <td>{item?.orderId}</td>
+                            <td>{item?.createdAt?.slice(0, 10)}</td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                <img
+                                  className="status_img"
+                                  src="assets/img/pending.png"
+                                  alt=""
+                                />{" "}
+                                Pending
                               </div>
-                            </form>
-                          </td>
-                          <td>
-                            <a className="table_btn" href="javascript:;">
-                              View
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>02</td>
-                          <td>Alexandria, Egypt</td>
-                          <td>Sonam Malik</td>
-                          <td>ex@gmail.com</td>
-                          <td>+20 989 8888888</td>
-                          <td>French,Italian,Mexi...</td>
-                          <td>
-                            <form className="table_btns d-flex align-items-center">
-                              <div className="check_toggle">
-                                <input
-                                  type="checkbox"
-                                  defaultChecked=""
-                                  name="check2"
-                                  id="check2"
-                                  className="d-none"
-                                />
-                                <label htmlFor="check2" />
-                              </div>
-                            </form>
-                          </td>
-                          <td>
-                            <a className="table_btn" href="javascript:;">
-                              View
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>03</td>
-                          <td>Alexandria, Egypt</td>
-                          <td>Sonam Malik</td>
-                          <td>ex@gmail.com</td>
-                          <td>+20 989 8888888</td>
-                          <td>French,Italian,Mexi...</td>
-                          <td>
-                            <form className="table_btns d-flex align-items-center">
-                              <div className="check_toggle">
-                                <input
-                                  type="checkbox"
-                                  name="check7"
-                                  id="check7"
-                                  className="d-none"
-                                />
-                                <label htmlFor="check7" />
-                              </div>
-                            </form>
-                          </td>
-                          <td>
-                            <a className="table_btn" href="javascript:;">
-                              View
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>04</td>
-                          <td>Alexandria, Egypt</td>
-                          <td>Sonam Malik</td>
-                          <td>ex@gmail.com</td>
-                          <td>+20 989 8888888</td>
-                          <td>French,Italian,Mexi...</td>
-                          <td>
-                            <form className="table_btns d-flex align-items-center">
-                              <div className="check_toggle">
-                                <input
-                                  type="checkbox"
-                                  defaultChecked=""
-                                  name="check3"
-                                  id="check3"
-                                  className="d-none"
-                                />
-                                <label htmlFor="check3" />
-                              </div>
-                            </form>
-                          </td>
-                          <td>
-                            <a className="table_btn" href="javascript:;">
-                              View
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>05</td>
-                          <td>Alexandria, Egypt</td>
-                          <td>Sonam Malik</td>
-                          <td>ex@gmail.com</td>
-                          <td>+20 989 8888888</td>
-                          <td>French,Italian,Mexi...</td>
-                          <td>
-                            <form className="table_btns d-flex align-items-center">
-                              <div className="check_toggle">
-                                <input
-                                  type="checkbox"
-                                  defaultChecked=""
-                                  name="check4"
-                                  id="check4"
-                                  className="d-none"
-                                />
-                                <label htmlFor="check4" />
-                              </div>
-                            </form>
-                          </td>
-                          <td>
-                            <a className="table_btn" href="javascript:;">
-                              View
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>06</td>
-                          <td>Alexandria, Egypt</td>
-                          <td>Sonam Malik</td>
-                          <td>ex@gmail.com</td>
-                          <td>+20 989 8888888</td>
-                          <td>French,Italian,Mexi...</td>
-                          <td>
-                            <form className="table_btns d-flex align-items-center">
-                              <div className="check_toggle">
-                                <input
-                                  type="checkbox"
-                                  defaultChecked=""
-                                  name="check5"
-                                  id="check5"
-                                  className="d-none"
-                                />
-                                <label htmlFor="check5" />
-                              </div>
-                            </form>
-                          </td>
-                          <td>
-                            <a className="table_btn" href="javascript:;">
-                              View
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>07</td>
-                          <td>Alexandria, Egypt</td>
-                          <td>Sonam Malik</td>
-                          <td>ex@gmail.com</td>
-                          <td>+20 989 8888888</td>
-                          <td>French,Italian,Mexi...</td>
-                          <td>
-                            <form className="table_btns d-flex align-items-center">
-                              <div className="check_toggle">
-                                <input
-                                  type="checkbox"
-                                  defaultChecked=""
-                                  name="check6"
-                                  id="check6"
-                                  className="d-none"
-                                />
-                                <label htmlFor="check6" />
-                              </div>
-                            </form>
-                          </td>
-                          <td>
-                            <a className="table_btn" href="javascript:;">
-                              View
-                            </a>
-                          </td>
-                        </tr>
+                            </td>
+                            <td>
+                              <a
+                                className="table_btn"
+                                onClick={() => {
+                                  navigate(
+                                    `/restaurant/dashboard/booking/View/${item?._id}`
+                                  );
+                                }}>
+                                View
+                              </a>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>

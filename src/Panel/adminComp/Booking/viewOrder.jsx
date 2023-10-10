@@ -48,6 +48,12 @@ const ViewOrder = () => {
                           <span>{order?.orderId}</span>
                         </div>
                       </div>
+                      <div className="col-3">
+                        <div className="Customer_boxx">
+                          <strong>Order Amount</strong>
+                          <span>EGP {order?.total}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
