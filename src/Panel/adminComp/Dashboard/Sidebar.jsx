@@ -111,6 +111,52 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
             </div>
           </div>
         </div> */}
+
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="heading3">
+            <button
+              className={
+                slide === "BookM"
+                  ? "accordion-button "
+                  : "accordion-button collapsed"
+              }
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse3n"
+              aria-expanded="true"
+              aria-controls="collapse3n">
+              <img src={require("../../assets/img/booking.png")} alt="" /> Order
+            </button>
+          </h2>
+          <div
+            id="collapse3n"
+            className={
+              slide === "BookM"
+                ? "accordion-collapse collapse show"
+                : "accordion-collapse collapse"
+            }
+            aria-labelledby="heading3"
+            data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              <div className="siderbar_menus">
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/booking/takeaway");
+                  }}>
+                  Takeaway
+                </a>
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/booking/dinings");
+                  }}>
+                  Dining
+                </a>
+                {/* <a>Dining with Food</a> */}
+                {/* <a>Waiting List</a> */}
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="accordion-item">
           <h2 className="accordion-header" id="heading3">
             <button
@@ -124,8 +170,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse3"
               aria-expanded="true"
               aria-controls="collapse3">
-              <img src={require("../../assets/img/booking.png")} alt="" /> Menu
-              Management
+              <img src={require("../../assets/img/menus.png")} alt="" /> Menu
             </button>
           </h2>
           <div
@@ -162,52 +207,6 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="heading3">
-            <button
-              className={
-                slide === "BookM"
-                  ? "accordion-button "
-                  : "accordion-button collapsed"
-              }
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapse3n"
-              aria-expanded="true"
-              aria-controls="collapse3n">
-              <img src={require("../../assets/img/booking.png")} alt="" /> Order
-              Management
-            </button>
-          </h2>
-          <div
-            id="collapse3n"
-            className={
-              slide === "BookM"
-                ? "accordion-collapse collapse show"
-                : "accordion-collapse collapse"
-            }
-            aria-labelledby="heading3"
-            data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-              <div className="siderbar_menus">
-                <a
-                  onClick={() => {
-                    navigate("/restaurant/dashboard/booking/takeaway");
-                  }}>
-                  Takeaway
-                </a>
-                <a
-                  onClick={() => {
-                    navigate("/restaurant/dashboard/booking/dinings");
-                  }}>
-                  Dining
-                </a>
-                {/* <a>Dining with Food</a> */}
-                {/* <a>Waiting List</a> */}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="accordion-item">
           <h2 className="accordion-header" id="heading4">
             <button
               className={
@@ -220,8 +219,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse4"
               aria-expanded="true"
               aria-controls="collapse4">
-              <img src={require("../../assets/img/Table.png")} alt="" /> Table
-              Management
+              <img src={require("../../assets/img/qr-code-line.png")} alt="" /> QR Code
             </button>
           </h2>
           <div
@@ -239,13 +237,13 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard/table/manual-table");
                   }}>
-                  Manual Table Management
+                  Manual Table
                 </a>
                 <a
                   onClick={() => {
                     navigate("/restaurant/dashboard/table/waiting-table");
                   }}>
-                  Wating Tables Management
+                  Wating Tables
                 </a>
                 {/* <a>Floor Plan Management</a>
                 <a>Slots Management</a> */}

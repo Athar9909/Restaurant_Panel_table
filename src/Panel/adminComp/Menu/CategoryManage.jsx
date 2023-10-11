@@ -4,6 +4,7 @@ import Profile from "../Dashboard/Profile";
 import {
   AddNewCategory,
   AllCategories,
+  EditCategoryStatus,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +12,9 @@ import { useForm } from "react-hook-form";
 
 const CategoryManage = () => {
   const [slide, setSlide] = useState("MenuM");
-  const [sideBar, setSideBar] = useState();
-  const initialValue = 0.0;
   const [cateName, setCateName] = useState("");
   const [cates, setCates] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     getAllCategories();
@@ -30,7 +30,6 @@ const CategoryManage = () => {
     }
   };
 
-  
   const AddCategory = async () => {
     const { data } = await AddNewCategory({
       name: cateName,
@@ -47,6 +46,19 @@ const CategoryManage = () => {
       setCateName("");
       document.getElementById("modalClose").click();
       document.getElementById("reset1").click();
+    }
+  };
+
+  const CategoryStatus = async (id) => {
+    const { data } = await EditCategoryStatus(id);
+    if (!data.error) {
+      Swal.fire({
+        title: data.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+      getAllCategories();
     }
   };
 
@@ -181,26 +193,36 @@ const CategoryManage = () => {
                         {(cates || [])?.map((itm, ind) => (
                           <tr>
                             <td>{ind + 1}</td>
-                          
+
                             <td>{itm?.name}</td>
                             <td>
                               <form className="table_btns d-flex align-items-center justify-content-center">
                                 <div className="check_toggle">
                                   <input
                                     type="checkbox"
-                                    defaultChecked=""
-                                    name="check1"
-                                    id="check1"
+                                    defaultChecked={itm?.status}
+                                    name={itm?._id + "99"}
+                                    id={itm?._id}
                                     className="d-none"
+                                    onClick={() => {
+                                      CategoryStatus(itm?._id);
+                                    }}
                                   />
-                                  <label htmlFor="check1" />
+                                  <label htmlFor={itm?._id} />
                                 </div>
                               </form>
                             </td>
                             <td>
                               <a
                                 className="table_btn_border ms-1"
-                                href="javascript:;">
+                                onClick={() =>
+                                  navigate(
+                                    `/restaurant/dashboard/menu/edit-category/${itm?._id}`,
+                                    {
+                                      state: itm?.name,
+                                    }
+                                  )
+                                }>
                                 Edit
                               </a>
                             </td>

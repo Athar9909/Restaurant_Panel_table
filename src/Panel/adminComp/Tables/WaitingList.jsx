@@ -29,10 +29,11 @@ const WaitingList = () => {
       search: key ? key : "",
     });
     if (!data?.error) {
-      let values = data?.results?.tables;
+      let values = data?.results?.waitingList;
       setTables(values);
     }
   };
+
   const getAllBranches = async () => {
     const { data } = await AllBranches();
     if (!data?.error) {
@@ -50,7 +51,7 @@ const WaitingList = () => {
         confirmButtonColor: "#e25829",
         timer: "2000",
       });
-      setPreviewImg(data?.results?.branch?.QRCode)
+      setPreviewImg(data?.results?.branch?.QRCode);
       getAllWaitingTables();
       document.getElementById("modalClose").click();
       document.getElementById("modalOpen").click();
@@ -113,27 +114,21 @@ const WaitingList = () => {
                         <thead>
                           <tr>
                             <th>S. No</th>
-                            {/* <th>Restaurant Address</th> */}
-                            <th>Table Name</th>
-                            {/* <th>Email Id</th>
-                            <th>Mobile Number</th> */}
-                            <th>QR code</th>
-                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Customer Name</th>
+                            <th>Email Id</th>
+                            <th>Mobile Number</th>
                           </tr>
                         </thead>
                         <tbody>
                           {(tables || [])?.map((itm, idx) => (
                             <tr>
                               <td>{idx + 1}</td>
-                              {/* <td>
-                                {itm?.restaurantId.restaurant_address?.slice(
-                                  0,
-                                  15
-                                )}
-                              </td> */}
+
+                              <td>{itm?.createdAt?.slice(0, 10)}</td>
                               <td>{itm?.name}</td>
-                              {/* <td>{itm?.restaurantId.email}</td>
-                              <td>{itm?.restaurantId.phone_number}</td> */}
+                              <td>{itm?.email}</td>
+                              <td>{itm?.phone_number}</td>
                               <td>
                                 <a
                                   style={{
@@ -279,7 +274,6 @@ const WaitingList = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

@@ -22,7 +22,6 @@ const CuisineManage = () => {
   const [cates, setCates] = useState([]);
   const [cateId, setCateId] = useState("");
   const [loader, setLoader] = useState(false);
-  const [load, setLoad] = useState(false);
   const [cuisines, setCuisines] = useState([]);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
@@ -59,7 +58,7 @@ const CuisineManage = () => {
       });
       getAllCuisines();
       setLoader(false);
-      setFiles([])
+      setFiles([]);
       // window.location.reload(false);
     }
 
@@ -288,10 +287,11 @@ const CuisineManage = () => {
                       <thead>
                         <tr>
                           <th>S. No</th>
+                          <th>Image</th>
                           <th>Item Name</th>
                           <th>Category</th>
                           <th>CPrice</th>
-                          <th>Main Ingredients</th>
+                          <th>Addons</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -299,20 +299,27 @@ const CuisineManage = () => {
                         {(cuisines || [])?.map((itm, ind) => (
                           <tr>
                             <td>{ind + 1}</td>
+                            <td>
+                              <img width={60} src={itm?.image}></img>
+                            </td>
 
                             <td>{itm?.name}</td>
-                            <td>{itm?.categoryId}</td>
+                            <td>{itm?.categoryId?.name}</td>
                             <td>{itm?.price}</td>
                             <td>
-                              {itm?.mainIngredients?.map((i, d) => (
-                                <strong>{i}</strong>
+                              {itm?.addOns?.map((i, d) => (
+                                <li>{i?.name}</li>
                               ))}
                             </td>
 
                             <td>
                               <a
                                 className="table_btn_border ms-1"
-                                href="javascript:;">
+                                onClick={() => {
+                                  navigate(
+                                    `/restaurant/dashboard/menu/edit-cuisine/${itm?._id}`
+                                  );
+                                }}>
                                 Edit
                               </a>
                             </td>

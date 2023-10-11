@@ -13,6 +13,8 @@ import Dining from "./Panel/adminComp/Booking/Dining";
 import ViewOrder from "./Panel/adminComp/Booking/viewOrder";
 import EditProfile from "./Panel/adminComp/Dashboard/EditProfile";
 import WaitingList from "./Panel/adminComp/Tables/WaitingList";
+import EditCategory from "./Panel/adminComp/Menu/EditCategory";
+import EditCuisine from "./Panel/adminComp/Menu/EditCuisine";
 function App() {
   return (
     <div className="App">
@@ -67,6 +69,18 @@ function App() {
           />
            <Route
             path="/restaurant/dashboard/profile"
+            element={<EditProfile />}
+          />
+            <Route
+            path="/restaurant/dashboard/menu/edit-category/:id"
+            element={<EditCategory />}
+          />
+            <Route
+            path="/restaurant/dashboard/menu/edit-cuisine/:id"
+            element={<EditCuisine />}
+          />
+            <Route
+            path="/restaurant/dashboard/menu/edit-addOn"
             element={<EditProfile />}
           />
         </Routes>
