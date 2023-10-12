@@ -1685,3 +1685,15 @@ a {
     max-width: 18px;
   }
 }
+.logo_cut{
+  border-radius: 50%;
+  width: 100% !important;
+  height: 165px;
+}
+.myprofile i {
+  position: relative;
+  top: 105px;
+  left: 15%;
+  font-size: 20px !important;
+  z-index: 9999;
+}

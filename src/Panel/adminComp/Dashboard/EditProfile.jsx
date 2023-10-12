@@ -69,8 +69,8 @@ const EditProfile = () => {
         confirmButtonText: "Okay",
         confirmButtonColor: "#e25829",
       });
-    //   document.getElementById("modalClose").click();
-    //   document.getElementById("reset1").click();
+      //   document.getElementById("modalClose").click();
+      //   document.getElementById("reset1").click();
       getProfile();
     }
   };
@@ -96,18 +96,25 @@ const EditProfile = () => {
                     <div
                       className="myprofile"
                       style={{
-                        backgroundImage: 'url("assets/img/profile_bg.png")',
+                        backgroundImage: `url(${profile?.cover_image})`,
                       }}>
+                      <i
+                        onClick={() => {
+                          document.getElementById("logoInput").click();
+                        }}
+                        className="fa fa-edit fa-2x"></i>
                       <div className="myprofile_logo">
+                        
                         <img
-                          src={require("../../assets/img/logo_profile.png")}
+                          className="logo_cut"
+                          src={
+                            profile?.restaurant_logo
+                              ? profile?.restaurant_logo
+                              : require("../../assets/img/logo_profile.png")
+                          }
                           alt=""
                         />
-                        <i
-                          onClick={() => {
-                            document.getElementById("logoInput").click();
-                          }}
-                          className="fa fa-edit fa-2x"></i>
+
                         <input
                           type="file"
                           className="form-control d-none"

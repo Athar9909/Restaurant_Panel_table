@@ -132,6 +132,7 @@ const CuisineManage = () => {
       document.getElementById("modalClose").click();
       document.getElementById("reset1").click();
       getAllCuisines();
+      setFiles([])
       setSelectedAddon([
         {
           optionSelected: [],
@@ -391,7 +392,7 @@ const CuisineManage = () => {
                       </small>
                     )}
                   </div>
-                  <div className="col-12 form-group position-relative">
+                  {/* <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
                       Main Ingredients.
                     </label>
@@ -409,7 +410,7 @@ const CuisineManage = () => {
                         {errors.mainIngredients?.message}
                       </small>
                     )}
-                  </div>
+                  </div> */}
 
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
