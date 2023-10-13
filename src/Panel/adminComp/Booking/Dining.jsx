@@ -50,7 +50,7 @@ const Dining = () => {
                             alt=""
                           />
                         </span>
-                      </div>  
+                      </div>
                     </div>
                   </div>
                   <div className="col-md-3">
@@ -119,7 +119,6 @@ const Dining = () => {
                       />
                     </button>
                   </div>
-                  
                 </form>
               </div>
               <div className="col-12">
@@ -142,16 +141,7 @@ const Dining = () => {
                               <td>{index + 1}</td>
                               <td>{item?.tableId?.name}</td>
                               <td>{item?.orderId}</td>
-                              <td>
-                                <div className="d-flex align-items-center">
-                                  <img
-                                    className="status_img"
-                                    src="assets/img/pending.png"
-                                    alt=""
-                                  />{" "}
-                                  Pending
-                                </div>
-                              </td>
+                              <td>{item?.status}</td>
                               <td>
                                 <a
                                   onClick={() => {

@@ -96,7 +96,7 @@ const TakeAway = () => {
                             src={require("../../assets/img/cancel_order.png")}
                             lt=""
                           />
-                       </span>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -182,16 +182,7 @@ const TakeAway = () => {
                               <td>{item?.tableId?.name}</td>
                               <td>{item?.orderId}</td>
                               <td>{item?.createdAt?.slice(0, 10)}</td>
-                              <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                  <img
-                                    className="status_img"
-                                    src="assets/img/pending.png"
-                                    alt=""
-                                  />{" "}
-                                  Pending
-                                </div>
-                              </td>
+                              <td>{item?.status}</td>
                               <td>
                                 <a
                                   className="table_btn"
