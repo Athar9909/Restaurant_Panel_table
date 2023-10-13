@@ -28,7 +28,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     const res = await adminLogin({
       phone_number: data?.phone_number,
-      country_code: "966",
+      country_code: data?.country_code,
       password: data?.password,
       deviceId: "123",
       deviceOS: "Web",
@@ -37,7 +37,7 @@ const Login = () => {
       language: "English",
     });
     console.log(res);
-    
+
     if (!res?.data.error) {
       Swal.fire({
         title: res?.data?.message,
@@ -47,17 +47,17 @@ const Login = () => {
       });
       localStorage.setItem("token-admin", res.data?.results.token);
       navigate("/restaurant/dashboard");
-    } 
+    }
   };
 
   return (
     <div>
       <div className="onboarding_pages">
         <div className="onboarding_left">
-          <a className="logo_top" href="javascript:;">
+          <a className="logo_top mb-5" href="javascript:;">
             <img src={require("../../assets/img/loggo.png")} alt="" />
           </a>
-          <div className="onboarding_slider owl-carousel">
+          <div className="onboarding_slider owl-carousel mt-5">
             <Carousel autoplay>
               <div className="onboarding_slider_box text-center">
                 <img src={require("../../assets/img/take.png")} alt="" />
@@ -74,7 +74,7 @@ const Login = () => {
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's .
                 </p>
-              </div>  
+              </div>
               <div className="onboarding_slider_box text-center">
                 <img src={require("../../assets/img/dineWith.png")} alt="" />
                 <h3>Dining With Food</h3>
@@ -95,18 +95,38 @@ const Login = () => {
             </div>
             <form className="comman_form row" onSubmit={handleSubmit(onSubmit)}>
               <div className="col-12 form-group position-relative">
-                <label className="set_label" htmlFor="">
-                  Phone Number
-                </label>
-                <input
-                  {...register("phone_number", { required: true })}
-                  type="number"
-                  className={classNames("form-control", {
-                    "is-invalid": errors.phone_number,
-                  })}
-                  name="phone_number"
-                  // placeholder=""
-                />
+                <div className="d-flex">
+                  <label className="set_label" htmlFor="">
+                    Country code
+                  </label>
+                  <input
+                    {...register("country_code", { required: true })}
+                    type="tel"
+                    className={classNames("form-control", {
+                      "is-invalid": errors.country_code,
+                    })}
+                    name="country_code"
+                    style={{
+                      width: "30%",
+                    }}
+                    placeholder="+966"
+                  />
+
+                  <input
+                    {...register("phone_number", { required: true })}
+                    type="number"
+                    placeholder="Enter Registered Number"
+                    style={{
+                      width: "70%",
+                    }}
+                    className={classNames("form-control", {
+                      "is-invalid": errors.phone_number,
+                    })}
+                    name="phone_number"
+                    // placeholder=""
+                  />
+                </div>
+
                 {errors.phone_number && (
                   <small className="errorText  ">
                     {errors.phone_number?.message}
@@ -120,6 +140,7 @@ const Login = () => {
                 <input
                   type="password"
                   name="password"
+                  placeholder="Enter password"
                   className={classNames("form-control", {
                     "is-invalid": errors.password,
                   })}

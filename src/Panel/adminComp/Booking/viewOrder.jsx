@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
-import { ViewNewOrders } from "../adminLogin/httpServicesAdmin/adminApis";
+import {
+  ViewNewOrders,
+  changeOrderStatus,
+} from "../adminLogin/httpServicesAdmin/adminApis";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ViewOrder = () => {
   const [slide, setSlide] = useState("BookM");
@@ -17,6 +21,23 @@ const ViewOrder = () => {
     if (!data?.error) {
       let values = data?.results?.order;
       setOrder(values);
+    }
+  };
+
+  const changeStatus = async (val) => {
+    const { data } = await changeOrderStatus({
+      orderId: id,
+      status: val,
+    });
+    if (!data?.error) {
+      Swal.fire({
+        title: "Status Changed Successfully",
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+        timer:"2000"
+      });
+      ViewOrder();
     }
   };
 
@@ -41,7 +62,6 @@ const ViewOrder = () => {
                       <div className="col-auto"></div>
                     </div>
                     <div className="row Customer_details">
-                     
                       <div className="col-3">
                         <div className="Customer_boxx">
                           <strong>Order Id</strong>
@@ -58,6 +78,41 @@ const ViewOrder = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="col-12 mb-4">
+                <div className="row Customer_Information">
+                  <div className="col-12">
+                    <div className="row Customer_infotop align-items-center">
+                      <div className="col">
+                        <h3>Order Status:</h3>
+                      </div>
+                      <div className="col-auto"></div>
+                    </div>
+                    <div className="row Customer_details">
+                      <div className="col-12">
+                        <div className="Customer_boxx">
+                          <strong>Change Order Status</strong>
+
+                          <select
+                            className="form-select "
+                            name="categoryId"
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              changeStatus(e.target.value);
+                            }}>
+                            <option value={order?.status}>
+                              {order?.status}
+                            </option>
+                            <option value="Pending">Pending</option>
+                            <option value="Complete">Completed</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="col-12 mb-4">
                 <div className="row Customer_Information">
                   <div className="col-12">

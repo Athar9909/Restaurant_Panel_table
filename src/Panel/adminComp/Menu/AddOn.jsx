@@ -244,7 +244,11 @@ const AddOn = () => {
                             <td>
                               <a
                                 className="table_btn_border ms-1"
-                                href="javascript:;">
+                                onClick={() => {
+                                  navigate(
+                                    `/restaurant/dashboard/menu/edit-addOn/${itm?._id}`
+                                  );
+                                }}>
                                 Edit
                               </a>
                             </td>

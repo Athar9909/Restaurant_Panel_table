@@ -15,7 +15,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Select from "react-select";
-
+import deleteIcon from "../../assets/img/delete-bin-line.svg";
 const EditCuisine = () => {
   const [slide, setSlide] = useState("MenuM");
   const [cateName, setCateName] = useState("");
@@ -47,6 +47,7 @@ const EditCuisine = () => {
     setFiles({ ...files, [key]: e.target.files[0] });
   };
 
+  console.log(files);
   const getAllCategories = async (key) => {
     const { data } = await AllCategories({
       search: key ? key : "",
@@ -276,12 +277,16 @@ const EditCuisine = () => {
                         </label>
                         <div className="uploded_file">
                           <div className="uploded_file_img">
-                            <img src="assets/img/profile_bg.png" alt="" />
+                            <img
+                              src={
+                                files?.cuisineImg
+                                  ? files?.cuisineImg?.name
+                                  : cuisines?.image
+                              }
+                              alt=""
+                            />
                             <a className="shadow" href="javascript:;">
-                              <img
-                                src="assets/img/delete-bin-line.svg"
-                                alt=""
-                              />
+                              <img src={deleteIcon} alt="" />
                             </a>
                           </div>
                         </div>

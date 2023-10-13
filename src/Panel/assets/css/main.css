@@ -961,16 +961,13 @@ a {
   }
   .btn-close {
     opacity: 1;
-    box-shadow: 0px 4px 4px 0px #00000040;
+    /* box-shadow: 0px 4px 4px 0px #00000040; */
     border-radius: 50px;
-    background-color: #fff;
+    /* background-color: #fff; */
     height: 40px;
     width: 40px;
     padding: 0 !important;
     background-size: 13px;
-    position: absolute;
-    top: -44px;
-    right: 10px;
   }
   .add_item_form {
     padding: 30px 80px;

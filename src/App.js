@@ -15,6 +15,8 @@ import EditProfile from "./Panel/adminComp/Dashboard/EditProfile";
 import WaitingList from "./Panel/adminComp/Tables/WaitingList";
 import EditCategory from "./Panel/adminComp/Menu/EditCategory";
 import EditCuisine from "./Panel/adminComp/Menu/EditCuisine";
+import EditAddon from "./Panel/adminComp/Menu/EditAddon";
+import AllTransactions from "./Panel/adminComp/Transactions/AllTransactions";
 function App() {
   return (
     <div className="App">
@@ -67,21 +69,25 @@ function App() {
             path="/restaurant/dashboard/booking/AddOn"
             element={<AddOn />}
           />
-           <Route
+          <Route
             path="/restaurant/dashboard/profile"
             element={<EditProfile />}
           />
-            <Route
+          <Route
             path="/restaurant/dashboard/menu/edit-category/:id"
             element={<EditCategory />}
           />
-            <Route
+          <Route
             path="/restaurant/dashboard/menu/edit-cuisine/:id"
             element={<EditCuisine />}
           />
-            <Route
-            path="/restaurant/dashboard/menu/edit-addOn"
-            element={<EditProfile />}
+          <Route
+            path="/restaurant/dashboard/menu/edit-addOn/:id"
+            element={<EditAddon />}
+          />
+           <Route
+            path="/restaurant/dashboard/transactions"
+            element={<AllTransactions />}
           />
         </Routes>
       </BrowserRouter>

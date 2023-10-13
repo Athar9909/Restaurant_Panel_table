@@ -219,7 +219,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse4"
               aria-expanded="true"
               aria-controls="collapse4">
-              <img src={require("../../assets/img/qr-code-line.png")} alt="" /> QR Code
+              <img src={require("../../assets/img/qr-code-line.png")} alt="" />{" "}
+              QR Code
             </button>
           </h2>
           <div
@@ -245,6 +246,57 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   }}>
                   Wating Tables
                 </a>
+                {/* <a>Floor Plan Management</a>
+                <a>Slots Management</a> */}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="heading6">
+            <button
+              className={
+                slide === "TransM"
+                  ? "accordion-button "
+                  : "accordion-button collapsed"
+              }
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse6"
+              aria-expanded="true"
+              aria-controls="collapse6">
+              <img
+                width={11}
+                src={require("../../assets/img/dollar.png")}
+                alt=""
+              />{" "}
+              Transactions
+            </button>
+          </h2>
+          <div
+            id="collapse6"
+            className={
+              slide === "TableM"
+                ? "accordion-collapse collapse show"
+                : "accordion-collapse collapse"
+            }
+            aria-labelledby="heading6"
+            data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              <div className="siderbar_menus">
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/transactions");
+                  }}>
+                  All Transactions
+                </a>
+                {/* <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/table/waiting-table");
+                  }}>
+                  Wating Tables
+                </a> */}
                 {/* <a>Floor Plan Management</a>
                 <a>Slots Management</a> */}
               </div>

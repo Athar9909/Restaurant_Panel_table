@@ -77,7 +77,7 @@ const WaitingList = () => {
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search by Table name"
+                      placeholder="Search by Customer name"
                     />
                     <button className="search_bt">
                       <img
@@ -116,8 +116,8 @@ const WaitingList = () => {
                             <th>S. No</th>
                             <th>Time</th>
                             <th>Customer Name</th>
-                            <th>Email Id</th>
                             <th>Mobile Number</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -127,32 +127,9 @@ const WaitingList = () => {
 
                               <td>{itm?.createdAt?.slice(0, 10)}</td>
                               <td>{itm?.name}</td>
-                              <td>{itm?.email}</td>
                               <td>{itm?.phone_number}</td>
-                              <td>
-                                <a
-                                  style={{
-                                    cursor: "zoom-in",
-                                  }}
-                                  href={itm?.QRCode}
-                                  target="_blank">
-                                  <img width={50} src={itm?.QRCode}></img>
-                                </a>
-                              </td>
-                              <td className="text-center">
-                                <form className="table_btns d-flex align-items-center justify-content-center ">
-                                  <div className="check_toggle">
-                                    <input
-                                      type="checkbox"
-                                      defaultChecked=""
-                                      name="check5"
-                                      id="check5"
-                                      className="d-none"
-                                    />
-                                    <label htmlFor="check5" />
-                                  </div>
-                                </form>
-                              </td>
+
+                              <td className="text-center">{itm?.status}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -187,7 +164,7 @@ const WaitingList = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Add New Table
+                Add Waiting Table QR
               </h5>
               <button
                 type="button"
@@ -215,9 +192,8 @@ const WaitingList = () => {
                       <option selected="">Select Branch</option>
                       {branch?.map((itm, id) => (
                         <option value={itm?._id}>
-                          {itm?.restaurantId?.restaurant_name +
-                            "-" +
-                            itm?.username}
+                          {itm?.restaurantId?.restaurant_name}-
+                          {itm?.username ? itm?.username : ""}
                         </option>
                       ))}
                     </select>
