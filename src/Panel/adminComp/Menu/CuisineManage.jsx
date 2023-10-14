@@ -496,7 +496,7 @@ const CuisineManage = () => {
                       Compare Price
                     </label>
                     <input
-                      {...register("Cprice", { required: true })}
+                      {...register("Cprice", { required: false })}
                       type="text"
                       className={classNames("form-control", {
                         "is-invalid": errors.Cprice,

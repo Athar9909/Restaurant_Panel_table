@@ -43,7 +43,7 @@ const Profile = ({ slide, getBarClick, getBar }) => {
             <a>
               <img
                 className="logo_dashboard"
-                src={require("../../assets/img/logomain.png")}
+                src={require("../../assets/img/logoNN.png")}
                 alt=""
               />
             </a>

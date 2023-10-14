@@ -10,7 +10,7 @@ import classNames from "classnames";
 import Swal from "sweetalert2";
 
 const EditProfile = () => {
-  const [slide, setSlide] = useState("Dash");
+  const [slide, setSlide] = useState("ProfileM");
   const [profile, setProfile] = useState([]);
   const [files, setFiles] = useState([]);
 
@@ -104,7 +104,6 @@ const EditProfile = () => {
                         }}
                         className="fa fa-edit fa-2x"></i>
                       <div className="myprofile_logo">
-                        
                         <img
                           className="logo_cut"
                           src={

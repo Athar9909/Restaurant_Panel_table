@@ -55,7 +55,7 @@ const Login = () => {
       <div className="onboarding_pages">
         <div className="onboarding_left">
           <a className="logo_top mb-5" href="javascript:;">
-            <img src={require("../../assets/img/loggo.png")} alt="" />
+            <img src={require("../../assets/img/logoNN.png")} alt="" />
           </a>
           <div className="onboarding_slider owl-carousel mt-5">
             <Carousel autoplay>

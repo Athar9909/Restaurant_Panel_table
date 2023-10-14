@@ -304,6 +304,62 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
           </div>
         </div>
 
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="heading7">
+            <button
+              className={
+                slide === "ProfileM"
+                  ? "accordion-button "
+                  : "accordion-button collapsed"
+              }
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse7"
+              aria-expanded="true"
+              aria-controls="collapse7">
+              <img
+                width={11}
+                src={require("../../assets/img/dollar.png")}
+                alt=""
+              />{" "}
+              My Profile
+            </button>
+          </h2>
+          <div
+            id="collapse7"
+            className={
+              slide === "ProfileM"
+                ? "accordion-collapse collapse show"
+                : "accordion-collapse collapse"
+            }
+            aria-labelledby="heading6"
+            data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              <div className="siderbar_menus">
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/profile");
+                  }}>
+                  Edit profile
+                </a>
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/banners");
+                  }}>
+                  Edit Banners
+                </a>
+                {/* <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/table/waiting-table");
+                  }}>
+                  Wating Tables
+                </a> */}
+                {/* <a>Floor Plan Management</a>
+                <a>Slots Management</a> */}
+              </div>
+            </div>
+          </div>
+        </div>
         {/* <div className="accordion-item">
           <h2 className="accordion-header" id="heading5">
             <button

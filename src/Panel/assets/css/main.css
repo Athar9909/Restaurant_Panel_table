@@ -187,6 +187,7 @@ a {
   }
   .logo_top img {
     max-width: 90px;
+    border-radius: 50%;
   }
   .logo_top {
     position: absolute;
@@ -352,6 +353,7 @@ a {
   }
   .logo_dashboard {
     max-width: 72px;
+    border-radius: 50%;
   }
   .Notification img {
     max-width: 30px;
@@ -1682,15 +1684,15 @@ a {
     max-width: 18px;
   }
 }
-.logo_cut{
+.logo_cut {
   border-radius: 50%;
   width: 100% !important;
   height: 165px;
 }
 .myprofile i {
   position: relative;
-  top: 105px;
-  left: 15%;
+  top: -61%;
+  left: 98%;
   font-size: 20px !important;
-  z-index: 9999;
+  z-index: 99;
 }

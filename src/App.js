@@ -17,6 +17,7 @@ import EditCategory from "./Panel/adminComp/Menu/EditCategory";
 import EditCuisine from "./Panel/adminComp/Menu/EditCuisine";
 import EditAddon from "./Panel/adminComp/Menu/EditAddon";
 import AllTransactions from "./Panel/adminComp/Transactions/AllTransactions";
+import Editbanners from "./Panel/adminComp/Dashboard/EditBanners";
 function App() {
   return (
     <div className="App">
@@ -73,6 +74,12 @@ function App() {
             path="/restaurant/dashboard/profile"
             element={<EditProfile />}
           />
+
+          <Route
+            path="/restaurant/dashboard/banners"
+            element={<Editbanners />}
+          />
+
           <Route
             path="/restaurant/dashboard/menu/edit-category/:id"
             element={<EditCategory />}
@@ -85,7 +92,7 @@ function App() {
             path="/restaurant/dashboard/menu/edit-addOn/:id"
             element={<EditAddon />}
           />
-           <Route
+          <Route
             path="/restaurant/dashboard/transactions"
             element={<AllTransactions />}
           />
