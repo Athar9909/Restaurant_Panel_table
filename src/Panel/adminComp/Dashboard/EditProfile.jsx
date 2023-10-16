@@ -12,7 +12,8 @@ import Swal from "sweetalert2";
 const EditProfile = () => {
   const [slide, setSlide] = useState("ProfileM");
   const [profile, setProfile] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [logo, setLogo] = useState([]);
+  const [cover, setCover] = useState([]);
 
   const {
     register,
@@ -24,8 +25,27 @@ const EditProfile = () => {
     getProfile();
   }, []);
 
-  const onFileSelection = (e, key) => {
-    setFiles({ ...files, [key]: e.target.files[0] });
+  const onFileSelectionLogo = async (e, key, ind) => {
+    setLogo([{ [key]: e.target.files[0] }]);
+
+    if (e.target.files[0]) {
+      var picture = new FileReader();
+      picture.readAsDataURL(e.target.files[0]);
+      picture.addEventListener("load", function (event) {
+        document.getElementById(ind).setAttribute("src", event.target.result);
+      });
+    }
+  };
+  
+  const onFileSelectionCover = async (e, key, ind) => {
+    setCover([{ [key]: e.target.files[0] }]);
+    if (e.target.files[0]) {
+      var picture = new FileReader();
+      picture.readAsDataURL(e.target.files[0]);
+      picture.addEventListener("load", function (event) {
+        document.getElementById(ind).setAttribute("src", event.target.result);
+      });
+    }
   };
 
   const getProfile = async (key) => {
@@ -58,8 +78,8 @@ const EditProfile = () => {
       "instagram",
       data?.insta ? data?.insta : profile?.instagram
     );
-    formData.append("logo", files?.logo);
-    formData.append("cover_image)", files?.cover);
+    formData.append("logo", logo[0]?.logo);
+    formData.append("cover_image", cover[0]?.cover);
 
     const res = await UpdateRestaurant(formData);
     if (!res?.data?.error) {
@@ -93,19 +113,26 @@ const EditProfile = () => {
                 onSubmit={handleSubmit(onSubmit)}>
                 <div className="col-12 mb-4">
                   <div className="col-12">
-                    <div
-                      className="myprofile"
-                      style={{
-                        backgroundImage: `url(${profile?.cover_image})`,
-                      }}>
-                      <i
-                        onClick={() => {
-                          document.getElementById("logoInput").click();
-                        }}
-                        className="fa fa-edit fa-2x"></i>
+                    <i
+                      onClick={() => {
+                        document.getElementById("logoInput").click();
+                      }}
+                      className="fa fa-edit fa-3x EditLogo"></i>
+                    <div className="myprofile">
+                      <img
+                        className="cover_cut"
+                        id="coverImg"
+                        src={
+                          profile?.cover_image
+                            ? profile?.cover_image
+                            : require("../../assets/img/logo_profile.png")
+                        }
+                        alt=""
+                      />
                       <div className="myprofile_logo">
                         <img
                           className="logo_cut"
+                          id="logoImg"
                           src={
                             profile?.restaurant_logo
                               ? profile?.restaurant_logo
@@ -119,24 +146,20 @@ const EditProfile = () => {
                           className="form-control d-none"
                           defaultValue=""
                           id="logoInput"
-                          name="logo"
-                          onChange={(e) => onFileSelection(e, "logo")}
+                          name="cover"
+                          onChange={(e) =>
+                            onFileSelectionCover(e, "cover", "coverImg")
+                          }
                         />
                       </div>
-                      <a className="edit_bg">
-                        <img
-                          src={require("../../assets/img/logo_profile.png")}
-                          alt=""
-                        />
-                      </a>
                     </div>
                   </div>
-                  <div className="col-12 form-group mb-3">
+                  <div className="row form-group mb-3">
                     <label className="label_bold" htmlFor="">
                       Restaurant Details
                     </label>
                   </div>
-                  <div className="col-5 form-group position-relative">
+                  <div className="col-6 form-group position-relative">
                     <label className="set_label" htmlFor="">
                       Restaurant Name
                     </label>
@@ -163,7 +186,7 @@ const EditProfile = () => {
                       <option value={3}>Three</option>
                     </select> */}
                   </div>
-                  <div className="col-12 form-group position-relative">
+                  <div className="col-6 form-group position-relative">
                     <label className="set_label" htmlFor="">
                       Restaurant Address
                     </label>
@@ -211,16 +234,15 @@ const EditProfile = () => {
                       </small>
                     )}
                   </div>
-
-                  <div className="form-group col-12 choose_file position-relative mt-2">
-                    <label htmlFor="upload_video"> Upload Cover</label>
+                  <div className="form-group col-6 choose_file position-relative mt-2">
+                    <label htmlFor="upload_videoTwo"> Upload Logo</label>
                     <input
                       type="file"
                       className="form-control"
                       defaultValue=""
-                      name="cover"
-                      id="upload_video"
-                      onChange={(e) => onFileSelection(e, "cover")}
+                      name="logo"
+                      id="upload_videotwo"
+                      onChange={(e) => onFileSelectionLogo(e, "logo", "logoImg")}
                     />
                   </div>
                 </div>

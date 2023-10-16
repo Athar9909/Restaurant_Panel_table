@@ -7,7 +7,7 @@ import {
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Profile from "../Dashboard/Profile";
 import Swal from "sweetalert2";
-
+import { QRCode } from "react-qrcode-logo";
 const ManualTable = () => {
   const [slide, setSlide] = useState("TableM");
   const [sideBar, setSideBar] = useState();
@@ -135,7 +135,19 @@ const ManualTable = () => {
                                   onClick={() => {
                                     setPreviewImg(itm?.QRCode);
                                   }}>
-                                  <img width={50} src={itm?.QRCode}></img>
+                                  <QRCode
+                                    fgColor="#fff"
+                                    bgColor="#ff7622"
+                                    ecLevel="Q"
+                                    quietZone="10"
+                                    qrStyle="dots"
+                                    logoWidth={60}
+                                    logoImage={require("../../assets/img/logoNN.png")}
+                                    removeQrCodeBehindLogo={true}
+                                    eyeRadius={8}
+                                    logoPadding={5}
+                                    value={itm?.QRCode?.slice(0, 50)}
+                                  />
                                 </a>
                               </td>
                               <td className="text-center">
@@ -279,8 +291,22 @@ const ManualTable = () => {
               />
             </div>
             <div className="modal-body">
-              <div className="add_item_form">
-                <img src={previewImg} className="border"></img>
+              <div className="add_item_form text-center">
+                <QRCode
+                  fgColor="#fff"
+                  bgColor="#F28500"
+                  ecLevel="Q"
+                  size={300}
+                  quietZone="10"
+                  qrStyle="dots"
+                  logoWidth={80}
+                  logoImage={require("../../assets/img/QrLogo.png")}
+                  removeQrCodeBehindLogo={true}
+                  eyeRadius={8}
+                  logoPadding={5}
+                  // value={previewImg}
+                />
+                {/* <img src={previewImg} className="border"></img> */}
               </div>
             </div>
           </div>
