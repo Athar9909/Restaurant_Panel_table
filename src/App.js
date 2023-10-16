@@ -18,6 +18,7 @@ import EditCuisine from "./Panel/adminComp/Menu/EditCuisine";
 import EditAddon from "./Panel/adminComp/Menu/EditAddon";
 import AllTransactions from "./Panel/adminComp/Transactions/AllTransactions";
 import Editbanners from "./Panel/adminComp/Dashboard/EditBanners";
+import ViewWaitingReq from "./Panel/adminComp/Tables/ViewWaitingReq";
 function App() {
   return (
     <div className="App">
@@ -91,6 +92,10 @@ function App() {
           <Route
             path="/restaurant/dashboard/menu/edit-addOn/:id"
             element={<EditAddon />}
+          />
+           <Route
+            path="/restaurant/dashboard/viewTableWaiting/:id"
+            element={<ViewWaitingReq />}
           />
           <Route
             path="/restaurant/dashboard/transactions"

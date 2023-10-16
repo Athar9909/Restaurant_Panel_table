@@ -9,15 +9,16 @@ import {
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Profile from "../Dashboard/Profile";
 import Swal from "sweetalert2";
+import { QRCode } from "react-qrcode-logo";
+import { useNavigate } from "react-router-dom";
 
 const WaitingList = () => {
   const [slide, setSlide] = useState("TableM");
-  const [sideBar, setSideBar] = useState();
   const [tables, setTables] = useState([]);
-  const [tableName, setTableName] = useState([]);
   const [branch, setBranch] = useState([]);
   const [selectBranch, setSelectBranch] = useState([]);
   const [previewImg, setPreviewImg] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllWaitingTables();
@@ -51,7 +52,7 @@ const WaitingList = () => {
         confirmButtonColor: "#e25829",
         timer: "2000",
       });
-      setPreviewImg(data?.results?.branch?.QRCode);
+      setPreviewImg(data?.results?.branch?._id);
       getAllWaitingTables();
       document.getElementById("modalClose").click();
       document.getElementById("modalOpen").click();
@@ -118,6 +119,7 @@ const WaitingList = () => {
                             <th>Customer Name</th>
                             <th>Mobile Number</th>
                             <th>Status</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -130,6 +132,24 @@ const WaitingList = () => {
                               <td>{itm?.phone_number}</td>
 
                               <td className="text-center">{itm?.status}</td>
+                              <td>
+                                <a
+                                  className="table_btn_border ms-1"
+                                  onClick={() => {
+                                    navigate(
+                                      `/restaurant/dashboard/viewTableWaiting/${itm?._id}`,
+                                      {
+                                        state: {
+                                          name: itm?.name,
+                                          num: itm?.phone_number,
+                                          status: itm?.status,
+                                        },
+                                      }
+                                    );
+                                  }}>
+                                  Edit
+                                </a>
+                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -244,7 +264,20 @@ const WaitingList = () => {
             </div>
             <div className="modal-body">
               <div className="add_item_form">
-                <img src={previewImg} className="border"></img>
+                <QRCode
+                  fgColor="#fff"
+                  bgColor="rgb(242,133,0)"
+                  ecLevel="Q"
+                  size={300}
+                  quietZone="10"
+                  qrStyle="dots"
+                  logoWidth={100}
+                  logoImage={require("../../assets/img/QrLogo.png")}
+                  removeQrCodeBehindLogo={false}
+                  eyeRadius={8}
+                  logoPadding={3}
+                  value={`https://zitex.techgropsedev.com/waitList/${previewImg}`}
+                />
               </div>
             </div>
           </div>

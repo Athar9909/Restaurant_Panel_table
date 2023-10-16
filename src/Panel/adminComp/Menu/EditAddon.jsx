@@ -7,6 +7,8 @@ import {
   AllAddOns,
   AllCategories,
   CuisineDetails,
+  EditAddonDetails,
+  EditAddonStatus,
   EditCategoryDetails,
   EditCuisineDetails,
   EditCuisineStatus,
@@ -21,9 +23,13 @@ const EditAddon = () => {
   const [slide, setSlide] = useState("MenuM");
   let { id } = useParams();
   let navigate = useNavigate();
-  const [Addons, setAddons] = useState([]);
-  const [options, setOptions] = useState([]);
-  const [selectedAddon, setSelectedAddon] = useState([]);
+  const [options, setOptions] = useState([
+    {
+      name: [],
+      price: "",
+    },
+  ]);
+  const [Addon, setAddon] = useState([]);
 
   const {
     register,
@@ -40,22 +46,23 @@ const EditAddon = () => {
     const { data } = await AddonsDetail(id);
     if (!data?.error) {
       let values = data?.results?.addOn;
+      setAddon(values);
       setOptions(values?.options);
-      setAddons(values);
       reset({
         name: values?.name,
       });
     }
   };
 
-  const handleChange = (selected) => {
-    setSelectedAddon({
-      optionSelected: selected,
-    });
+  let handleChange = (i, e) => {
+    let newFormValues = [...options];
+    newFormValues[i][e.target.name] = e.target.value;
+    console.log(options);
+    setOptions(options);
   };
 
-  const CuisineStatus = async (id) => {
-    const { data } = await EditCuisineStatus(id);
+  const AddonStatusStatus = async (id) => {
+    const { data } = await EditAddonStatus(id);
     if (!data.error) {
       Swal.fire({
         title: data.message,
@@ -68,17 +75,12 @@ const EditAddon = () => {
   };
 
   const onSubmit = async (data) => {
-    let addons = [];
-    (selectedAddon.optionSelected || [])?.map((item) => {
-      addons.push(item?.value);
+    let AddOn = options?.map(({ _id, ...options }) => options);
+    const res = await EditAddonDetails({
+      name: data?.name,
+      options: AddOn,
+      addOnId: id,
     });
-    let formData = new FormData();
-    formData.append("name", data?.name ? data?.name : Addons?.name);
-    formData.append("addOns", JSON.stringify(addons));
-    formData.append("price", data?.price ? data?.price : Addons?.price);
-    formData.append("cuisineId", id);
-
-    const res = await EditCuisineDetails(formData);
 
     if (!res?.data?.error) {
       Swal.fire({
@@ -87,11 +89,6 @@ const EditAddon = () => {
         confirmButtonText: "Okay",
         confirmButtonColor: "#e25829",
       });
-      setSelectedAddon([
-        {
-          optionSelected: [],
-        },
-      ]);
       navigate(-1);
     }
   };
@@ -110,7 +107,10 @@ const EditAddon = () => {
             <div className="col-12">
               <div className="row comman-new-design">
                 <div className="col-12">
-                  <form className="comman_form row" action="#">
+                  <form
+                    className="comman_form row"
+                    action="#"
+                    onSubmit={handleSubmit(onSubmit)}>
                     <div className="col-12 form-group position-relative">
                       <label className="set_label" htmlFor="">
                         Name
@@ -132,7 +132,7 @@ const EditAddon = () => {
 
                     <div className="col-12 form-group options_box">
                       <h2 className="options_head">Options</h2>
-                      {options?.map(() => (
+                      {options?.map((item, ind) => (
                         <div className="row">
                           <div className="col-4 form-group mb-3 position-relative">
                             <label className="set_label" htmlFor="">
@@ -142,7 +142,9 @@ const EditAddon = () => {
                               type="text"
                               className="form-control"
                               placeholder=""
-                              defaultValue="Sprite"
+                              name="name"
+                              defaultValue={item?.name}
+                              onChange={(e) => handleChange(ind, e)}
                             />
                           </div>
                           <div className="col-4 form-group mb-3 position-relative">
@@ -150,13 +152,15 @@ const EditAddon = () => {
                               Price
                             </label>
                             <input
-                              type="text"
+                              type="number"
+                              name="price"
                               className="form-control"
                               placeholder=""
-                              defaultValue={87}
+                              defaultValue={item?.price}
+                              onChange={(e) => handleChange(ind, e)}
                             />
                           </div>
-                          <div className="col-2 form-group mb-3 position-relative form-checkbox">
+                          {/* <div className="col-2 form-group mb-3 position-relative form-checkbox">
                             <label
                               className="set_label without_input"
                               htmlFor="">
@@ -190,7 +194,7 @@ const EditAddon = () => {
                                 />
                               </a>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       ))}
                     </div>
@@ -219,10 +223,13 @@ const EditAddon = () => {
                         <div className="check_toggle">
                           <input
                             type="checkbox"
-                            defaultChecked=""
                             name="check1"
                             id="check1"
                             className="d-none"
+                            defaultChecked={Addon?.status}
+                            onClick={() => {
+                              AddonStatusStatus(Addon?._id);
+                            }}
                           />
                           <label htmlFor="check1" />
                         </div>
@@ -232,14 +239,16 @@ const EditAddon = () => {
                     <div className="col-12">
                       <div className="row">
                         <div className="col-4">
-                          <a className="btns_new_bg w-100" href="javascript:;">
+                          <button className="btns_new_bg w-100" type="submit">
                             Save
-                          </a>
+                          </button>
                         </div>
                         <div className="col-4">
                           <a
                             className="btns_new_border w-100"
-                            href="javascript:;">
+                            onClick={() => {
+                              navigate(-1);
+                            }}>
                             Back
                           </a>
                         </div>

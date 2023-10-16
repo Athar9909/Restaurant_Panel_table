@@ -133,20 +133,20 @@ const ManualTable = () => {
                                     cursor: "zoom-in",
                                   }}
                                   onClick={() => {
-                                    setPreviewImg(itm?.QRCode);
+                                    setPreviewImg(itm?._id);
                                   }}>
                                   <QRCode
                                     fgColor="#fff"
-                                    bgColor="#ff7622"
+                                    bgColor="rgb(242,133,0)"
                                     ecLevel="Q"
                                     quietZone="10"
+                                    size={100}
                                     qrStyle="dots"
-                                    logoWidth={60}
-                                    logoImage={require("../../assets/img/logoNN.png")}
+                                    logoWidth={30}
+                                    logoImage={require("../../assets/img/QrLogo.png")}
                                     removeQrCodeBehindLogo={true}
                                     eyeRadius={8}
-                                    logoPadding={5}
-                                    value={itm?.QRCode?.slice(0, 50)}
+                                    value={`https://zitex.techgropsedev.com/${itm?._id}`}
                                   />
                                 </a>
                               </td>
@@ -294,17 +294,17 @@ const ManualTable = () => {
               <div className="add_item_form text-center">
                 <QRCode
                   fgColor="#fff"
-                  bgColor="#F28500"
+                  bgColor="rgb(242,133,0)"
                   ecLevel="Q"
                   size={300}
                   quietZone="10"
                   qrStyle="dots"
-                  logoWidth={80}
+                  logoWidth={100}
                   logoImage={require("../../assets/img/QrLogo.png")}
-                  removeQrCodeBehindLogo={true}
+                  removeQrCodeBehindLogo={false}
                   eyeRadius={8}
-                  logoPadding={5}
-                  // value={previewImg}
+                  logoPadding={3}
+                  value={`https://zitex.techgropsedev.com/${previewImg}`}
                 />
                 {/* <img src={previewImg} className="border"></img> */}
               </div>

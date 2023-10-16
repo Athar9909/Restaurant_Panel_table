@@ -277,6 +277,36 @@ export async function EditCuisineStatus(id) {
     return { error };
   }
 }
+export async function EditAddonStatus(id) {
+  try {
+    const { data } = await adminHttpService.get(
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/changeAddOnStatus/` +
+        id
+    );
+    console.log(data);
+    if (data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { data };
+  } catch (error) {
+    if (error.response) {
+      console.log(error?.response);
+      Swal.fire({
+        title: "Error!",
+        text: "",
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { error };
+  }
+}
 
 export async function AllCousines(formData) {
   try {
@@ -521,6 +551,36 @@ export async function AllAddOns(formData) {
     return { error };
   }
 }
+export async function EditAddonDetails(formData) {
+  try {
+    const { data } = await adminHttpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/editAddOn`,
+      formData
+    );
+    console.log(data);
+    if (data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { data };
+  } catch (error) {
+    if (error.response) {
+      console.log(error?.response);
+      Swal.fire({
+        title: "Error!",
+        text: "",
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { error };
+  }
+}
 export async function GetOrders(formData) {
   try {
     const { data } = await adminHttpService.post(
@@ -643,10 +703,41 @@ export async function changeOrderStatus(formData) {
   }
 }
 
+
 export async function AddNewAddOn(formData) {
   try {
     const { data } = await adminHttpService.post(
       `${process.env.REACT_APP_APIENDPOINT}api/restaurant/addAddOn`,
+      formData
+    );
+    console.log(data);
+    if (data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { data };
+  } catch (error) {
+    if (error?.response) {
+      console.log(error?.response);
+      Swal.fire({
+        title: "Error!",
+        text: "",
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { error };
+  }
+}
+export async function AddWaitingTime(formData) {
+  try {
+    const { data } = await adminHttpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/addWaitingTime`,
       formData
     );
     console.log(data);
