@@ -143,6 +143,9 @@ const WaitingList = () => {
                                           name: itm?.name,
                                           num: itm?.phone_number,
                                           status: itm?.status,
+                                          tableId: itm?.tableId?._id,
+                                          tableName: itm?.tableId?.name,
+                                          time: itm?.time,
                                         },
                                       }
                                     );

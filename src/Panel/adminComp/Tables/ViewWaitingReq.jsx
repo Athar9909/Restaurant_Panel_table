@@ -2,19 +2,35 @@ import React, { useEffect, useState } from "react";
 import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
 import {
+  AddAlotTable,
   AddWaitingTime,
+  AllManTables,
   ViewNewOrders,
   changeOrderStatus,
 } from "../adminLogin/httpServicesAdmin/adminApis";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ViewWaitingReq = () => {
   const [slide, setSlide] = useState("BookM");
   const [order, setOrder] = useState([]);
   let { id } = useParams();
-
+  const [tables, setTables] = useState([]);
+  const navigate = useNavigate();
   let location = useLocation();
+  useEffect(() => {
+    getAllTables();
+  }, []);
+
+  const getAllTables = async (key) => {
+    const { data } = await AllManTables({
+      search: key ? key : "",
+    });
+    if (!data?.error) {
+      let values = data?.results?.tables;
+      setTables(values);
+    }
+  };
 
   const AddTime = async (val) => {
     const { data } = await AddWaitingTime({
@@ -32,6 +48,22 @@ const ViewWaitingReq = () => {
     }
   };
 
+  const AlotTable = async (val) => {
+    const { data } = await AddAlotTable({
+      id: id,
+      tableId: val,
+    });
+    if (!data?.error) {
+      Swal.fire({
+        title: "Table Alloted Successfully",
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+        timer: "2000",
+      });
+      navigate(-1);
+    }
+  };
   return (
     <div>
       <div className="admin_main">
@@ -90,12 +122,15 @@ const ViewWaitingReq = () => {
                             name="appt"
                             min="09:00"
                             max="18:00"
+                            defaultValue={location?.state?.time}
                             required
                             onChange={(e) => {
                               AddTime(e.target.value);
                             }}
                           />{" "}
-                          <small>Open hours are 9am to 6pm</small>
+                          <small>
+                            Please Set Time According to Open and Close Hours
+                          </small>
                         </div>
                       </div>
                     </div>
@@ -112,53 +147,23 @@ const ViewWaitingReq = () => {
                       </div>
                       <div className="col-auto"></div>
                     </div>
-                    <div className="Customer_boxx">
+                    <div className="Customer_boxx py-4">
                       <strong>Choose Table</strong>
 
                       <select
                         className="form-select "
                         name="categoryId"
                         aria-label="Default select example"
-                      >
-                        <option value={order?.status}>{order?.status}</option>
-                        <option value="Pending">table 1</option>
-                        <option value="Complete">table2</option>
+                        onChange={(e) => {
+                          AlotTable(e.target.value);
+                        }}>
+                        <option value={location?.state?.tableId}>
+                          {location?.state?.tableName}
+                        </option>
+                        {tables?.map((itm, ind) => (
+                          <option value={itm?._id}>{itm?.name}</option>
+                        ))}
                       </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 mb-4">
-                <div className="row Customer_Information">
-                  <div className="col-12">
-                    <div className="row Customer_infotop align-items-center">
-                      <div className="col">
-                        <h3>Menu Information:</h3>
-                      </div>
-                      <div className="col-auto"></div>
-                    </div>
-                    <div className="row Customer_details">
-                      <div className="col-3">
-                        <div className="Customer_boxx">
-                          <strong>Items</strong>
-                          {order?.cuisines?.map((itm, ind) => (
-                            <div className="d-flex">
-                              <span>{itm?.cuisineId?.name}</span>
-                              {/* <span>-EGP{itm?.cuisineId?.price}</span> */}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="col-3">
-                        <div className="Customer_boxx">
-                          <strong>Quantity</strong>
-                          {order?.cuisines?.map((itm, ind) => (
-                            <div className="d-flex text-center  ">
-                              <span>{itm?.quantity}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
