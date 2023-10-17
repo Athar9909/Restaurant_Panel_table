@@ -43,9 +43,12 @@ const AllTransactions = () => {
                   <div className="form-group col-12 position-relative">
                     <input
                       className="form-control"
-                      type="text"
+                      type="search"
                       id=""
                       placeholder="Search by Transaction Id"
+                      onChange={(e) => {
+                        GetAllTransactions(e.target.value);
+                      }}
                     />
                     <button className="search_bt">
                       <img
@@ -54,46 +57,6 @@ const AllTransactions = () => {
                       />
                     </button>
                   </div>
-                  {/* <div className="col-3">
-                    <div className="dropdown fliter_dropdown">
-                      <a
-                        className="btn btn-secondary dropdown-toggle"
-                        href="#"
-                        role="button"
-                        id="dropdownMenuLink"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Filter: <strong>Not Applied</strong>
-                      </a>
-                      <div
-                        className="dropdown-menu p-0"
-                        aria-labelledby="dropdownMenuLink">
-                        <div className="filter_data_top">
-                          <div className="form-group mb-5">
-                            <label htmlFor="">Restaurant Address</label>
-                            <select
-                              className="form-select form-control"
-                              aria-label="Default select example">
-                              <option selected="">Alexandria, Egypt</option>
-                              <option value={1}>One</option>
-                              <option value={2}>Two</option>
-                              <option value={3}>Three</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="filter_data_bottom">
-                          <a className="small_bts_bg" href="javascript:;">
-                            Apply Filter
-                          </a>
-                          <a
-                            className="small_bts_border ms-3"
-                            href="javascript:;">
-                            Reset
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
                 </form>
               </div>
               <div className="col-12">

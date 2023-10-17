@@ -79,6 +79,9 @@ const WaitingList = () => {
                       type="text"
                       id=""
                       placeholder="Search by Customer name"
+                      onChange={(e) => {
+                        getAllWaitingTables(e.target.value);
+                      }}
                     />
                     <button className="search_bt">
                       <img

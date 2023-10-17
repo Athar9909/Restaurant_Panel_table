@@ -8,6 +8,7 @@ import {
 import Profile from "../Dashboard/Profile";
 import Swal from "sweetalert2";
 import { QRCode } from "react-qrcode-logo";
+import { Pagination } from "antd";
 const ManualTable = () => {
   const [slide, setSlide] = useState("TableM");
   const [sideBar, setSideBar] = useState();
@@ -16,20 +17,23 @@ const ManualTable = () => {
   const [branch, setBranch] = useState([]);
   const [selectBranch, setSelectBranch] = useState([]);
   const [previewImg, setPreviewImg] = useState("");
+  const [activePage, setActivePage] = useState(1);
   useEffect(() => {
     getAllTables();
     getAllBranches();
-  }, []);
+  }, [activePage]);
 
   const getAllTables = async (key) => {
     const { data } = await AllManTables({
       search: key ? key : "",
+      page: activePage,
     });
     if (!data?.error) {
       let values = data?.results?.tables;
       setTables(values);
     }
   };
+  
   const getAllBranches = async () => {
     const { data } = await AllBranches();
     if (!data?.error) {
@@ -37,6 +41,7 @@ const ManualTable = () => {
     }
   };
 
+  console.log(activePage);
   const GenerateQR = async () => {
     const { data } = await AddNewQR({
       name: tableName,
@@ -73,9 +78,12 @@ const ManualTable = () => {
                   <div className="form-group col-9 position-relative">
                     <input
                       className="form-control"
-                      type="text"
+                      type="search"
                       id=""
                       placeholder="Search by Table name"
+                      onChange={(e) => {
+                        getAllTables(e.target.value);
+                      }}
                     />
                     <button className="search_bt">
                       <img
@@ -105,23 +113,19 @@ const ManualTable = () => {
                           <tr>
                             <th>S. No</th>
                             {/* <th>Restaurant Address</th> */}
+                            {/* <th>Branch Id</th> */}
                             <th>Table Name</th>
                             {/* <th>Email Id</th>
                             <th>Mobile Number</th> */}
                             <th>QR code</th>
-                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
                           {(tables || [])?.map((itm, idx) => (
                             <tr>
                               <td>{idx + 1}</td>
-                              {/* <td>
-                                {itm?.restaurantId.restaurant_address?.slice(
-                                  0,
-                                  15
-                                )}
-                              </td> */}
+
+                              {/* <td>{itm?.branchId}</td> */}
                               <td>{itm?.name}</td>
                               {/* <td>{itm?.restaurantId.email}</td>
                               <td>{itm?.restaurantId.phone_number}</td> */}
@@ -150,33 +154,23 @@ const ManualTable = () => {
                                   />
                                 </a>
                               </td>
-                              <td className="text-center">
-                                <form className="table_btns d-flex align-items-center justify-content-center ">
-                                  <div className="check_toggle">
-                                    <input
-                                      type="checkbox"
-                                      defaultChecked=""
-                                      name="check5"
-                                      id="check5"
-                                      className="d-none"
-                                    />
-                                    <label htmlFor="check5" />
-                                  </div>
-                                </form>
-                              </td>
                             </tr>
                           ))}
                         </tbody>
                       </table>
                     </div>
                     <div className="pagination_custom">
-                      <a href="javascript:;">
-                        <img src="assets/img/ar_left.png" alt="" />
-                      </a>{" "}
-                      <span>1 - 10 of 100</span>{" "}
-                      <a href="javascript:;">
-                        <img src="assets/img/ar_right.png" alt="" />
-                      </a>
+                      <Pagination
+                        prev
+                        last
+                        next
+                        first
+                        size="lg"
+                        total={50}
+                        limit={10}
+                        activePage={activePage}
+                        onChangePage={setActivePage}
+                      />
                     </div>
                   </div>
                 </div>

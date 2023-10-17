@@ -318,8 +318,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               aria-expanded="true"
               aria-controls="collapse7">
               <img
-                width={11}
-                src={require("../../assets/img/dollar.png")}
+                
+                src={require("../../assets/img/profilemy.png")}
                 alt=""
               />{" "}
               My Profile

@@ -41,6 +41,7 @@ const Dashboard = () => {
     const { data } = await GetOrders({
       search: key ? key : "",
       type: "Take Away",
+      page:1
     });
     if (!data?.error) {
       let values = data?.results?.orders;
@@ -168,9 +169,12 @@ const Dashboard = () => {
                 <div className="form-group col-12 position-relative">
                   <input
                     className="form-control"
-                    type="text"
+                    type="search"
                     id=""
                     placeholder="Search by Order ID"
+                    onChange={(e) => {
+                      getAllTakeaways(e.target.value);
+                    }}
                   />
                   <button className="search_bt">
                     <img src={require("../../assets/img/search.png")} alt="" />

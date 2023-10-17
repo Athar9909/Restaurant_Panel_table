@@ -162,9 +162,12 @@ const CuisineManage = () => {
                 <div className="form-group col-6 position-relative">
                   <input
                     className="form-control"
-                    type="text"
+                    type="search"
                     id=""
                     placeholder="Search by Cuisine name"
+                    onChange={(e) => {
+                      getAllCuisines(e.target.value);
+                    }}
                   />
                   <button className="search_bt">
                     <img src={require("../../assets/img/search.png")} alt="" />

@@ -117,7 +117,10 @@ const AddOn = () => {
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by Customer name"
+                    placeholder="Search by Addon name"
+                    onChange={(e) => {
+                      getAllAddons(e.target.value);
+                    }}
                   />
                   <button className="search_bt">
                     <img src={require("../../assets/img/search.png")} alt="" />
