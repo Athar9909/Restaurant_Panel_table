@@ -19,7 +19,7 @@ const AllTransactions = () => {
     const { data } = await GetAllTransactions({
       search: key ? key : "",
       branch: "",
-    });
+    }); 
     if (!data?.error) {
       let values = data?.results?.transactions;
       setList(values);

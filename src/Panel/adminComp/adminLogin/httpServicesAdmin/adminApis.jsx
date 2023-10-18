@@ -703,7 +703,6 @@ export async function changeOrderStatus(formData) {
   }
 }
 
-
 export async function AddNewAddOn(formData) {
   try {
     const { data } = await adminHttpService.post(
@@ -887,10 +886,11 @@ export async function UpdateRestaurant(formData) {
   }
 }
 
-export async function GetAllTransactions() {
+export async function GetAllTransactions(formData) {
   try {
     const { data } = await adminHttpService.post(
-      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/getTransactions`
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/getTransactions`,
+      formData
     );
     console.log(data);
     if (data?.error) {
