@@ -43,19 +43,19 @@ const AllTransactions = () => {
                   <div className="form-group col-12 position-relative">
                     <input
                       className="form-control"
-                      type="search"
+                      type="text"
                       id=""
                       placeholder="Search by Transaction Id"
                       onChange={(e) => {
-                        GetAllTransactions(e.target.value);
+                        getTransactions(e.target.value);
                       }}
                     />
-                    <button className="search_bt">
+                    <a className="search_bt">
                       <img
                         src={require("../../assets/img/search.png")}
                         alt=""
                       />
-                    </button>
+                    </a>
                   </div>
                 </form>
               </div>

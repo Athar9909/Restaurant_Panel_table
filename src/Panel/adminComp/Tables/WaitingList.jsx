@@ -83,12 +83,12 @@ const WaitingList = () => {
                         getAllWaitingTables(e.target.value);
                       }}
                     />
-                    <button className="search_bt">
+                    <a className="search_bt">
                       <img
                         src={require("../../assets/img/search.png")}
                         alt=""
                       />
-                    </button>
+                    </a>
                   </div>
                   <div className="col-3">
                     <div className="">

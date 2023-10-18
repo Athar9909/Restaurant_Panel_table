@@ -111,13 +111,16 @@ const Dining = () => {
                       type="text"
                       id=""
                       placeholder="Search Order Id"
+                      onChange={(e) => {
+                        getAllDinings(e.target.value);
+                      }}
                     />
-                    <button className="search_bt">
+                    <a className="search_bt">
                       <img
                         src={require("../../assets/img/search.png")}
                         alt=""
                       />
-                    </button>
+                    </a>
                   </div>
                 </form>
               </div>

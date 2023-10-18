@@ -110,13 +110,16 @@ const TakeAway = () => {
                       type="text"
                       id=""
                       placeholder="Search by Order Id"
+                      onChange={(e) => {
+                        getAllTakeaways(e.target.value);
+                      }}
                     />
-                    <button className="search_bt">
+                    <a className="search_bt">
                       <img
                         src={require("../../assets/img/search.png")}
                         alt=""
                       />
-                    </button>
+                    </a>
                   </div>
                   {/* <div className="col-3">
                     <div className="dropdown fliter_dropdown">
