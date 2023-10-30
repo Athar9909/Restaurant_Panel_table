@@ -18,6 +18,7 @@ const ViewWaitingReq = () => {
   const [tables, setTables] = useState([]);
   const navigate = useNavigate();
   let location = useLocation();
+  const [time, setTime] = useState();
   useEffect(() => {
     getAllTables();
   }, []);
@@ -35,7 +36,7 @@ const ViewWaitingReq = () => {
   const AddTime = async (val) => {
     const { data } = await AddWaitingTime({
       id: id,
-      time: val,
+      time: time,
     });
     if (!data?.error) {
       Swal.fire({
@@ -125,13 +126,21 @@ const ViewWaitingReq = () => {
                             defaultValue={location?.state?.time}
                             required
                             onChange={(e) => {
-                              AddTime(e.target.value);
+                              setTime(e.target.value);
                             }}
                           />{" "}
                           <small>
                             Please Set Time According to Open and Close Hours
                           </small>
                         </div>
+
+                        <button
+                          className="comman_btn mt-4 px-3"
+                          onClick={() => {
+                            AddTime();
+                          }}>
+                          {location?.state?.time ? "Change Time" : "Save Time"}
+                        </button>
                       </div>
                     </div>
                   </div>

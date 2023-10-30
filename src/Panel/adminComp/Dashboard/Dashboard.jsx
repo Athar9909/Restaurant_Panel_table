@@ -13,7 +13,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
-import { GetOrders } from "../adminLogin/httpServicesAdmin/adminApis";
+import {
+  DashboardData,
+  GetOrders,
+} from "../adminLogin/httpServicesAdmin/adminApis";
 // import { MDBDataTable } from "mdbreact";
 // import moment from "moment";
 
@@ -23,6 +26,7 @@ const Dashboard = () => {
   const [files, setFiles] = useState([]);
   const [list, setList] = useState([]);
   const navigate = useNavigate();
+  const [count, setCount] = useState();
   const {
     register,
     handleSubmit,
@@ -35,18 +39,28 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllTakeaways();
+    getDashData();
   }, []);
+
+  const getDashData = async (key) => {
+    const { data } = await DashboardData();
+    if (!data?.error) {
+      let values = data?.results;
+      setCount(values);
+    }
+  };
 
   const getAllTakeaways = async (key) => {
     const { data } = await GetOrders({
       search: key ? key : "",
-      page:1
+      page: 1,
     });
     if (!data?.error) {
       let values = data?.results?.orders;
       setList(values);
     }
   };
+
   const onSubmit = async (data) => {
     let addons = [];
     // (selectedAddon.optionSelected || [])?.map((item) => {
@@ -100,7 +114,7 @@ const Dashboard = () => {
                 <div className="col-md-3">
                   <div className="statics_box">
                     <div className="statics_left">
-                      <strong>459</strong>
+                      <strong>{count?.totalMenu}</strong>
                       <span>Total Menu</span>
                     </div>
                     <div className="statics_icon">
@@ -116,7 +130,7 @@ const Dashboard = () => {
                 <div className="col-md-3">
                   <div className="statics_box">
                     <div className="statics_left">
-                      <strong>87,500</strong>
+                      <strong>{count?.totalRevenue}</strong>
                       <span>Total revenue</span>
                     </div>
                     <div className="statics_icon">
@@ -132,7 +146,7 @@ const Dashboard = () => {
                 <div className="col-md-3">
                   <div className="statics_box">
                     <div className="statics_left">
-                      <strong>780</strong>
+                      <strong>{count?.totalOrders}</strong>
                       <span>Total orders</span>
                     </div>
                     <div className="statics_icon">

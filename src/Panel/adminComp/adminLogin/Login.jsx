@@ -173,11 +173,11 @@ const Login = () => {
                   Sign in
                 </button>
               </div>
-              <div className="col-12 form-group mt-4">
-                <div className="register_now">
+              {/* <div className="col-12 form-group mt-4">
+                <div className="register_now">    
                   Don’t have an account yet? <a>Register Now</a>
                 </div>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

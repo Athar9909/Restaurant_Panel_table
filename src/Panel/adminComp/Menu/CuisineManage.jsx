@@ -132,7 +132,7 @@ const CuisineManage = () => {
       document.getElementById("modalClose").click();
       document.getElementById("reset1").click();
       getAllCuisines();
-      setFiles([])
+      setFiles([]);
       setSelectedAddon([
         {
           optionSelected: [],
@@ -199,6 +199,7 @@ const CuisineManage = () => {
                       className="d-none"
                       type="file"
                       id="bulk"
+                      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                       name="bulkMenu"
                       onChange={(e) => onBulkUpload(e, "bulkMenu")}></input>
                   </div>

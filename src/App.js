@@ -19,6 +19,7 @@ import EditAddon from "./Panel/adminComp/Menu/EditAddon";
 import AllTransactions from "./Panel/adminComp/Transactions/AllTransactions";
 import Editbanners from "./Panel/adminComp/Dashboard/EditBanners";
 import ViewWaitingReq from "./Panel/adminComp/Tables/ViewWaitingReq";
+import ResetPassword from "./Panel/adminComp/adminLogin/ResetPassword";
 function App() {
   return (
     <div className="App">
@@ -31,8 +32,12 @@ function App() {
             element={<ForgotPass />}
           />
           <Route
-            path="/restaurant/login/forgot-Password/OTP-verification"
+            path="/restaurant/login/forgot-Password/OTP-verification/:mail/:code"
             element={<OtpVerify />}
+          />
+          <Route
+            path="/restaurant/login/forgot-Password/Reset-Password/:mail/:code"
+            element={<ResetPassword />}
           />
           <Route path="/restaurant/dashboard" element={<Dashboard />} />
           <Route
@@ -93,7 +98,7 @@ function App() {
             path="/restaurant/dashboard/menu/edit-addOn/:id"
             element={<EditAddon />}
           />
-           <Route
+          <Route
             path="/restaurant/dashboard/viewTableWaiting/:id"
             element={<ViewWaitingReq />}
           />
