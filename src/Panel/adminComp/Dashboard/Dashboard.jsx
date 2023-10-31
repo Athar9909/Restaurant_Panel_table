@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
-// import "../../assets/css/style.css";
-// import {
-//   RecentOrders,
-//   totalBuyers,
-//   totalEarning,
-//   totalOrders,
-//   totalVendors,
-// } from "../httpServices/dashHttpService";
-// import AnimatedNumber from "react-animated-number/build/AnimatedNumber";
 import { Link, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useForm } from "react-hook-form";
@@ -16,9 +7,10 @@ import classNames from "classnames";
 import {
   DashboardData,
   GetOrders,
+  exportOrderData,
+  exportTransactData,
+  exportTransactionData,
 } from "../adminLogin/httpServicesAdmin/adminApis";
-// import { MDBDataTable } from "mdbreact";
-// import moment from "moment";
 
 const Dashboard = () => {
   const [slide, setSlide] = useState("Dash");
@@ -63,39 +55,35 @@ const Dashboard = () => {
 
   const onSubmit = async (data) => {
     let addons = [];
-    // (selectedAddon.optionSelected || [])?.map((item) => {
-    //   addons.push(item?.value);
-    // });
-    // let formData = new FormData();
-    // formData.append("name", data?.name);
-    // formData.append("categoryId", data?.categoryId);
-    // formData.append("mainIngredients", JSON.stringify(data?.mainIngredients));
-    // formData.append("addOns", JSON.stringify(addons));
-    // formData.append("price", data?.price);
-    // formData.append("image", files?.cuisineImg);
-
-    // const res = await AddNewCuisine(formData);
-    // if (!res?.data?.error) {
-    //   Swal.fire({
-    //     title: res?.data?.message,
-    //     icon: "success",
-    //     confirmButtonText: "Okay",
-    //     confirmButtonColor: "#e25829",
-    //   });
-    //   document.getElementById("modalClose").click();
-    //   document.getElementById("reset1").click();
-    //   getAllCuisines();
-    //   setSelectedAddon([
-    //     {
-    //       optionSelected: [],
-    //     },
-    //   ]);
-    // }
   };
 
   const getBarClick = (val) => {
     console.log(val);
     setSideBar(val);
+  };
+  const ExportMenu = async () => {
+    const { data } = await exportOrderData();
+    if (!data.error) {
+      window?.open(data?.results?.file);
+    }
+  };
+  const ExportUsers = async () => {
+    const { data } = await exportOrderData();
+    if (!data.error) {
+      window?.open(data?.results?.file);
+    }
+  };
+  const ExportRevenue = async () => {
+    const { data } = await exportTransactionData();
+    if (!data?.error) {
+      window.open(data?.results?.file);
+    }
+  };
+  const ExportOrder = async () => {
+    const { data } = await exportOrderData();
+    if (!data?.error) {
+      window.open(data?.results?.file);
+    }
   };
 
   return (
@@ -116,6 +104,19 @@ const Dashboard = () => {
                     <div className="statics_left">
                       <strong>{count?.totalMenu}</strong>
                       <span>Total Menu</span>
+                      <div className="">
+                        <span>
+                          <img
+                            width={25}
+                            onClick={() => {
+                              ExportMenu();
+                            }}
+                            className="expIcon"
+                            src={require("../../assets/img/exp.png")}
+                            alt=""
+                          />
+                        </span>
+                      </div>
                     </div>
                     <div className="statics_icon">
                       <span>
@@ -132,6 +133,19 @@ const Dashboard = () => {
                     <div className="statics_left">
                       <strong>{count?.totalRevenue}</strong>
                       <span>Total revenue</span>
+                      <div className="">
+                        <span>
+                          <img
+                            width={25}
+                            onClick={() => {
+                              ExportRevenue();
+                            }}
+                            className="expIcon"
+                            src={require("../../assets/img/exp.png")}
+                            alt=""
+                          />
+                        </span>
+                      </div>
                     </div>
                     <div className="statics_icon">
                       <span>
@@ -148,6 +162,19 @@ const Dashboard = () => {
                     <div className="statics_left">
                       <strong>{count?.totalOrders}</strong>
                       <span>Total orders</span>
+                      <div className="">
+                        <span>
+                          <img
+                          width={25}
+                          onClick={()=>{
+                            ExportOrder()
+                          }}
+                          className="expIcon"
+                            src={require("../../assets/img/exp.png")}
+                            alt=""
+                          />
+                        </span>
+                      </div>
                     </div>
                     <div className="statics_icon">
                       <span>
@@ -164,6 +191,19 @@ const Dashboard = () => {
                     <div className="statics_left">
                       <strong>1800</strong>
                       <span>Total Visitor</span>
+                      <div className="">
+                        <span>
+                          <img
+                          width={25}
+                          onClick={()=>{
+                            ExportUsers()
+                          }}
+                          className="expIcon"
+                            src={require("../../assets/img/exp.png")}
+                            alt=""
+                          />
+                        </span>
+                      </div>
                     </div>
                     <div className="statics_icon">
                       <span>
