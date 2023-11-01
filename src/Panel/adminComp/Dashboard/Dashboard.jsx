@@ -7,6 +7,7 @@ import classNames from "classnames";
 import {
   DashboardData,
   GetOrders,
+  exportMenu,
   exportOrderData,
   exportTransactData,
   exportTransactionData,
@@ -62,7 +63,7 @@ const Dashboard = () => {
     setSideBar(val);
   };
   const ExportMenu = async () => {
-    const { data } = await exportOrderData();
+    const { data } = await exportMenu();
     if (!data.error) {
       window?.open(data?.results?.file);
     }
@@ -165,11 +166,11 @@ const Dashboard = () => {
                       <div className="">
                         <span>
                           <img
-                          width={25}
-                          onClick={()=>{
-                            ExportOrder()
-                          }}
-                          className="expIcon"
+                            width={25}
+                            onClick={() => {
+                              ExportOrder();
+                            }}
+                            className="expIcon"
                             src={require("../../assets/img/exp.png")}
                             alt=""
                           />
@@ -186,7 +187,6 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-               
               </div>
             </div>
             <div className="col-12 mb-4">

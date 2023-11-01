@@ -1190,10 +1190,10 @@ export async function rmvBanner(formData) {
   }
 }
 
-export async function exportBranchData(formData) {
+export async function exportMenu(formData) {
   try {
-    const { data } = await adminHttpService.post(
-      `${process.env.REACT_APP_APIENDPOINT}api/admin/exportBranches`,
+    const { data } = await adminHttpService.get(
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/exportCuisines`,
       formData
     );
     console.log(data);
