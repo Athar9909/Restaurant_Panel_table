@@ -20,6 +20,7 @@ import AllTransactions from "./Panel/adminComp/Transactions/AllTransactions";
 import Editbanners from "./Panel/adminComp/Dashboard/EditBanners";
 import ViewWaitingReq from "./Panel/adminComp/Tables/ViewWaitingReq";
 import ResetPassword from "./Panel/adminComp/adminLogin/ResetPassword";
+import Notifications from "./Panel/adminComp/Notifications/Notifications";
 function App() {
   return (
     <div className="App">
@@ -105,6 +106,10 @@ function App() {
           <Route
             path="/restaurant/dashboard/transactions"
             element={<AllTransactions />}
+          />
+          <Route
+            path="/restaurant/dashboard/Notifications"
+            element={<Notifications />}
           />
         </Routes>
       </BrowserRouter>

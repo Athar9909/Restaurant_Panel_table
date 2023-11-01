@@ -303,6 +303,61 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
             </div>
           </div>
         </div>
+        
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="heading6">
+            <button
+              onClick={() => {
+                navigate("/restaurant/dashboard/Notifications");
+              }}
+              className={
+                slide === "NotiM"
+                  ? "accordion-button "
+                  : "accordion-button collapsed "
+              }
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse9"
+              aria-expanded="true"
+              aria-controls="collapse9">
+              <i
+                class={"fa fa-bell me-3"}
+                style={{
+                  color: "#ff7622",
+                }}
+                aria-hidden="true"></i>
+              Notifications
+            </button>
+          </h2>
+          <div
+            id="collapse9"
+            className={
+              slide === "NotiM"
+                ? "accordion-collapse collapse show"
+                : "accordion-collapse collapse"
+            }
+            aria-labelledby="heading6"
+            data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+              <div className="siderbar_menus">
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/Notifications");
+                  }}>
+                  Notifications
+                </a>
+                {/* <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/table/waiting-table");
+                  }}>
+                  Wating Tables
+                </a> */}
+                {/* <a>Floor Plan Management</a>
+                <a>Slots Management</a> */}
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="accordion-item">
           <h2 className="accordion-header" id="heading7">
@@ -317,12 +372,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse7"
               aria-expanded="true"
               aria-controls="collapse7">
-              <img
-                
-                src={require("../../assets/img/profilemy.png")}
-                alt=""
-              />{" "}
-              My Profile
+              <img src={require("../../assets/img/profilemy.png")} alt="" /> My
+              Profile
             </button>
           </h2>
           <div

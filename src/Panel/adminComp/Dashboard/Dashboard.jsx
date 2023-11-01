@@ -99,7 +99,7 @@ const Dashboard = () => {
             </div>
             <div className="col-12 mb-4">
               <div className="row statics_part">
-                <div className="col-md-3">
+                <div className="col-md-4">
                   <div className="statics_box">
                     <div className="statics_left">
                       <strong>{count?.totalMenu}</strong>
@@ -128,7 +128,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-4">
                   <div className="statics_box">
                     <div className="statics_left">
                       <strong>{count?.totalRevenue}</strong>
@@ -157,7 +157,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-4">
                   <div className="statics_box">
                     <div className="statics_left">
                       <strong>{count?.totalOrders}</strong>
@@ -186,35 +186,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-3">
-                  <div className="statics_box">
-                    <div className="statics_left">
-                      <strong>1800</strong>
-                      <span>Total Visitor</span>
-                      <div className="">
-                        <span>
-                          <img
-                          width={25}
-                          onClick={()=>{
-                            ExportUsers()
-                          }}
-                          className="expIcon"
-                            src={require("../../assets/img/exp.png")}
-                            alt=""
-                          />
-                        </span>
-                      </div>
-                    </div>
-                    <div className="statics_icon">
-                      <span>
-                        <img
-                          src={require("../../assets/img/visitors.png")}
-                          alt=""
-                        />
-                      </span>
-                    </div>
-                  </div>
-                </div>
+               
               </div>
             </div>
             <div className="col-12 mb-4">
