@@ -21,6 +21,8 @@ import Editbanners from "./Panel/adminComp/Dashboard/EditBanners";
 import ViewWaitingReq from "./Panel/adminComp/Tables/ViewWaitingReq";
 import ResetPassword from "./Panel/adminComp/adminLogin/ResetPassword";
 import Notifications from "./Panel/adminComp/Notifications/Notifications";
+import ManageDiscount from "./Panel/adminComp/Discount/ManageDiscount";
+import PromoManage from "./Panel/adminComp/Discount/PromoManage";
 function App() {
   return (
     <div className="App">
@@ -110,6 +112,15 @@ function App() {
           <Route
             path="/restaurant/dashboard/Notifications"
             element={<Notifications />}
+          />
+          <Route
+            path="/restaurant/dashboard/Manage-Discount"
+            element={<ManageDiscount />}
+          />
+
+          <Route
+            path="/restaurant/dashboard/Promo-Manage"
+            element={<PromoManage />}
           />
         </Routes>
       </BrowserRouter>

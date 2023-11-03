@@ -8,6 +8,7 @@ import {
   AllCategories,
   AllCousines,
   CsvImport,
+  exportCuisines,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -107,6 +108,12 @@ const CuisineManage = () => {
       optionSelected: selected,
     });
   };
+  const ExportMenu = async () => {
+    const { data } = await exportCuisines();
+    if (!data.error) {
+      window?.open(data?.results?.file);
+    }
+  };
 
   const onSubmit = async (data) => {
     let addons = [];
@@ -173,13 +180,22 @@ const CuisineManage = () => {
                     <img src={require("../../assets/img/search.png")} alt="" />
                   </a>
                 </div>
-                <div className="col-4">
+                <div className="col-2">
                   <div className="">
                     <a
                       className="comman_btn"
                       data-bs-toggle="modal"
                       data-bs-target="#additem">
                       <strong>+ Add Cuisine</strong>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-2">
+                  <div className="">
+                    <a className="comman_btn" onClick={() => ExportMenu()}>
+                      <strong>
+                        <i class="fa-solid fa-file-export mx-1"></i>Export
+                      </strong>
                     </a>
                   </div>
                 </div>

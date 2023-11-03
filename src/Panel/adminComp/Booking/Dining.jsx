@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
-import { GetOrders } from "../adminLogin/httpServicesAdmin/adminApis";
+import {
+  DashboardData,
+  GetOrders,
+  exportMenu,
+  exportOrderData,
+  exportTransactionData,
+} from "../adminLogin/httpServicesAdmin/adminApis";
 import { useNavigate } from "react-router-dom";
 
 const Dining = () => {
   const [slide, setSlide] = useState("BookM");
   const [list, setList] = useState([]);
   const navigate = useNavigate();
+  const [count, setCount] = useState();
 
   useEffect(() => {
     getAllDinings();
+    getDashData();
   }, []);
 
   const getAllDinings = async (key) => {
@@ -21,6 +29,32 @@ const Dining = () => {
     if (!data?.error) {
       let values = data?.results?.orders;
       setList(values);
+    }
+  };
+  const getDashData = async (key) => {
+    const { data } = await DashboardData();
+    if (!data?.error) {
+      let values = data?.results;
+      setCount(values);
+    }
+  };
+
+  const ExportRevenue = async () => {
+    const { data } = await exportTransactionData();
+    if (!data?.error) {
+      window.open(data?.results?.file);
+    }
+  };
+  const ExportOrder = async () => {
+    const { data } = await exportOrderData();
+    if (!data?.error) {
+      window.open(data?.results?.file);
+    }
+  };
+  const ExportMenu = async () => {
+    const { data } = await exportMenu();
+    if (!data.error) {
+      window?.open(data?.results?.file);
     }
   };
 
@@ -37,64 +71,87 @@ const Dining = () => {
               </div>
               <div className="col-12 mb-4">
                 <div className="row statics_part">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <div className="statics_box">
                       <div className="statics_left">
-                        <strong>459</strong>
-                        <span>Total branch</span>
+                        <strong>{count?.totalTables}</strong>
+                        <span>Total QR</span>
+                        <div className="">
+                          <span>
+                            <img
+                              width={25}
+                              onClick={() => {
+                                ExportMenu();
+                              }}
+                              className="expIcon"
+                              src={require("../../assets/img/exp.png")}
+                              alt=""
+                            />
+                          </span>
+                        </div>
                       </div>
                       <div className="statics_icon">
                         <span>
                           <img
-                            src={require("../../assets/img/branch_icon.png")}
+                            src={require("../../assets/img/menus.png")}
                             alt=""
                           />
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <div className="statics_box">
                       <div className="statics_left">
-                        <strong>87,500</strong>
-                        <span>Incoming Order</span>
+                        <strong>{count?.totalRevenue}</strong>
+                        <span>Grand Total</span>
+                        <div className="">
+                          <span>
+                            <img
+                              width={25}
+                              onClick={() => {
+                                ExportRevenue();
+                              }}
+                              className="expIcon"
+                              src={require("../../assets/img/exp.png")}
+                              alt=""
+                            />
+                          </span>
+                        </div>
                       </div>
                       <div className="statics_icon">
                         <span>
                           <img
-                            src={require("../../assets/img/incommingorder.png")}
+                            src={require("../../assets/img/dollar.png")}
                             alt=""
                           />
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <div className="statics_box">
                       <div className="statics_left">
-                        <strong>780</strong>
-                        <span>Complete Order</span>
+                        <strong>{count?.totalOrders}</strong>
+                        <span>Total orders</span>
+                        <div className="">
+                          <span>
+                            <img
+                              width={25}
+                              onClick={() => {
+                                ExportOrder();
+                              }}
+                              className="expIcon"
+                              src={require("../../assets/img/exp.png")}
+                              alt=""
+                            />
+                          </span>
+                        </div>
                       </div>
                       <div className="statics_icon">
                         <span>
                           <img
-                            src={require("../../assets/img/complete_order.png")}
-                            alt=""
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="statics_box">
-                      <div className="statics_left">
-                        <strong>1800</strong>
-                        <span>Cancel Order</span>
-                      </div>
-                      <div className="statics_icon">
-                        <span>
-                          <img
-                            src={require("../../assets/img/cancel_order.png")}
+                            src={require("../../assets/img/orders.png")}
                             alt=""
                           />
                         </span>

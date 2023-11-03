@@ -1071,7 +1071,8 @@ export async function GetAllNotifications(formData) {
 export async function NotificationDetail(id) {
   try {
     const { data } = await adminHttpService.get(
-      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/readNotification/` + id
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/readNotification/` +
+        id
     );
     console.log(data);
     if (data?.error) {
@@ -1097,7 +1098,6 @@ export async function NotificationDetail(id) {
     return { error };
   }
 }
-
 
 export async function AddonsDetail(id) {
   try {
@@ -1191,6 +1191,36 @@ export async function rmvBanner(formData) {
 }
 
 export async function exportMenu(formData) {
+  try {
+    const { data } = await adminHttpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}api/restaurant/exportTables`,
+      formData
+    );
+    console.log(data);
+    if (data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { data };
+  } catch (error) {
+    if (error.response) {
+      console.log(error?.response);
+      Swal.fire({
+        title: "Error!",
+        text: "",
+        icon: "error",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+    }
+    return { error };
+  }
+}
+export async function exportCuisines(formData) {
   try {
     const { data } = await adminHttpService.get(
       `${process.env.REACT_APP_APIENDPOINT}api/restaurant/exportCuisines`,

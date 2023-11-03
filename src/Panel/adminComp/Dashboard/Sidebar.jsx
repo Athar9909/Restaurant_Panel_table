@@ -81,7 +81,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
             </div>
           </div>
         </div>
-        {/* <div className="accordion-item">
+        <div className="accordion-item d-none">
           <h2 className="accordion-header" id="heading2">
             <button
               className="accordion-button collapsed"
@@ -110,7 +110,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
 
         <div className="accordion-item">
           <h2 className="accordion-header" id="heading3">
@@ -303,7 +303,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
             </div>
           </div>
         </div>
-        
+
         <div className="accordion-item">
           <h2 className="accordion-header" id="heading6">
             <button
@@ -322,9 +322,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               aria-controls="collapse9">
               <i
                 class={"fa fa-bell me-3"}
-                style={{
-                  color: "#ff7622",
-                }}
+              
                 aria-hidden="true"></i>
               Notifications
             </button>
@@ -411,10 +409,14 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
             </div>
           </div>
         </div>
-        {/* <div className="accordion-item">
+        <div className="accordion-item d-none">
           <h2 className="accordion-header" id="heading5">
             <button
-              className="accordion-button collapsed"
+              className={
+                slide === "DiscountM"
+                  ? "accordion-button "
+                  : "accordion-button collapsed"
+              }
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapse5"
@@ -426,17 +428,32 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
           </h2>
           <div
             id="collapse5"
-            className="accordion-collapse collapse"
+            className={
+              slide === "DiscountM"
+                ? "accordion-collapse collapse show"
+                : "accordion-collapse collapse"
+            }
             aria-labelledby="heading5"
             data-bs-parent="#accordionExample">
             <div className="accordion-body">
               <div className="siderbar_menus">
-                <a>Manage Discount</a>
-                <a>Promo Code Management</a>
-              </div>
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/Manage-Discount");
+                  }}>
+                  Manage Discount
+                </a>
+                <a
+                  onClick={() => {
+                    navigate("/restaurant/dashboard/Promo-Manage");
+                  }}>
+                  Promo Code Management
+                </a>
+      
+              </div>  
             </div>
           </div>
-        </div> */}
+        </div>
         {/* <div className="accordion-item">
           <h2 className="accordion-header" id="heading7">
             <button

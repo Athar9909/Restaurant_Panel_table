@@ -103,8 +103,8 @@ const Dashboard = () => {
                 <div className="col-md-4">
                   <div className="statics_box">
                     <div className="statics_left">
-                      <strong>{count?.totalMenu}</strong>
-                      <span>Total Menu</span>
+                      <strong>{count?.totalTables}</strong>
+                      <span>Total QR</span>
                       <div className="">
                         <span>
                           <img
@@ -133,7 +133,7 @@ const Dashboard = () => {
                   <div className="statics_box">
                     <div className="statics_left">
                       <strong>{count?.totalRevenue}</strong>
-                      <span>Total revenue</span>
+                      <span>Grand Total</span>
                       <div className="">
                         <span>
                           <img
