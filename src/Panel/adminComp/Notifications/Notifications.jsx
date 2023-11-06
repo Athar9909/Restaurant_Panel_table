@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
-import {
-  GetAllNotifications,
-} from "../adminLogin/httpServicesAdmin/adminApis";
+import { GetAllNotifications } from "../adminLogin/httpServicesAdmin/adminApis";
 import { useNavigate } from "react-router-dom";
 
 const Notifications = () => {
@@ -17,7 +15,7 @@ const Notifications = () => {
   const getNotifications = async (key) => {
     const { data } = await GetAllNotifications({
       search: key ? key : "",
-    }); 
+    });
     if (!data?.error) {
       let values = data?.results?.notifications;
       setList(values);
@@ -65,9 +63,10 @@ const Notifications = () => {
                         <thead>
                           <tr>
                             <th>Date</th>
+                            <th>Order Id</th>
                             <th>Title</th>
                             <th>Description</th>
-                            
+
                             {/* <th>Action</th> */}
                           </tr>
                         </thead>
@@ -75,10 +74,19 @@ const Notifications = () => {
                           {list?.map((item, index) => (
                             <tr>
                               <td>{item?.createdAt?.slice(0, 10)}</td>
+                              <td>
+                                <a
+                                  className="tag_class1"
+                                  onClick={() => {
+                                    navigate(
+                                      `/restaurant/dashboard/booking/View/${item?.orderId?._id}`
+                                    );
+                                  }}>
+                                  {item?.orderId?.orderId}
+                                </a>
+                              </td>
                               <td>{item?.title_en}</td>
                               <td>{item?.description_en}</td>
-                         
-                            
                             </tr>
                           ))}
                         </tbody>

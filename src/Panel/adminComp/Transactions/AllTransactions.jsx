@@ -79,7 +79,17 @@ const AllTransactions = () => {
                           {list?.map((item, index) => (
                             <tr>
                               <td>{item?.createdAt?.slice(0, 10)}</td>
-                              <td>{item?.orderId?.orderId}</td>
+                              <td>
+                              <a
+                                className="tag_class1"
+                                onClick={() => {
+                                  navigate(
+                                    `/restaurant/dashboard/booking/View/${item?.orderId?._id}`
+                                  );
+                                }}>
+                               {item?.orderId?.orderId}
+                              </a>
+                              </td>
                               <td>{item?.orderId?.tableId?.name}</td>
                               <td>{item?.transactionId}</td>
                               <td>{item?.type}</td>

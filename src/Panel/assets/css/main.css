@@ -1764,3 +1764,8 @@ canvas {
   margin-top: 10px;
   cursor: pointer;
 }
+
+.tag_class1 {
+  cursor: pointer;
+  text-decoration: none;
+}

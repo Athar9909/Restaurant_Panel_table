@@ -317,7 +317,17 @@ const Dashboard = () => {
                           <tr>
                             <td>{index + 1}</td>
                             <td>{item?.tableId?.name}</td>
-                            <td>{item?.orderId}</td>
+                            <td>
+                              <a
+                                className="tag_class1"
+                                onClick={() => {
+                                  navigate(
+                                    `/restaurant/dashboard/booking/View/${item?._id}`
+                                  );
+                                }}>
+                                {item?.orderId}
+                              </a>
+                            </td>
                             <td>{item?.createdAt?.slice(0, 10)}</td>
                             <td>{item?.status}</td>
                             <td>
