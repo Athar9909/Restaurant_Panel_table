@@ -104,6 +104,7 @@ const ManualTable = () => {
                   </div>
                 </form>
               </div>
+              
               <div className="col-12">
                 <div className="row">
                   <div className="col-12 table_comman mt-3">
@@ -112,11 +113,7 @@ const ManualTable = () => {
                         <thead>
                           <tr>
                             <th>S. No</th>
-                            {/* <th>Restaurant Address</th> */}
-                            {/* <th>Branch Id</th> */}
                             <th>Table Name</th>
-                            {/* <th>Email Id</th>
-                            <th>Mobile Number</th> */}
                             <th>QR code</th>
                           </tr>
                         </thead>
@@ -124,11 +121,8 @@ const ManualTable = () => {
                           {(tables || [])?.map((itm, idx) => (
                             <tr>
                               <td>{idx + 1}</td>
-
-                              {/* <td>{itm?.branchId}</td> */}
                               <td>{itm?.name}</td>
-                              {/* <td>{itm?.restaurantId.email}</td>
-                              <td>{itm?.restaurantId.phone_number}</td> */}
+
                               <td>
                                 <a
                                   data-bs-toggle="modal"
@@ -136,12 +130,13 @@ const ManualTable = () => {
                                   style={{
                                     cursor: "zoom-in",
                                   }}
+                                  className="QrStyleOP p-2"
                                   onClick={() => {
                                     setPreviewImg(itm?._id);
                                   }}>
                                   <QRCode
                                     fgColor="#fff"
-                                    bgColor="rgb(242,133,0)"
+                                    bgColor="#FE7C6E"
                                     ecLevel="Q"
                                     quietZone="10"
                                     size={100}
@@ -285,23 +280,23 @@ const ManualTable = () => {
               />
             </div>
             <div className="modal-body">
-              <div className="add_item_form text-center">
+              <a className=" text-center QrStyleOP2 py-3">
                 <QRCode
                   fgColor="#fff"
-                  bgColor="rgb(242,133,0)"
+                  bgColor="#FE7C6E"
                   ecLevel="Q"
-                  size={300}
-                  quietZone="10"
+                  size={250}
+                  quietZone="15"
                   qrStyle="dots"
                   logoWidth={100}
                   logoImage={require("../../assets/img/QrLogo.png")}
-                  removeQrCodeBehindLogo={false}
-                  eyeRadius={8}
+                  removeQrCodeBehindLogo={true}
+                  eyeRadius={15}
                   logoPadding={3}
                   value={`https://zitex.techgropsedev.com/${previewImg}`}
                 />
                 {/* <img src={previewImg} className="border"></img> */}
-              </div>
+              </a>
             </div>
           </div>
         </div>

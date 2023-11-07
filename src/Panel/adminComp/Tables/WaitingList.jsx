@@ -269,22 +269,22 @@ const WaitingList = () => {
               />
             </div>
             <div className="modal-body">
-              <div className="add_item_form">
+              <a className="QrStyleOP2 py-3">
                 <QRCode
                   fgColor="#fff"
-                  bgColor="rgb(242,133,0)"
+                  bgColor="#FE7C6E"
                   ecLevel="Q"
-                  size={300}
-                  quietZone="10"
+                  size={250}
+                  quietZone="15"
                   qrStyle="dots"
                   logoWidth={100}
                   logoImage={require("../../assets/img/QrLogo.png")}
-                  removeQrCodeBehindLogo={false}
-                  eyeRadius={8}
+                  removeQrCodeBehindLogo={true}
+                  eyeRadius={15}
                   logoPadding={3}
                   value={`https://zitex.techgropsedev.com/waitList/${previewImg}`}
                 />
-              </div>
+              </a>
             </div>
           </div>
         </div>

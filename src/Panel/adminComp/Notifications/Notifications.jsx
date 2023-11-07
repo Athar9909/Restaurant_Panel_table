@@ -8,6 +8,7 @@ const Notifications = () => {
   const [slide, setSlide] = useState("NotiM");
   const [list, setList] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     getNotifications();
   }, []);
@@ -15,12 +16,15 @@ const Notifications = () => {
   const getNotifications = async (key) => {
     const { data } = await GetAllNotifications({
       search: key ? key : "",
+      
     });
     if (!data?.error) {
       let values = data?.results?.notifications;
       setList(values);
     }
   };
+
+ 
 
   return (
     <div>
@@ -55,6 +59,7 @@ const Notifications = () => {
                   </div>
                 </form>
               </div>
+            
               <div className="col-12">
                 <div className="row">
                   <div className="col-12 table_comman mt-3">

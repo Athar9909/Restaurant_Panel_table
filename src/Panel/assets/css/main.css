@@ -1769,3 +1769,20 @@ canvas {
   cursor: pointer;
   text-decoration: none;
 }
+.QrStyleOP {
+  width: 8.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-image: linear-gradient(to bottom, #FD6452, #FC6D49, #FA7641, #F78039, #F38931);
+}
+
+.QrStyleOP2 {
+  width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-image: linear-gradient(to bottom, #FD6452, #FC6D49, #FA7641, #F78039, #F38931);
+}

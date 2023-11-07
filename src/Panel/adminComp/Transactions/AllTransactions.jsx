@@ -11,6 +11,8 @@ const AllTransactions = () => {
   const [slide, setSlide] = useState("TransM");
   const [list, setList] = useState([]);
   const navigate = useNavigate();
+  const [values, setValues] = useState({ from: "", to: "" });
+
   useEffect(() => {
     getTransactions();
   }, []);
@@ -19,11 +21,20 @@ const AllTransactions = () => {
     const { data } = await GetAllTransactions({
       search: key ? key : "",
       branch: "",
-    }); 
+      from: values?.from,
+      till: values?.to,
+    });
     if (!data?.error) {
       let values = data?.results?.transactions;
       setList(values);
     }
+  };
+  const handleDate = (e) => {
+    const value = e.target.value;
+    setValues({
+      ...values,
+      [e.target.name]: value,
+    });
   };
 
   return (
@@ -38,7 +49,7 @@ const AllTransactions = () => {
                 <h2>All Transactions</h2>
               </div>
 
-              <div className="col-12 mb-4">
+              <div className="col-5 mb-4 mt-5">
                 <form action="#" className="row search_part">
                   <div className="form-group col-12 position-relative">
                     <input
@@ -55,6 +66,43 @@ const AllTransactions = () => {
                         src={require("../../assets/img/search.png")}
                         alt=""
                       />
+                    </a>
+                  </div>
+                </form>
+              </div>
+              <div className="col-7 mt-3">
+                <form
+                  className="form-design py-4 px-3  row align-items-end justify-content-between"
+                  action="">
+                  <div className="form-group mb-0 col-4">
+                    <label htmlFor="">From</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      name="from"
+                      id="dashFrom"
+                      value={values.from}
+                      onChange={handleDate}
+                    />
+                  </div>
+                  <div className="form-group mb-0 col-4">
+                    <label htmlFor="">To</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      name="to"
+                      id="dashTo"
+                      value={values.to}
+                      onChange={handleDate}
+                    />
+                  </div>
+                  <div className="form-group mb-0 col-4">
+                    <a
+                      onClick={() => {
+                        getTransactions();
+                      }}
+                      className="comman_btn text-decoration-none">
+                      <span>Search</span>
                     </a>
                   </div>
                 </form>
@@ -80,15 +128,15 @@ const AllTransactions = () => {
                             <tr>
                               <td>{item?.createdAt?.slice(0, 10)}</td>
                               <td>
-                              <a
-                                className="tag_class1"
-                                onClick={() => {
-                                  navigate(
-                                    `/restaurant/dashboard/booking/View/${item?.orderId?._id}`
-                                  );
-                                }}>
-                               {item?.orderId?.orderId}
-                              </a>
+                                <a
+                                  className="tag_class1"
+                                  onClick={() => {
+                                    navigate(
+                                      `/restaurant/dashboard/booking/View/${item?.orderId?._id}`
+                                    );
+                                  }}>
+                                  {item?.orderId?.orderId}
+                                </a>
                               </td>
                               <td>{item?.orderId?.tableId?.name}</td>
                               <td>{item?.transactionId}</td>
