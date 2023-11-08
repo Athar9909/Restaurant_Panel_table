@@ -104,7 +104,7 @@ const ManualTable = () => {
                   </div>
                 </form>
               </div>
-              
+
               <div className="col-12">
                 <div className="row">
                   <div className="col-12 table_comman mt-3">
@@ -284,15 +284,16 @@ const ManualTable = () => {
                 <QRCode
                   fgColor="#fff"
                   bgColor="#FE7C6E"
-                  ecLevel="Q"
+                  ecLevel={"H"}
                   size={250}
+                  logoWidth={70}
                   quietZone="15"
                   qrStyle="dots"
-                  logoWidth={100}
                   logoImage={require("../../assets/img/QrLogo.png")}
                   removeQrCodeBehindLogo={true}
                   eyeRadius={15}
-                  logoPadding={3}
+                  logoPaddingStyle="square"
+                  logoPadding={5}
                   value={`https://zitex.techgropsedev.com/${previewImg}`}
                 />
                 {/* <img src={previewImg} className="border"></img> */}

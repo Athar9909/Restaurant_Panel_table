@@ -277,11 +277,11 @@ const WaitingList = () => {
                   size={250}
                   quietZone="15"
                   qrStyle="dots"
-                  logoWidth={100}
+                  logoWidth={70}
                   logoImage={require("../../assets/img/QrLogo.png")}
                   removeQrCodeBehindLogo={true}
                   eyeRadius={15}
-                  logoPadding={3}
+                  logoPadding={5}
                   value={`https://zitex.techgropsedev.com/waitList/${previewImg}`}
                 />
               </a>
