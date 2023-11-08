@@ -218,8 +218,7 @@ const WaitingList = () => {
                       <option selected="">Select Branch</option>
                       {branch?.map((itm, id) => (
                         <option value={itm?._id}>
-                          {itm?.restaurantId?.restaurant_name}-
-                          {itm?.username ? itm?.username : ""}
+                          {itm?.restaurantId?.restaurant_name}
                         </option>
                       ))}
                     </select>
