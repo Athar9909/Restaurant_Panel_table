@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Trans, useTranslation } from "react-i18next";
 
 const Sidebar = ({ slide, getBarClick, getBar }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [SlideState, setSlideState] = useState("");
   const width = window.innerWidth;
   const [sideBar, setSideBar] = useState(width < 768 ? false : true);
-
   useEffect(() => {
     setSlideState(slide);
   }, []);
-
   let token = localStorage.getItem("token-admin");
   // let AdminData = JSON.parse(localStorage.getItem("token-admin-data"));
-
-  // console.log(AdminData);
-  console.log(slide, "kjkj");
   if (token === null) {
     Swal.fire({
       title: "PLease Login to Continue!",
@@ -28,13 +25,6 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
       navigate("/restaurant/Login");
     });
   }
-  // console.log(width);
-
-  const Logout = () => {
-    localStorage.removeItem("token-admin");
-    navigate("/restaurant/Login");
-    window.location.reload();
-  };
 
   return (
     <div className="sider_bar">
@@ -55,8 +45,10 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapseOne"
               aria-expanded="true"
               aria-controls="collapseOne">
-              <img src={require("../../assets/img/dashboard.png")} alt="" />{" "}
-              Dashboard
+              {/* <Trans i18nKey="desc"> */}
+                <img src={require("../../assets/img/dashboard.png")} alt="" />
+              {/* </Trans>{" "} */}
+              {t("Dashboard")}
             </button>
           </h2>
           <div
@@ -320,10 +312,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse9"
               aria-expanded="true"
               aria-controls="collapse9">
-              <i
-                class={"fa fa-bell me-3"}
-              
-                aria-hidden="true"></i>
+              <i class={"fa fa-bell me-3"} aria-hidden="true"></i>
               Notifications
             </button>
           </h2>
@@ -449,8 +438,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   }}>
                   Promo Code Management
                 </a>
-      
-              </div>  
+              </div>
             </div>
           </div>
         </div>

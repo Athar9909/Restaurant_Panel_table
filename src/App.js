@@ -23,6 +23,7 @@ import ResetPassword from "./Panel/adminComp/adminLogin/ResetPassword";
 import Notifications from "./Panel/adminComp/Notifications/Notifications";
 import ManageDiscount from "./Panel/adminComp/Discount/ManageDiscount";
 import PromoManage from "./Panel/adminComp/Discount/PromoManage";
+
 function App() {
   return (
     <div className="App">

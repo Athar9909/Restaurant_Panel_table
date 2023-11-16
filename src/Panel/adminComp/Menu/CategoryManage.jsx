@@ -9,13 +9,14 @@ import {
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Button } from "antd";
 
 const CategoryManage = () => {
   const [slide, setSlide] = useState("MenuM");
   const [cateName, setCateName] = useState("");
   const [cates, setCates] = useState([]);
   let navigate = useNavigate();
-
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     getAllCategories();
   }, []);
@@ -31,6 +32,7 @@ const CategoryManage = () => {
   };
 
   const AddCategory = async () => {
+    setLoader(true);
     const { data } = await AddNewCategory({
       name: cateName,
     });
@@ -42,6 +44,7 @@ const CategoryManage = () => {
         confirmButtonColor: "#e25829",
         timer: "2000",
       });
+      setLoader(false);
       getAllCategories();
       setCateName("");
       document.getElementById("modalClose").click();
@@ -289,7 +292,7 @@ const CategoryManage = () => {
                     />
                   </div>
 
-                  <div className="col-12 form-group position-relative">
+                  {/* <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
                       Decription
                     </label>
@@ -301,15 +304,17 @@ const CategoryManage = () => {
                       rows={10}
                       defaultValue={""}
                     />
-                  </div>
-                  <div className="col-4 form-group mb-0 position-relative">
-                    <a
-                      className="small_bts_bg text-center"
+                  </div> */}
+                  <div className="col-4 form-group mb-0 position-relative text-center">
+                    <Button
+                      className="small_bts_bg "
+                      type="primary"
+                      loading={loader}
                       onClick={() => {
                         AddCategory();
                       }}>
-                      Add
-                    </a>
+                      + Add
+                    </Button>
                     <button className="d-none" type="reset" id="reset1">
                       reset
                     </button>

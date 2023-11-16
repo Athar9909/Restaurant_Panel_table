@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Select from "react-select";
 import deleteIcon from "../../assets/img/delete-bin-line.svg";
+import { Button } from "antd";
 const EditCuisine = () => {
   const [slide, setSlide] = useState("MenuM");
   const [cateName, setCateName] = useState("");
@@ -29,7 +30,7 @@ const EditCuisine = () => {
   const [options, setOptions] = useState([]);
   const [selectedAddon, setSelectedAddon] = useState([]);
   const [files, setFiles] = useState([]);
-
+  const [loader, setLoader] = useState(false);
   const {
     register,
     handleSubmit,
@@ -112,6 +113,7 @@ const EditCuisine = () => {
   };
 
   const onSubmit = async (data) => {
+    setLoader(true);
     let addons = [];
     (selectedAddon.optionSelected || [])?.map((item) => {
       addons.push(item?.value);
@@ -141,9 +143,26 @@ const EditCuisine = () => {
           optionSelected: [],
         },
       ]);
+      setLoader(false);
       navigate(-1);
+    } else {
+      setLoader(false);
     }
   };
+
+  document
+    .getElementById("file_upload")
+    ?.addEventListener("change", function () {
+      if (this.files[0]) {
+        var picture = new FileReader();
+        picture.readAsDataURL(this.files[0]);
+        picture.addEventListener("load", function (event) {
+          document
+            .getElementById("selectedImg")
+            .setAttribute("src", event.target.result);
+        });
+      }
+    });
 
   return (
     <div className="admin_main">
@@ -163,7 +182,7 @@ const EditCuisine = () => {
                     className="comman_form row"
                     action="#"
                     onSubmit={handleSubmit(onSubmit)}>
-                    <div className="col-8 form-group position-relative">
+                    <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
                         Display Name
                       </label>
@@ -217,29 +236,7 @@ const EditCuisine = () => {
                         Choose the Product`s Selling Category In which..
                       </p> */}
                     </div>
-                    <div className="col-8 form-group position-relative">
-                      <label className="set_label" htmlFor="">
-                        Short Description
-                      </label>
-                      <textarea
-                        {...register("desc", { required: true })}
-                        type="text"
-                        className={classNames("form-control", {
-                          "is-invalid": errors.desc,
-                        })}
-                        name="desc"
-                        defaultValue={cuisines?.description}
-                      />
-                      {errors.desc && (
-                        <small className="errorText  ">
-                          {errors.desc?.message}
-                        </small>
-                      )}
-                      {/* <p className="input_description">
-                        2-3 Line Description text about your Product, We suggest
-                        you to put in bullet points.
-                      </p> */}
-                    </div>
+
                     <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
                         Addon
@@ -254,7 +251,7 @@ const EditCuisine = () => {
                         value={selectedAddon?.optionSelected}
                       />
                     </div>
-                    <div className="col-8 form-group position-relative">
+                    <div className="col-6 form-group position-relative">
                       <label className="set_label" htmlFor="">
                         Featured Image
                       </label>
@@ -275,18 +272,28 @@ const EditCuisine = () => {
                             </span>
                           </div>
                         </label>
+                        {console.log(files?.cuisineImg)}
                         <div className="uploded_file">
                           <div className="uploded_file_img">
                             <img
+                              id="selectedImg"
                               src={
                                 files?.cuisineImg
-                                  ? files?.cuisineImg?.name
+                                  ? files?.cuisineImg
                                   : cuisines?.image
                               }
                               alt=""
                             />
-                            <a className="shadow" href="javascript:;">
-                              <img src={deleteIcon} alt="" />
+                            <a className="shadow">
+                              <img
+                                onClick={() => {
+                                  document
+                                    .getElementById("file_upload")
+                                    .click();
+                                }}
+                                src={deleteIcon}
+                                alt=""
+                              />
                             </a>
                           </div>
                         </div>
@@ -314,7 +321,7 @@ const EditCuisine = () => {
                       </div>
                     </div> */}
 
-                    <div className="col-6 form-group position-relative">
+                    <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
                         Price
                       </label>
@@ -357,12 +364,21 @@ const EditCuisine = () => {
                       </div>
                     </div>
 
-                    <div className="col-6">
+                    <div className="col-10">
                       <div className="row">
-                        <div className="col-4">
-                          <button className="btns_new_bg w-100" type="submit">
-                            Save
-                          </button>
+                        <div className="col-6">
+                          {loader ? (
+                            <Button
+                              className="small_bts_bg  mx-3"
+                              type="primary"
+                              loading={loader}>
+                              Loading..
+                            </Button>
+                          ) : (
+                            <button className="btns_new_bg w-100" type="submit">
+                              Save
+                            </button>
+                          )}
                         </div>
                         <div className="col-4">
                           <a

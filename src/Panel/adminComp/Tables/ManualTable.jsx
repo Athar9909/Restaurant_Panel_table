@@ -8,7 +8,7 @@ import {
 import Profile from "../Dashboard/Profile";
 import Swal from "sweetalert2";
 import { QRCode } from "react-qrcode-logo";
-import { Pagination } from "antd";
+import { Button, Pagination } from "antd";
 const ManualTable = () => {
   const [slide, setSlide] = useState("TableM");
   const [sideBar, setSideBar] = useState();
@@ -18,6 +18,8 @@ const ManualTable = () => {
   const [selectBranch, setSelectBranch] = useState([]);
   const [previewImg, setPreviewImg] = useState("");
   const [activePage, setActivePage] = useState(1);
+  const [loader, setLoader] = useState(false);
+
   useEffect(() => {
     getAllTables();
     getAllBranches();
@@ -41,8 +43,8 @@ const ManualTable = () => {
     }
   };
 
-  console.log(activePage);
   const GenerateQR = async () => {
+    setLoader(true);
     const { data } = await AddNewQR({
       name: tableName,
       branchId: selectBranch,
@@ -56,9 +58,12 @@ const ManualTable = () => {
         timer: "2000",
       });
       getAllTables();
+      setLoader(false);
       setTableName("");
       document.getElementById("modalClose").click();
       document.getElementById("reset1").click();
+    } else {
+      setLoader(false);
     }
   };
 
@@ -228,21 +233,29 @@ const ManualTable = () => {
                       <option selected="">Select Branch</option>
                       {branch?.map((itm, id) => (
                         <option value={itm?._id}>
-                          {itm?.restaurantId?.restaurant_name +
-                            "-" +
-                            itm?.username}
+                          {itm?.restaurantId?.restaurant_name}
                         </option>
                       ))}
                     </select>
                   </div>
                   <div className="col-4 form-group mb-0 position-relative">
-                    <a
-                      className="small_bts_bg text-center"
-                      onClick={() => {
-                        GenerateQR();
-                      }}>
-                      Generate QR
-                    </a>
+                    {loader ? (
+                      <Button
+                        className="small_bts_bg  mx-3"
+                        type="primary"
+                        loading={loader}>
+                        Loading..
+                      </Button>
+                    ) : (
+                      <a
+                        className="small_bts_bg text-center"
+                        onClick={() => {
+                          GenerateQR();
+                        }}>
+                        Generate QR
+                      </a>
+                    )}
+
                     <button className="d-none" type="reset" id="reset1">
                       reset
                     </button>

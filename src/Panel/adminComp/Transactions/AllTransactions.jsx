@@ -3,9 +3,10 @@ import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
 import {
   GetAllTransactions,
-  GetOrders,
+  exportTransactionData,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import { useNavigate } from "react-router-dom";
+
 
 const AllTransactions = () => {
   const [slide, setSlide] = useState("TransM");
@@ -18,7 +19,7 @@ const AllTransactions = () => {
   }, []);
 
   const getTransactions = async (key) => {
-    const { data } = await GetAllTransactions({
+    const { data  } = await GetAllTransactions({
       search: key ? key : "",
       branch: "",
       from: values?.from,
@@ -29,6 +30,17 @@ const AllTransactions = () => {
       setList(values);
     }
   };
+
+  const ExportTransaction = async () => {
+    const { data } = await exportTransactionData({
+      from: values?.from,
+      till: values?.to,
+    });
+    if (!data.error) {
+      window?.open(data?.results?.file);
+    }
+  };
+
   const handleDate = (e) => {
     const value = e.target.value;
     setValues({
@@ -70,7 +82,8 @@ const AllTransactions = () => {
                   </div>
                 </form>
               </div>
-              <div className="col-7 mt-3">
+
+              <div className="col-5 mt-3">
                 <form
                   className="form-design py-4 px-3  row align-items-end justify-content-between"
                   action="">
@@ -106,6 +119,15 @@ const AllTransactions = () => {
                     </a>
                   </div>
                 </form>
+              </div>
+              <div className="col-2 mt-5">
+                <div className="mt-1">
+                  <a className="comman_btn" onClick={() => ExportTransaction()}>
+                    <strong>
+                      <i class="fa-solid fa-file-export mx-1"></i>Export
+                    </strong>
+                  </a>
+                </div>
               </div>
               <div className="col-12">
                 <div className="row">

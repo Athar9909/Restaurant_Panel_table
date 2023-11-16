@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
+import { Button } from "antd";
 
 const AddOn = () => {
   const [slide, setSlide] = useState("MenuM");
@@ -20,6 +21,7 @@ const AddOn = () => {
   const [Addons, setAddons] = useState([]);
   const navigate = useNavigate();
   const [editedImg, setEditedImg] = useState();
+  const [loader, setLoader] = useState(false);
   const [files, setFiles] = useState([]);
   const [formValues, setFormValues] = useState([
     {
@@ -27,18 +29,19 @@ const AddOn = () => {
       price: [],
     },
   ]);
+
   let handleChange = (e, i) => {
     let newFormValues = [...formValues];
     newFormValues[i][e.target.name] = e.target.value;
     setFormValues(newFormValues);
   };
+
   const removeFormFields = (index) => {
     let newFormValues = [...formValues];
     newFormValues?.splice(index, 1);
     setFormValues(newFormValues);
   };
 
-  console.log(formValues, "5456");
   const addFormFields = (e) => {
     setFormValues([
       ...formValues,
@@ -74,6 +77,7 @@ const AddOn = () => {
   };
 
   const onSubmit = async (data) => {
+    setLoader(true);
     let formData = new FormData();
 
     const res = await AddNewAddOn({
@@ -90,12 +94,15 @@ const AddOn = () => {
       document.getElementById("modalClose").click();
       document.getElementById("reset1").click();
       getAllAddons();
+      setLoader(false);
       setFormValues([
         {
           name: [],
           price: [],
         },
       ]);
+    } else {
+      setLoader(false);
     }
   };
 
@@ -134,84 +141,6 @@ const AddOn = () => {
                       data-bs-target="#additem">
                       <strong>+ Add New Addon</strong>
                     </a>
-                  </div>
-                </div>
-                <div className="col-3">
-                  <div className="dropdown fliter_dropdown">
-                    <a
-                      className="dropdown-toggle"
-                      href="#"
-                      role="button"
-                      id="dropdownMenuLink"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                      Filter: <strong>Not Applied</strong>
-                    </a>
-                    <div
-                      className="dropdown-menu p-0"
-                      aria-labelledby="dropdownMenuLink">
-                      <div className="filter_data_top">
-                        <div className="form-group mb-5">
-                          <label htmlFor="">Restaurant Address</label>
-                          <select
-                            className="form-select form-control"
-                            aria-label="Default select example">
-                            <option selected="">Alexandria, Egypt</option>
-                            <option value={1}>One</option>
-                            <option value={2}>Two</option>
-                            <option value={3}>Three</option>
-                          </select>
-                        </div>
-                        <div className="form-group">
-                          <label htmlFor="">Status</label>
-                          <div className="row">
-                            <div className="col-auto">
-                              <div className="radio_bts">
-                                <input
-                                  type="radio"
-                                  id="01"
-                                  name="radio"
-                                  className="d-none"
-                                />
-                                <label htmlFor="01">Active</label>
-                              </div>
-                            </div>
-                            <div className="col-auto">
-                              <div className="radio_bts">
-                                <input
-                                  type="radio"
-                                  id="02"
-                                  name="radio"
-                                  className="d-none"
-                                />
-                                <label htmlFor="02">Complete</label>
-                              </div>
-                            </div>
-                            <div className="col-auto">
-                              <div className="radio_bts">
-                                <input
-                                  type="radio"
-                                  id="03"
-                                  name="radio"
-                                  className="d-none"
-                                />
-                                <label htmlFor="03">All</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="filter_data_bottom">
-                        <a className="small_bts_bg" href="javascript:;">
-                          Apply Filter
-                        </a>
-                        <a
-                          className="small_bts_border ms-3"
-                          href="javascript:;">
-                          Reset
-                        </a>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </form>
@@ -383,9 +312,19 @@ const AddOn = () => {
                   </div>
 
                   <div className="col-12 form-group mb-0 position-relative text-center">
-                    <button className="small_bts_bg" type="submit">
-                      + Add AddOn
-                    </button>
+                    {loader ? (
+                      <Button
+                        className="small_bts_bg  mx-3"
+                        type="primary"
+                        loading={loader}>
+                        Loading..
+                      </Button>
+                    ) : (
+                      <button className="small_bts_bg" type="submit">
+                        + Add AddOn
+                      </button>
+                    )}
+
                     <button
                       className="small_bts_bg d-none"
                       type="reset"

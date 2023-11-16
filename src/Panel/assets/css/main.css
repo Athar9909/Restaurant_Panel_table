@@ -838,6 +838,11 @@ a {
     padding: 0 40px;
     width: 220px;
   }
+  .small_bts_bg:hover {
+    background-color: #ff7622 !important; 
+    color: #fff !important;
+    border: 2px solid #fff !important;
+  }
   .small_bts_border {
     height: 50px;
     display: inline-flex;
@@ -1785,4 +1790,7 @@ canvas {
   justify-content: center;
   margin: 0 auto;
   background-image: linear-gradient(to bottom, #FD6452, #FC6D49, #FA7641, #F78039, #F38931);
+}
+.mt-8{
+  margin-top: 8rem !important;
 }

@@ -67,7 +67,7 @@ const EditCategory = () => {
                         }}
                       />
                     </div>
-        
+
                     <div className="col-12">
                       <div className="row">
                         <div className="col-4">
@@ -78,7 +78,7 @@ const EditCategory = () => {
                         <div className="col-4">
                           <a
                             className="btns_new_border w-100"
-                            href="javascript:;">
+                            onClick={() => navigate(-1)}>
                             Back
                           </a>
                         </div>

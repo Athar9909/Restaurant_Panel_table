@@ -23,6 +23,7 @@ const CuisineManage = () => {
   const [cates, setCates] = useState([]);
   const [cateId, setCateId] = useState("");
   const [loader, setLoader] = useState(false);
+  const [loader2, setLoader2] = useState(false);
   const [cuisines, setCuisines] = useState([]);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
@@ -116,6 +117,7 @@ const CuisineManage = () => {
   };
 
   const onSubmit = async (data) => {
+    setLoader2(true);
     let addons = [];
     (selectedAddon.optionSelected || [])?.map((item) => {
       addons.push(item?.value);
@@ -138,6 +140,7 @@ const CuisineManage = () => {
       });
       document.getElementById("modalClose").click();
       document.getElementById("reset1").click();
+      setLoader2(false);
       getAllCuisines();
       setFiles([]);
       setSelectedAddon([
@@ -145,6 +148,8 @@ const CuisineManage = () => {
           optionSelected: [],
         },
       ]);
+    } else {
+      setLoader2(false);
     }
   };
 
@@ -511,7 +516,7 @@ const CuisineManage = () => {
                       </small>
                     )}
                   </div>
-                  <div className="col-6 form-group position-relative">
+                  {/* <div className="col-6 form-group position-relative">
                     <label className="set_label" htmlFor="">
                       Compare Price
                     </label>
@@ -529,7 +534,7 @@ const CuisineManage = () => {
                         {errors.Cprice?.message}
                       </small>
                     )}
-                  </div>
+                  </div> */}
 
                   <div className="form-group col-12 choose_file position-relative">
                     <label htmlFor="upload_video"> Upload Image</label>
@@ -543,9 +548,19 @@ const CuisineManage = () => {
                     />
                   </div>
                   <div className="col-4 form-group mb-0 position-relative">
-                    <button className="small_bts_bg" type="submit">
-                      Add
-                    </button>
+                    {loader2 ? (
+                      <Button
+                        className="small_bts_bg "
+                        type="primary"
+                        loading={loader2}>
+                        Loading..
+                      </Button>
+                    ) : (
+                      <button className="small_bts_bg" type="submit">
+                        Add
+                      </button>
+                    )}
+
                     <button
                       className="small_bts_bg d-none"
                       type="reset"

@@ -2,22 +2,15 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Dashboard/Sidebar";
 import Profile from "../Dashboard/Profile";
 import {
-  AddNewCategory,
   AddonsDetail,
-  AllAddOns,
-  AllCategories,
-  CuisineDetails,
   EditAddonDetails,
   EditAddonStatus,
-  EditCategoryDetails,
-  EditCuisineDetails,
-  EditCuisineStatus,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
-import Select from "react-select";
+import { Button } from "antd";
 
 const EditAddon = () => {
   const [slide, setSlide] = useState("MenuM");
@@ -30,6 +23,7 @@ const EditAddon = () => {
     },
   ]);
   const [Addon, setAddon] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   const {
     register,
@@ -75,6 +69,7 @@ const EditAddon = () => {
   };
 
   const onSubmit = async (data) => {
+    setLoader(true);
     let AddOn = options?.map(({ _id, ...options }) => options);
     const res = await EditAddonDetails({
       name: data?.name,
@@ -89,7 +84,10 @@ const EditAddon = () => {
         confirmButtonText: "Okay",
         confirmButtonColor: "#e25829",
       });
+      setLoader(false);
       navigate(-1);
+    } else {
+      setLoader(false);
     }
   };
 
@@ -239,9 +237,18 @@ const EditAddon = () => {
                     <div className="col-12">
                       <div className="row">
                         <div className="col-4">
-                          <button className="btns_new_bg w-100" type="submit">
-                            Save
-                          </button>
+                          {loader ? (
+                            <Button
+                              className="small_bts_bg  mx-3"
+                              type="primary"
+                              loading={loader}>
+                              Loading..
+                            </Button>
+                          ) : (
+                            <button className="btns_new_bg w-100" type="submit">
+                              Save
+                            </button>
+                          )}
                         </div>
                         <div className="col-4">
                           <a
