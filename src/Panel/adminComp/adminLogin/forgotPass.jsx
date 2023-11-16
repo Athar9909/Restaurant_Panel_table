@@ -63,7 +63,7 @@ const ForgotPass = () => {
                   })}
                   name="country_code"
                   style={{
-                    width: "30%",
+                    width: "40%",
                   }}
                   placeholder="+966">
                   <option value="+93">Afghanistan (+93)</option>
@@ -267,7 +267,7 @@ const ForgotPass = () => {
                   <option value="+685">Samoa (+685)</option>
                   <option value="+378">San Marino (+378)</option>
                   <option value="+239">Sao Tome and Principe (+239)</option>
-                  <option value="+966">Saudi Arabia (+966)</option>
+                    <option value="+966" selected>Saudi Arabia (+966)</option>
                   <option value="+221">Senegal (+221)</option>
                   <option value="+381">Serbia (+381)</option>
                   <option value="+248">Seychelles (+248)</option>
@@ -312,7 +312,7 @@ const ForgotPass = () => {
                   type="number"
                   placeholder="Enter Registered Number"
                   style={{
-                    width: "70%",
+                    width: "60%",
                   }}
                   className={classNames("form-control", {
                     "is-invalid": errors.phone_number,
