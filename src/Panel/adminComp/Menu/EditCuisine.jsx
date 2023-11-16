@@ -8,6 +8,7 @@ import {
   CuisineDetails,
   EditCategoryDetails,
   EditCuisineDetails,
+  EditCuisineImg,
   EditCuisineStatus,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Swal from "sweetalert2";
@@ -97,6 +98,21 @@ const EditCuisine = () => {
     setSelectedAddon({
       optionSelected: selected,
     });
+  };
+
+  const DeleteCuisineImg = async (id) => {
+    const { data } = await EditCuisineImg(id);
+    if (!data.error) {
+      Swal.fire({
+        title: data.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+        timer:"2000"
+      });
+      getAllCuisines();
+      window.location.reload(false)
+    }
   };
 
   const CuisineStatus = async (id) => {
@@ -265,7 +281,8 @@ const EditCuisine = () => {
                         />
                         <label className="file_upload" htmlFor="file_upload">
                           <div>
-                            <img src="assets/img/upload.png" alt="" />
+                            <img src={require("../../assets/img/upload.png")} alt="" />
+
                             <span>
                               File Format: JPG, JPEG, PNG or PDF Size: Upto
                               500KB
@@ -284,17 +301,22 @@ const EditCuisine = () => {
                               }
                               alt=""
                             />
+                            {
+                              cuisines?.image &&
+                            
                             <a className="shadow">
                               <img
                                 onClick={() => {
-                                  document
-                                    .getElementById("file_upload")
-                                    .click();
+                                  // document
+                                  //   .getElementById("file_upload")
+                                  //   .click();
+                                  DeleteCuisineImg(cuisines?._id);
                                 }}
                                 src={deleteIcon}
                                 alt=""
                               />
                             </a>
+}
                           </div>
                         </div>
                       </div>
