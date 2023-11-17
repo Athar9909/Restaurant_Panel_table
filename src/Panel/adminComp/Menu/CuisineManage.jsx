@@ -314,7 +314,8 @@ const CuisineManage = () => {
                         <tr>
                           <th>S. No</th>
                           <th>Image</th>
-                          <th>Item Name</th>
+                          <th>Item Name (en)</th>
+                          <th>Item Name (ar)</th>
                           <th>Category</th>
                           <th>CPrice</th>
                           <th>Addons</th>
@@ -330,6 +331,7 @@ const CuisineManage = () => {
                             </td>
 
                             <td>{itm?.name}</td>
+                            <td>{itm?.name_ar}</td>
                             <td>{itm?.categoryId?.name}</td>
                             <td>{itm?.price}</td>
                             <td>
@@ -465,7 +467,7 @@ const CuisineManage = () => {
                   </div>
                   <div className="col-12 form-group position-relative">
                     <label className=" mb-1" htmlFor="">
-                      Select Addon
+                       Select Addon
                     </label>
                     <Select
                       isMulti
@@ -516,25 +518,7 @@ const CuisineManage = () => {
                       </small>
                     )}
                   </div>
-                  {/* <div className="col-6 form-group position-relative">
-                    <label className="set_label" htmlFor="">
-                      Compare Price
-                    </label>
-                    <input
-                      {...register("Cprice", { required: false })}
-                      type="text"
-                      className={classNames("form-control", {
-                        "is-invalid": errors.Cprice,
-                      })}
-                      name="Cprice"
-                      placeholder="Enter Price"
-                    />
-                    {errors.Cprice && (
-                      <small className="errorText  ">
-                        {errors.Cprice?.message}
-                      </small>
-                    )}
-                  </div> */}
+             
 
                   <div className="form-group col-12 choose_file position-relative">
                     <label htmlFor="upload_video"> Upload Image</label>

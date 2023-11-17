@@ -49,7 +49,7 @@ const EditCuisine = () => {
     setFiles({ ...files, [key]: e.target.files[0] });
   };
 
-  console.log(files);
+
   const getAllCategories = async (key) => {
     const { data } = await AllCategories({
       search: key ? key : "",
@@ -86,6 +86,7 @@ const EditCuisine = () => {
       setCuisines(values);
       reset({
         name: values?.name,
+        name_ar: values?.name_ar,
         desc: values?.description ? values?.description : "Desc",
       });
       setSelectedAddon({
@@ -216,12 +217,30 @@ const EditCuisine = () => {
                           {errors.name?.message}
                         </small>
                       )}
-                      {/* <p className="input_description">
-                        Type your product name, customer can find this item
-                        using this name, this will also printed in cart &amp;
-                        Invoice{" "}
-                      </p> */}
+                     
                     </div>
+
+                    <div className="col-4 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        Display Name (ar)
+                      </label>
+                      <input
+                        {...register("name_ar", { required: true })}
+                        type="text"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.name,
+                        })}
+                        name="name_ar"
+                        defaultValue={cuisines?.name_ar}
+                      />
+                      {errors.name_ar && (
+                        <small className="errorText  ">
+                          {errors.name_ar?.message}
+                        </small>
+                      )}
+                     
+                    </div>
+
                     <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
                         Categories
@@ -248,9 +267,7 @@ const EditCuisine = () => {
                           {errors.categoryId?.message}
                         </small>
                       )}
-                      {/* <p className="input_description">
-                        Choose the Product`s Selling Category In which..
-                      </p> */}
+                    
                     </div>
 
                     <div className="col-4 form-group position-relative">
@@ -320,10 +337,7 @@ const EditCuisine = () => {
                           </div>
                         </div>
                       </div>
-                      {/* <p className="input_description">
-                        We recommend good quality Product image that is helpful
-                        to showcase your Product. Max. upload file size: 5MB{" "}
-                      </p> */}
+                      
                     </div>
                     {/* <div className="col-2 form-group position-relative">
                       <label className="set_label without_input" htmlFor="">
