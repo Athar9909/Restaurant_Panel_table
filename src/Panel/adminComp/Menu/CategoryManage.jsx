@@ -10,13 +10,16 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button } from "antd";
+import { t } from "i18next";
 
 const CategoryManage = () => {
   const [slide, setSlide] = useState("MenuM");
   const [cateName, setCateName] = useState("");
+  const [cateNameAr, setCateNameAr] = useState("");
   const [cates, setCates] = useState([]);
   let navigate = useNavigate();
   const [loader, setLoader] = useState(false);
+
   useEffect(() => {
     getAllCategories();
   }, []);
@@ -35,6 +38,7 @@ const CategoryManage = () => {
     setLoader(true);
     const { data } = await AddNewCategory({
       name: cateName,
+      name_ar: cateNameAr,
     });
     if (!data?.error) {
       Swal.fire({
@@ -74,8 +78,9 @@ const CategoryManage = () => {
         <div className="admin_main_part">
           <div className="row">
             <div className="col-12 heading_main mb-4">
-              <h2>Category Management</h2>
+              <h2>{t("CateM")}</h2>
             </div>
+
             <div className="col-12 mb-4">
               <form action="#" className="row search_part">
                 <div className="form-group col-9 position-relative">
@@ -83,7 +88,7 @@ const CategoryManage = () => {
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by Category name"
+                    placeholder={t("SCateN")}
                     onChange={(e) => {
                       getAllCategories(e.target.value);
                     }}
@@ -98,7 +103,7 @@ const CategoryManage = () => {
                       className="comman_btn"
                       data-bs-toggle="modal"
                       data-bs-target="#promocode">
-                      <strong>+Add Category</strong>
+                      <strong>+{t("AddCate")}</strong>
                     </a>
                   </div>
                 </div>
@@ -182,6 +187,7 @@ const CategoryManage = () => {
                 </div> */}
               </form>
             </div>
+
             <div className="col-12">
               <div className="row">
                 <div className="col-12 table_comman mt-3">
@@ -189,10 +195,11 @@ const CategoryManage = () => {
                     <table className="table">
                       <thead>
                         <tr>
-                          <th>S. No</th>
-                          <th>Category</th>
-                          <th>Status</th>
-                          <th>action</th>
+                          <th>{t("S_no")}</th>
+                          <th>Category (en)</th>
+                          <th>{t("Cate")} (ar)</th>
+                          <th>{t("Status")}</th>
+                          <th>{t("Action")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -201,6 +208,7 @@ const CategoryManage = () => {
                             <td>{ind + 1}</td>
 
                             <td>{itm?.name}</td>
+                            <td>{itm?.name_ar}</td>
                             <td>
                               <form className="table_btns d-flex align-items-center justify-content-center">
                                 <div className="check_toggle">
@@ -225,11 +233,14 @@ const CategoryManage = () => {
                                   navigate(
                                     `/restaurant/dashboard/menu/edit-category/${itm?._id}`,
                                     {
-                                      state: itm?.name,
+                                      state: {
+                                        name: itm?.name,
+                                        name_ar: itm?.name_ar,
+                                      },
                                     }
                                   )
                                 }>
-                                Edit
+                                {t("Edit")}
                               </a>
                             </td>
                           </tr>
@@ -265,7 +276,7 @@ const CategoryManage = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Add New Category
+                {t("AddCate")}
               </h5>
               <button
                 type="button"
@@ -280,31 +291,33 @@ const CategoryManage = () => {
                 <form className="row comman_dashboard_form" action="#">
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Category Name
+                      Name (en)
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="FIRSTUSE"
+                      placeholder="Type Something..."
                       onChange={(e) => {
                         setCateName(e.target.value);
                       }}
                     />
                   </div>
-
-                  {/* <div className="col-12 form-group position-relative">
+                  <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Decription
+                      {t("Name")} (ar)
                     </label>
-                    <textarea
+                    <input
+                      type="text"
+                      lang="ar"
+                      dir="rtl"
                       className="form-control"
-                      name=""
-                      id=""
-                      cols={30}
-                      rows={10}
-                      defaultValue={""}
+                      placeholder="..اكتب شيئا باللغة العربية"
+                      onChange={(e) => {
+                        setCateNameAr(e.target.value);
+                      }}
                     />
-                  </div> */}
+                  </div>
+
                   <div className="col-4 form-group mb-0 position-relative text-center">
                     <Button
                       className="small_bts_bg "
@@ -313,7 +326,7 @@ const CategoryManage = () => {
                       onClick={() => {
                         AddCategory();
                       }}>
-                      + Add
+                      {t("AddCate")}
                     </Button>
                     <button className="d-none" type="reset" id="reset1">
                       reset

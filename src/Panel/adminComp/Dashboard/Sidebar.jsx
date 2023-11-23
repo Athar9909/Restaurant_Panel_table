@@ -45,9 +45,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapseOne"
               aria-expanded="true"
               aria-controls="collapseOne">
-              {/* <Trans i18nKey="desc"> */}
-                <img src={require("../../assets/img/dashboard.png")} alt="" />
-              {/* </Trans>{" "} */}
+              <img src={require("../../assets/img/dashboard.png")} alt="" />
               {t("Dashboard")}
             </button>
           </h2>
@@ -66,7 +64,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard");
                   }}>
-                  Restaurant
+                  {t("Restaurant")}
                 </a>
                 {/* <a>Survey</a> */}
               </div>
@@ -117,7 +115,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse3n"
               aria-expanded="true"
               aria-controls="collapse3n">
-              <img src={require("../../assets/img/booking.png")} alt="" /> Order
+              <img src={require("../../assets/img/booking.png")} alt="" />{" "}
+              {t("Order")}
             </button>
           </h2>
           <div
@@ -135,13 +134,13 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard/booking/takeaway");
                   }}>
-                  Takeaway
+                  {t("Takeaway")}
                 </a>
                 <a
                   onClick={() => {
                     navigate("/restaurant/dashboard/booking/dinings");
                   }}>
-                  Dining
+                  {t("Dining")}
                 </a>
                 {/* <a>Dining with Food</a> */}
                 {/* <a>Waiting List</a> */}
@@ -162,7 +161,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse3"
               aria-expanded="true"
               aria-controls="collapse3">
-              <img src={require("../../assets/img/menus.png")} alt="" /> Menu
+              <img src={require("../../assets/img/menus.png")} alt="" />{" "}
+              {t("Menu")}
             </button>
           </h2>
           <div
@@ -180,19 +180,19 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard/category-management");
                   }}>
-                  Category Management
+                  {t("CateM")}
                 </a>
                 <a
                   onClick={() => {
                     navigate("/restaurant/dashboard/cuisines-management");
                   }}>
-                  Cuisines Management
+                  {t("CuisM")}
                 </a>
                 <a
                   onClick={() => {
                     navigate("/restaurant/dashboard/booking/AddOn");
                   }}>
-                  Add On
+                  {t("AddOn")}
                 </a>
               </div>
             </div>
@@ -212,7 +212,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               aria-expanded="true"
               aria-controls="collapse4">
               <img src={require("../../assets/img/qr-code-line.png")} alt="" />{" "}
-              QR Code
+              {t("QR_Code")}
             </button>
           </h2>
           <div
@@ -230,13 +230,13 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard/table/manual-table");
                   }}>
-                  Manual Table
+                  {t("ManualT")}
                 </a>
                 <a
                   onClick={() => {
                     navigate("/restaurant/dashboard/table/waiting-table");
                   }}>
-                  Wating Tables
+                  {t("WaitingT")}
                 </a>
                 {/* <a>Floor Plan Management</a>
                 <a>Slots Management</a> */}
@@ -263,7 +263,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                 src={require("../../assets/img/dollar.png")}
                 alt=""
               />{" "}
-              Transactions
+              {t("Transaction")}
             </button>
           </h2>
           <div
@@ -281,7 +281,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard/transactions");
                   }}>
-                  All Transactions
+                  {t("AllTransaction")}
                 </a>
                 {/* <a
                   onClick={() => {
@@ -313,7 +313,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               aria-expanded="true"
               aria-controls="collapse9">
               <i class={"fa fa-bell me-3"} aria-hidden="true"></i>
-              Notifications
+              {t("Notification")}
             </button>
           </h2>
           <div
@@ -331,7 +331,7 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard/Notifications");
                   }}>
-                  Notifications
+                  {t("Notification")}
                 </a>
                 {/* <a
                   onClick={() => {
@@ -359,8 +359,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse7"
               aria-expanded="true"
               aria-controls="collapse7">
-              <img src={require("../../assets/img/profilemy.png")} alt="" /> My
-              Profile
+              <img src={require("../../assets/img/profilemy.png")} alt="" />
+              {t("My_Profile")}
             </button>
           </h2>
           <div
@@ -378,13 +378,13 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                   onClick={() => {
                     navigate("/restaurant/dashboard/profile");
                   }}>
-                  Edit profile
+                  {t("EditProfile")}
                 </a>
                 <a
                   onClick={() => {
                     navigate("/restaurant/dashboard/banners");
                   }}>
-                  Edit Banners
+                  {t("EditBanner")}
                 </a>
                 {/* <a
                   onClick={() => {
@@ -490,7 +490,8 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
                 navigate("/restaurant/Login");
                 window.location.reload();
               }}>
-              <img src={require("../../assets/img/logout.png")} alt="" /> Logout
+              <img src={require("../../assets/img/logout.png")} alt="" />
+              {t("Logout")}
             </a>
           </h2>
         </div>

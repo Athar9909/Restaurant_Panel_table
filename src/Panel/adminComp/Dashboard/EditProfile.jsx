@@ -8,6 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Swal from "sweetalert2";
+import { t } from "i18next";
 
 const EditProfile = () => {
   const [slide, setSlide] = useState("ProfileM");
@@ -36,7 +37,7 @@ const EditProfile = () => {
       });
     }
   };
-  
+
   const onFileSelectionCover = async (e, key, ind) => {
     setCover([{ [key]: e.target.files[0] }]);
     if (e.target.files[0]) {
@@ -61,7 +62,7 @@ const EditProfile = () => {
     formData.append(
       "restaurant_name",
       data?.name ? data?.name : profile?.restaurant_name
-    );
+      );
     formData.append(
       "restaurant_address",
       data?.address ? data?.address : profile?.restaurant_address
@@ -71,6 +72,27 @@ const EditProfile = () => {
       data?.desc ? data?.desc : profile?.restaurant_description
     );
     formData.append("owner_name", "Owner");
+
+    formData.append(
+      "restaurant_name_ar",
+      data?.name_ar ? data?.name_ar : profile?.restaurant_name_ar
+    );
+    formData.append(
+      "restaurant_address_ar",
+      data?.address_ar ? data?.address_ar : profile?.restaurant_address_ar
+    );
+    formData.append(
+      "restaurant_description_ar",
+      data?.desc_ar ? data?.desc_ar : profile?.restaurant_description_ar
+    );
+    formData.append(
+      "owner_name",
+      data?.owner_name ? data?.owner_name : profile?.owner_name
+    );
+    formData.append(
+      "owner_name_ar",
+      data?.owner_name_ar ? data?.owner_name : profile?.owner_name_ar
+    );
     formData.append("email", profile?.email);
     formData.append("facebook", data?.fb ? data?.fb : profile?.facebook);
     formData.append("linkedin", data?.link ? data?.link : profile?.linkedin);
@@ -105,7 +127,7 @@ const EditProfile = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>My Profile</h2>
+                <h2>{t("EditPro")}</h2>
               </div>
               <form
                 className="row Comman_design_box comman_dashboard_form"
@@ -156,28 +178,28 @@ const EditProfile = () => {
                   </div>
                   <div className="row form-group mb-3">
                     <label className="label_bold" htmlFor="">
-                      Restaurant Details
+                      {t("RestDetails")}
                     </label>
-                  </div>
-                  <div className="col-6 form-group position-relative">
-                    <label className="set_label" htmlFor="">
-                      Restaurant Name
-                    </label>
-                    <input
-                      {...register("name", { required: false })}
-                      type="text"
-                      className={classNames("form-control", {
-                        "is-invalid": errors.name,
-                      })}
-                      name="name"
-                      defaultValue={profile?.restaurant_name}
-                    />
-                    {errors.name && (
-                      <small className="errorText  ">
-                        {errors.name?.message}
-                      </small>
-                    )}
-                    {/* <select
+
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        Restaurant Name (en)
+                      </label>
+                      <input
+                        {...register("name", { required: false })}
+                        type="text"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.name,
+                        })}
+                        name="name"
+                        defaultValue={profile?.restaurant_name}
+                      />
+                      {errors.name && (
+                        <small className="errorText  ">
+                          {errors.name?.message}
+                        </small>
+                      )}
+                      {/* <select
                       className="form-select form-control"
                       aria-label="Default select example">
                       <option selected="">Gateway Restaurant</option>
@@ -185,28 +207,49 @@ const EditProfile = () => {
                       <option value={2}>Two</option>
                       <option value={3}>Three</option>
                     </select> */}
-                  </div>
-                  <div className="col-6 form-group position-relative">
-                    <label className="set_label" htmlFor="">
-                      Restaurant Address
-                    </label>
+                    </div>
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        {t("RestN")} (ar)
+                      </label>
+                      <input
+                        {...register("name_ar", { required: false })}
+                        type="text"
+                        lang="ar"
+                        dir="rtl"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.name_ar,
+                        })}
+                        name="name_ar"
+                        defaultValue={profile?.restaurant_name_ar}
+                      />
+                      {errors.name_ar && (
+                        <small className="errorText  ">
+                          {errors.name_ar?.message}
+                        </small>
+                      )}
+                    </div>
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        Restaurant Address (en)
+                      </label>
 
-                    <input
-                      {...register("address", { required: false })}
-                      type="text"
-                      className={classNames("form-control", {
-                        "is-invalid": errors.address,
-                      })}
-                      name="address"
-                      defaultValue={profile?.restaurant_address}
-                    />
-                    {errors.address && (
-                      <small className="errorText  ">
-                        {errors.address?.message}
-                      </small>
-                    )}
+                      <input
+                        {...register("address", { required: false })}
+                        type="text"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.address,
+                        })}
+                        name="address"
+                        defaultValue={profile?.restaurant_address}
+                      />
+                      {errors.address && (
+                        <small className="errorText  ">
+                          {errors.address?.message}
+                        </small>
+                      )}
 
-                    {/* <select
+                      {/* <select
                       className="form-select form-control"
                       aria-label="Default select example">
                       <option selected="">USA</option>
@@ -214,39 +257,128 @@ const EditProfile = () => {
                       <option value={2}>Two</option>
                       <option value={3}>Three</option>
                     </select> */}
-                  </div>
-                  <div className="col-12 form-group position-relative mb-0">
-                    <label className="set_label" htmlFor="">
-                      Restaurant Description
-                    </label>
-                    <textarea
-                      {...register("desc", { required: false })}
-                      type="text"
-                      className={classNames(" textarea_design", {
-                        "is-invalid": errors.desc,
-                      })}
-                      name="desc"
-                      defaultValue={profile?.restaurant_description}
-                    />
-                    {errors.desc && (
-                      <small className="errorText  ">
-                        {errors.desc?.message}
-                      </small>
-                    )}
-                  </div>
-                  <div className="form-group col-6 choose_file position-relative mt-2">
-                    <label htmlFor="upload_videoTwo"> Upload Logo</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      defaultValue=""
-                      name="logo"
-                      id="upload_videotwo"
-                      onChange={(e) => onFileSelectionLogo(e, "logo", "logoImg")}
-                    />
+                    </div>
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        {t("RestAddress")} (ar) 
+                      </label>
+
+                      <input
+                        {...register("address_ar", { required: false })}
+                        type="text"
+                        lang="ar"
+                        dir="rtl"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.address_ar,
+                        })}
+                        name="address_ar"
+                        defaultValue={profile?.restaurant_address_ar}
+                      />
+                      {errors.address_ar && (
+                        <small className="errorText  ">
+                          {errors.address_ar?.message}
+                        </small>
+                      )}
+                    </div>
+
+                    <div className="col-6 form-group position-relative mb-3">
+                      <label className="set_label" htmlFor="">
+                        Restaurant Description (en)
+                      </label>
+                      <textarea
+                        {...register("desc", { required: false })}
+                        type="text"
+                        className={classNames(" textarea_design", {
+                          "is-invalid": errors.desc,
+                        })}
+                        name="desc"
+                        defaultValue={profile?.restaurant_description}
+                      />
+                      {errors.desc && (
+                        <small className="errorText  ">
+                          {errors.desc?.message}
+                        </small>
+                      )}
+                    </div>
+
+                    <div className="col-6 form-group position-relative mb-0">
+                      <label className="set_label" htmlFor="">
+                      {t("RestDesc")} (ar) 
+                      </label>
+                      <textarea
+                        {...register("desc_ar", { required: false })}
+                        type="text"
+                        className={classNames(" textarea_design", {
+                          "is-invalid": errors.desc_ar,
+                        })}
+                        lang="ar"
+                        dir="rtl"
+                        name="desc_ar"
+                        defaultValue={profile?.restaurant_description_ar}
+                      />
+                      {errors.desc_ar && (
+                        <small className="errorText  ">
+                          {errors.desc_ar?.message}
+                        </small>
+                      )}
+                    </div>
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        Owner Name (en)
+                      </label>
+                      <input
+                        {...register("owner_name", { required: false })}
+                        type="text"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.owner_name,
+                        })}
+                        name="name"
+                        defaultValue={profile?.owner_name}
+                      />
+                      {errors.owner_name && (
+                        <small className="errorText  ">
+                          {errors.owner_name?.message}
+                        </small>
+                      )}
+                    </div>
+
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                         {t("RestOwn")}  (ar)
+                      </label>
+                      <input
+                        {...register("owner_name_ar", { required: false })}
+                        type="text"
+                        lang="ar"
+                        dir="rtl"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.owner_name_ar,
+                        })}
+                        name="owner_name_ar"
+                        defaultValue={profile?.owner_name_ar}
+                      />
+                      {errors.owner_name_ar && (
+                        <small className="errorText  ">
+                          {errors.owner_name_ar?.message}
+                        </small>
+                      )}
+                    </div>
+                    <div className="form-group col-6 choose_file position-relative mt-2">
+                      <label htmlFor="upload_videoTwo"> {t("UpLogo")}</label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        defaultValue=""
+                        name="logo"
+                        id="upload_videotwo"
+                        onChange={(e) =>
+                          onFileSelectionLogo(e, "logo", "logoImg")
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="col-12 mb-4">
+                {/* <div className="col-12 mb-4">
                   <div className="col-12 form-group mb-3">
                     <label className="label_bold" htmlFor="">
                       Social Media Accounts
@@ -298,12 +430,13 @@ const EditProfile = () => {
                     <a className="add_new_link">Add New Link</a>
                   </div>
 
-                  <button
+                 
+                </div> */}
+                <button
                     className="comman_btn w-50 text-center mt-4"
                     type="submit">
-                    Update Details
+                    {t("Save")}
                   </button>
-                </div>
               </form>
             </div>
           </div>

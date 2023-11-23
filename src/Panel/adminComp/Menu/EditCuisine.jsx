@@ -18,6 +18,7 @@ import classNames from "classnames";
 import Select from "react-select";
 import deleteIcon from "../../assets/img/delete-bin-line.svg";
 import { Button } from "antd";
+import { t } from "i18next";
 const EditCuisine = () => {
   const [slide, setSlide] = useState("MenuM");
   const [cateName, setCateName] = useState("");
@@ -48,7 +49,6 @@ const EditCuisine = () => {
   const onFileSelection = (e, key) => {
     setFiles({ ...files, [key]: e.target.files[0] });
   };
-
 
   const getAllCategories = async (key) => {
     const { data } = await AllCategories({
@@ -109,10 +109,10 @@ const EditCuisine = () => {
         icon: "success",
         confirmButtonText: "Okay",
         confirmButtonColor: "#e25829",
-        timer:"2000"
+        timer: "2000",
       });
       getAllCuisines();
-      window.location.reload(false)
+      window.location.reload(false);
     }
   };
 
@@ -137,6 +137,10 @@ const EditCuisine = () => {
     });
     let formData = new FormData();
     formData.append("name", data?.name ? data?.name : cuisines?.name);
+    formData.append(
+      "name_ar",
+      data?.name_ar ? data?.name_ar : cuisines?.name_ar
+    );
     formData.append(
       "categoryId",
       data?.categoryId ? data?.categoryId : cuisines?.categoryId?._id
@@ -190,7 +194,9 @@ const EditCuisine = () => {
         <div className="admin_main_part">
           <div className="row">
             <div className="col-12 heading_main mb-4">
-              <h2>Edit Product</h2>
+              <h2>
+                {t("Edit")} {t("Cuis")}
+              </h2>
             </div>
             <div className="col-12">
               <div className="row comman-new-design">
@@ -201,7 +207,7 @@ const EditCuisine = () => {
                     onSubmit={handleSubmit(onSubmit)}>
                     <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Display Name
+                        Name (en)
                       </label>
                       <input
                         {...register("name", { required: true })}
@@ -217,16 +223,17 @@ const EditCuisine = () => {
                           {errors.name?.message}
                         </small>
                       )}
-                     
                     </div>
 
                     <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Display Name (ar)
+                        {t("Name")} (ar)
                       </label>
                       <input
                         {...register("name_ar", { required: true })}
                         type="text"
+                        lang="ar"
+                        dir="rtl"
                         className={classNames("form-control", {
                           "is-invalid": errors.name,
                         })}
@@ -238,12 +245,11 @@ const EditCuisine = () => {
                           {errors.name_ar?.message}
                         </small>
                       )}
-                     
                     </div>
 
                     <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Categories
+                        {t("Cate")}
                       </label>
                       <select
                         {...register("categoryId", {
@@ -267,12 +273,11 @@ const EditCuisine = () => {
                           {errors.categoryId?.message}
                         </small>
                       )}
-                    
                     </div>
 
                     <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Addon
+                        {t("AddOn")}
                       </label>
                       <Select
                         isMulti
@@ -286,7 +291,7 @@ const EditCuisine = () => {
                     </div>
                     <div className="col-6 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Featured Image
+                        {t("Image")}
                       </label>
                       <div className="upload_file">
                         <input
@@ -298,7 +303,10 @@ const EditCuisine = () => {
                         />
                         <label className="file_upload" htmlFor="file_upload">
                           <div>
-                            <img src={require("../../assets/img/upload.png")} alt="" />
+                            <img
+                              src={require("../../assets/img/upload.png")}
+                              alt=""
+                            />
 
                             <span>
                               File Format: JPG, JPEG, PNG or PDF Size: Upto
@@ -318,26 +326,23 @@ const EditCuisine = () => {
                               }
                               alt=""
                             />
-                            {
-                              cuisines?.image &&
-                            
-                            <a className="shadow">
-                              <img
-                                onClick={() => {
-                                  // document
-                                  //   .getElementById("file_upload")
-                                  //   .click();
-                                  DeleteCuisineImg(cuisines?._id);
-                                }}
-                                src={deleteIcon}
-                                alt=""
-                              />
-                            </a>
-}
+                            {cuisines?.image && (
+                              <a className="shadow">
+                                <img
+                                  onClick={() => {
+                                    // document
+                                    //   .getElementById("file_upload")
+                                    //   .click();
+                                    DeleteCuisineImg(cuisines?._id);
+                                  }}
+                                  src={deleteIcon}
+                                  alt=""
+                                />
+                              </a>
+                            )}
                           </div>
                         </div>
                       </div>
-                      
                     </div>
                     {/* <div className="col-2 form-group position-relative">
                       <label className="set_label without_input" htmlFor="">
@@ -359,7 +364,7 @@ const EditCuisine = () => {
 
                     <div className="col-4 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Price
+                        {t("Price")}
                       </label>
                       <input
                         {...register("price", { required: true })}
@@ -381,7 +386,7 @@ const EditCuisine = () => {
                     </div>
                     <div className="col-2 form-group position-relative">
                       <label className="set_label without_input" htmlFor="">
-                        Status
+                        {t("Status")}
                       </label>
                       <div className="text_toggle">
                         <div className="check_toggle">
@@ -412,7 +417,7 @@ const EditCuisine = () => {
                             </Button>
                           ) : (
                             <button className="btns_new_bg w-100" type="submit">
-                              Save
+                              {t("Save")}
                             </button>
                           )}
                         </div>
@@ -422,7 +427,7 @@ const EditCuisine = () => {
                             onClick={() => {
                               navigate(-1);
                             }}>
-                            Back
+                            {t("Back")}
                           </a>
                         </div>
                       </div>

@@ -12,6 +12,7 @@ import {
   exportTransactData,
   exportTransactionData,
 } from "../adminLogin/httpServicesAdmin/adminApis";
+import { t } from "i18next";
 
 const Dashboard = () => {
   const [slide, setSlide] = useState("Dash");
@@ -96,7 +97,7 @@ const Dashboard = () => {
         <div className="admin_main_part">
           <div className="row">
             <div className="col-12 heading_main mb-4">
-              <h2>Restaurants</h2>
+              <h2>{t("Restaurant")}</h2>
             </div>
             <div className="col-12 mb-4">
               <div className="row statics_part">
@@ -104,7 +105,7 @@ const Dashboard = () => {
                   <div className="statics_box">
                     <div className="statics_left">
                       <strong>{count?.totalTables}</strong>
-                      <span>Total QR</span>
+                      <span>{t("TotalQR")}</span>
                       <div className="">
                         <span>
                           <img
@@ -133,7 +134,7 @@ const Dashboard = () => {
                   <div className="statics_box">
                     <div className="statics_left">
                       <strong>{count?.totalRevenue}</strong>
-                      <span>Grand Total</span>
+                      <span>{t("GrandTotal")}</span>
                       <div className="">
                         <span>
                           <img
@@ -162,7 +163,7 @@ const Dashboard = () => {
                   <div className="statics_box">
                     <div className="statics_left">
                       <strong>{count?.totalOrders}</strong>
-                      <span>Total orders</span>
+                      <span>{t("TotalOrders")}</span>
                       <div className="">
                         <span>
                           <img
@@ -196,7 +197,7 @@ const Dashboard = () => {
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by Order ID"
+                    placeholder={t("SOD")}
                     onChange={(e) => {
                       getAllTakeaways(e.target.value);
                     }}
@@ -304,12 +305,12 @@ const Dashboard = () => {
                     <table className="table">
                       <thead>
                         <tr>
-                          <th>Order Id</th>
-                          <th>Table ID</th>
-                          <th>Order ID</th>
-                          <th>Pickup Time</th>
-                          <th>Status</th>
-                          <th>Action</th>
+                          <th>{t("S_no")}</th>
+                          <th>{t("TableId")}</th>
+                          <th>{t("OrderId")}</th>
+                          <th>{t("PickTime")}</th>
+                          <th>{t("Status")}</th>
+                          <th>{t("Action")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -338,7 +339,7 @@ const Dashboard = () => {
                                     `/restaurant/dashboard/booking/View/${item?._id}`
                                   );
                                 }}>
-                                View
+                                {t("View")}
                               </a>
                             </td>
                           </tr>

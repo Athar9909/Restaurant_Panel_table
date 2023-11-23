@@ -10,6 +10,7 @@ import {
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { t } from "i18next";
 
 const ViewWaitingReq = () => {
   const [slide, setSlide] = useState("BookM");
@@ -74,27 +75,35 @@ const ViewWaitingReq = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>Table Request</h2>
+                <h2>
+                  {t("Req")} {t("Table")}
+                </h2>
               </div>
               <div className="col-12 mb-4">
                 <div className="row Customer_Information">
                   <div className="col-12">
                     <div className="row Customer_infotop align-items-center">
                       <div className="col">
-                        <h3>Customer Information:</h3>
+                        <h3>
+                          {t("Info")} {t("Req")} :
+                        </h3>
                       </div>
                       <div className="col-auto"></div>
                     </div>
                     <div className="row Customer_details">
                       <div className="col-3">
                         <div className="Customer_boxx">
-                          <strong>Customer Name</strong>
+                          <strong>
+                            {t("CustN")} {t("Name")}{" "}
+                          </strong>
                           <span>{location?.state?.name}</span>
                         </div>
                       </div>
                       <div className="col-3">
                         <div className="Customer_boxx">
-                          <strong>Customer Number</strong>
+                          <strong>
+                            {t("CustN")} {t("No_")}{" "}
+                          </strong>
                           <span>{location?.state?.num}</span>
                         </div>
                       </div>
@@ -108,14 +117,14 @@ const ViewWaitingReq = () => {
                   <div className="col-12">
                     <div className="row Customer_infotop align-items-center">
                       <div className="col">
-                        <h3>Request Status:</h3>
+                        <h3> {t("Status")} </h3>
                       </div>
                       <div className="col-auto"></div>
                     </div>
                     <div className="row Customer_details">
                       <div className="col-12">
                         <div className="Customer_boxx">
-                          <strong>Add Waiting Time</strong>
+                          <strong>{t("AWT")}</strong>
                           <input
                             type="time"
                             className="form-group border rounded"
@@ -130,7 +139,7 @@ const ViewWaitingReq = () => {
                             }}
                           />{" "}
                           <small>
-                            Please Set Time According to Open and Close Hours
+                          {t("desc2")}
                           </small>
                         </div>
 
@@ -139,7 +148,7 @@ const ViewWaitingReq = () => {
                           onClick={() => {
                             AddTime();
                           }}>
-                          {location?.state?.time ? "Change Time" : "Save Time"}
+                          {location?.state?.time ? "Change Time" : t("Save")}
                         </button>
                       </div>
                     </div>
@@ -152,12 +161,12 @@ const ViewWaitingReq = () => {
                   <div className="col-12">
                     <div className="row Customer_infotop align-items-center">
                       <div className="col">
-                        <h3>Alott Table:</h3>
+                        <h3>{t("Alott")} {t("Table")}:</h3>
                       </div>
                       <div className="col-auto"></div>
                     </div>
                     <div className="Customer_boxx py-4">
-                      <strong>Choose Table</strong>
+                      <strong>{t("Choose")} {t("Table")}</strong>
 
                       <select
                         className="form-select "

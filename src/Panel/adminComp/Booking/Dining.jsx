@@ -9,6 +9,7 @@ import {
   exportTransactionData,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 const Dining = () => {
   const [slide, setSlide] = useState("BookM");
@@ -67,15 +68,16 @@ const Dining = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>Dinings</h2>
+                <h2> {t("Dining")}</h2>
               </div>
+
               <div className="col-12 mb-4">
                 <div className="row statics_part">
                   <div className="col-md-4">
                     <div className="statics_box">
                       <div className="statics_left">
                         <strong>{count?.totalTables}</strong>
-                        <span>Total QR</span>
+                        <span>{t("TotalQR")}</span>
                         <div className="">
                           <span>
                             <img
@@ -104,7 +106,7 @@ const Dining = () => {
                     <div className="statics_box">
                       <div className="statics_left">
                         <strong>{count?.totalRevenue}</strong>
-                        <span>Grand Total</span>
+                        <span>{t("GrandTotal")}</span>
                         <div className="">
                           <span>
                             <img
@@ -133,7 +135,7 @@ const Dining = () => {
                     <div className="statics_box">
                       <div className="statics_left">
                         <strong>{count?.totalOrders}</strong>
-                        <span>Total orders</span>
+                        <span>{t("TotalOrders")}</span>
                         <div className="">
                           <span>
                             <img
@@ -160,6 +162,7 @@ const Dining = () => {
                   </div>
                 </div>
               </div>
+
               <div className="col-12 mb-4">
                 <form action="#" className="row search_part">
                   <div className="form-group col-12 position-relative">
@@ -167,7 +170,7 @@ const Dining = () => {
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search Order Id"
+                      placeholder={t("SOD")}
                       onChange={(e) => {
                         getAllDinings(e.target.value);
                       }}
@@ -188,11 +191,11 @@ const Dining = () => {
                       <table className="table">
                         <thead>
                           <tr>
-                            <th>Order Id</th>
-                            <th>Table ID</th>
-                            <th>Order ID</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>{t("S_no")}</th>
+                            <th>{t("TableId")}</th>
+                            <th>{t("OrderId")}</th>
+                            <th>{t("Status")}</th>
+                            <th>{t("Action")}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -210,7 +213,7 @@ const Dining = () => {
                                     );
                                   }}
                                   className="table_btn">
-                                  View
+                                  {t("View")}
                                 </a>
                               </td>
                             </tr>

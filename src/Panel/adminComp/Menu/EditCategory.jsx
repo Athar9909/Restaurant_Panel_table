@@ -9,16 +9,20 @@ import {
 import Swal from "sweetalert2";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { t } from "i18next";
 
 const EditCategory = () => {
   const [slide, setSlide] = useState("MenuM");
   const [cateName, setCateName] = useState("");
+  const [cateNameAr, setCateNameAr] = useState("");
+
   let location = useLocation();
   let { id } = useParams();
   let navigate = useNavigate();
   const onSave = async () => {
     const { data } = await EditCategoryDetails({
       name: cateName,
+      name_ar: cateNameAr,
       categoryId: id,
     });
     if (!data.error) {
@@ -42,28 +46,43 @@ const EditCategory = () => {
         <div className="admin_main_part">
           <div className="row">
             <div className="col-12 heading_main mb-4">
-              <h2>Edit Category</h2>
+              <h2>
+                {t("Edit")} {t("Cate")}
+              </h2>
             </div>
             <div className="col-12">
               <div className="row comman-new-design">
                 <div className="col-12">
                   <form className="comman_form row" action="#">
                     <div className="p_form form-group col-12">
-                      <p>
-                        Product Selling Categories can be defined here like...
-                        Beverages, Bakery, Breads, Dairy Items{" "}
-                      </p>
+                      <p>{t("desc1")}</p>
                     </div>
                     <div className="col-6 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Name
+                        Name (en)
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue={location?.state}
+                        defaultValue={location?.state?.name}
                         onChange={(e) => {
                           setCateName(e.target.value);
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        {t("Name")} (ar)
+                      </label>
+                      <input
+                        type="text"
+                        lang="ar"
+                        dir="rtl"
+                        className="form-control"
+                        defaultValue={location?.state?.name_ar}
+                        onChange={(e) => {
+                          setCateNameAr(e.target.value);
                         }}
                       />
                     </div>
@@ -72,14 +91,14 @@ const EditCategory = () => {
                       <div className="row">
                         <div className="col-4">
                           <a className="btns_new_bg w-100" onClick={onSave}>
-                            Save
+                            {t("Save")}
                           </a>
                         </div>
                         <div className="col-4">
                           <a
                             className="btns_new_border w-100"
                             onClick={() => navigate(-1)}>
-                            Back
+                            {t("Back")}
                           </a>
                         </div>
                       </div>

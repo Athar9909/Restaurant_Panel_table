@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { GetProfileDetail } from "../adminLogin/httpServicesAdmin/adminApis";
+import Cookies from "js-cookie";
+import i18next from "i18next";
 
 const Profile = ({ slide, getBarClick, getBar }) => {
   const navigate = useNavigate();
@@ -9,10 +11,21 @@ const Profile = ({ slide, getBarClick, getBar }) => {
   const width = window.innerWidth;
   const [sideBar, setSideBar] = useState(width < 768 ? false : true);
   const [profile, setProfile] = useState();
+  const [currentLangCode, setCurrentLangCode] = useState(
+    Cookies.get("i18next") || "en"
+  );
   useEffect(() => {
     setSlideState(slide);
     getProfile();
   }, []);
+
+  useEffect(() => {
+    if (currentLangCode === "ar") {
+      document.body.dir = "rtl";
+    } else {
+      document.body.dir = "ltr";
+    }
+  }, [currentLangCode]);
 
   const getProfile = async (key) => {
     const { data } = await GetProfileDetail();
@@ -66,11 +79,11 @@ const Profile = ({ slide, getBarClick, getBar }) => {
               <div className="name">
                 {" "}
                 <img
-                style={{
-                  borderRadius:"50%",
-                  height:"2rem"
-                }}
-                width={30}
+                  style={{
+                    borderRadius: "50%",
+                    height: "2rem",
+                  }}
+                  width={30}
                   id="coverImg"
                   src={
                     profile?.cover_image
@@ -81,6 +94,28 @@ const Profile = ({ slide, getBarClick, getBar }) => {
                 />
               </div>
             </a>
+          </div>
+          <div className="col-auto ">
+            <Link
+              className="comman_btn px-3 bg-white text-dark fw-bold"
+              to=""
+              onClick={() => {
+                i18next.changeLanguage(currentLangCode === "en" ? "ar" : "en");
+                setCurrentLangCode(currentLangCode === "en" ? "ar" : "en");
+                window.location.reload(false);
+              }}>
+              <img
+                className="mx-2"
+                width={30}
+                src={
+                  currentLangCode === "en"
+                    ? require("../../assets/img/Arabic.png")
+                    : require("../../assets/img/usa.png")
+                }
+                alt=""
+              />
+              {currentLangCode === "en" ? "عربى" : "English"}
+            </Link>
           </div>
           <div className="col-auto pe-5 ps-5">
             <a

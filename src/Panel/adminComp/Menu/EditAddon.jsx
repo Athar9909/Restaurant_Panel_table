@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { Button } from "antd";
+import { t } from "i18next";
 
 const EditAddon = () => {
   const [slide, setSlide] = useState("MenuM");
@@ -44,6 +45,7 @@ const EditAddon = () => {
       setOptions(values?.options);
       reset({
         name: values?.name,
+        name_ar: values?.name_ar,
       });
     }
   };
@@ -73,6 +75,7 @@ const EditAddon = () => {
     let AddOn = options?.map(({ _id, ...options }) => options);
     const res = await EditAddonDetails({
       name: data?.name,
+      name_ar: data?.name_ar,
       options: AddOn,
       addOnId: id,
     });
@@ -100,7 +103,9 @@ const EditAddon = () => {
         <div className="admin_main_part">
           <div className="row">
             <div className="col-12 heading_main mb-4">
-              <h2>Edit Addon</h2>
+              <h2>
+                {t("Cate")} {t("AddOn")}
+              </h2>
             </div>
             <div className="col-12">
               <div className="row comman-new-design">
@@ -109,9 +114,9 @@ const EditAddon = () => {
                     className="comman_form row"
                     action="#"
                     onSubmit={handleSubmit(onSubmit)}>
-                    <div className="col-12 form-group position-relative">
+                    <div className="col-6 form-group position-relative">
                       <label className="set_label" htmlFor="">
-                        Name
+                        Name (en)
                       </label>
                       <input
                         {...register("name", { required: true })}
@@ -128,8 +133,27 @@ const EditAddon = () => {
                       )}
                     </div>
 
+                    <div className="col-6 form-group position-relative">
+                      <label className="set_label" htmlFor="">
+                        {t("Name")} (ar)
+                      </label>
+                      <input
+                        {...register("name_ar", { required: true })}
+                        type="text"
+                        className={classNames("form-control", {
+                          "is-invalid": errors.name_ar,
+                        })}
+                        name="name_ar"
+                      />
+                      {errors.name_ar && (
+                        <small className="errorText  ">
+                          {errors.name_ar?.message}
+                        </small>
+                      )}
+                    </div>
+
                     <div className="col-12 form-group options_box">
-                      <h2 className="options_head">Options</h2>
+                      <h2 className="options_head">{t("OptionsN")}</h2>
                       {options?.map((item, ind) => (
                         <div className="row">
                           <div className="col-4 form-group mb-3 position-relative">
@@ -144,10 +168,25 @@ const EditAddon = () => {
                               defaultValue={item?.name}
                               onChange={(e) => handleChange(ind, e)}
                             />
+                          </div>{" "}
+                          <div className="col-4 form-group mb-3 position-relative">
+                            <label className="set_label" htmlFor="">
+                              {t("Name")} (ar)
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder=""
+                              name="name_ar"
+                              lang="ar"
+                              dir="rtl"
+                              defaultValue={item?.name_ar}
+                              onChange={(e) => handleChange(ind, e)}
+                            />
                           </div>
                           <div className="col-4 form-group mb-3 position-relative">
                             <label className="set_label" htmlFor="">
-                              Price
+                              {t("Price")}
                             </label>
                             <input
                               type="number"
@@ -215,7 +254,7 @@ const EditAddon = () => {
                     </div> */}
                     <div className="col-4 form-group position-relative">
                       <label className="set_label without_input" htmlFor="">
-                        Status
+                        {t("Status")}
                       </label>
                       <div className="text_toggle">
                         <div className="check_toggle">
@@ -246,7 +285,7 @@ const EditAddon = () => {
                             </Button>
                           ) : (
                             <button className="btns_new_bg w-100" type="submit">
-                              Save
+                              {t("Save")}
                             </button>
                           )}
                         </div>
@@ -256,7 +295,7 @@ const EditAddon = () => {
                             onClick={() => {
                               navigate(-1);
                             }}>
-                            Back
+                            {t("Back")}
                           </a>
                         </div>
                       </div>

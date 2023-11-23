@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Select from "react-select";
 import { Button } from "antd";
+import { t } from "i18next";
 
 const CuisineManage = () => {
   const [slide, setSlide] = useState("MenuM");
@@ -124,6 +125,7 @@ const CuisineManage = () => {
     });
     let formData = new FormData();
     formData.append("name", data?.name);
+    formData.append("name_ar", data?.name_ar);
     formData.append("categoryId", data?.categoryId);
     formData.append("mainIngredients", JSON.stringify(data?.mainIngredients));
     formData.append("addOns", JSON.stringify(addons));
@@ -167,7 +169,7 @@ const CuisineManage = () => {
         <div className="admin_main_part">
           <div className="row">
             <div className="col-12 heading_main mb-4">
-              <h2>Cuisines Management</h2>
+              <h2>{t("CuisM")}</h2>
             </div>
             <div className="col-12 mb-4">
               <form action="#" className="row search_part">
@@ -176,7 +178,7 @@ const CuisineManage = () => {
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by Cuisine name"
+                    placeholder={t("SCuisN")}
                     onChange={(e) => {
                       getAllCuisines(e.target.value);
                     }}
@@ -191,7 +193,7 @@ const CuisineManage = () => {
                       className="comman_btn"
                       data-bs-toggle="modal"
                       data-bs-target="#additem">
-                      <strong>+ Add Cuisine</strong>
+                      <strong>+ {t("AddCuis")}</strong>
                     </a>
                   </div>
                 </div>
@@ -199,7 +201,8 @@ const CuisineManage = () => {
                   <div className="">
                     <a className="comman_btn" onClick={() => ExportMenu()}>
                       <strong>
-                        <i class="fa-solid fa-file-export mx-1"></i>Export
+                        <i class="fa-solid fa-file-export mx-1"></i>
+                        {t("Exp")}
                       </strong>
                     </a>
                   </div>
@@ -213,7 +216,7 @@ const CuisineManage = () => {
                       className="comman_btn"
                       type="primary"
                       loading={loader}>
-                      + Bulk Upload
+                      + {t("Bulk")}
                     </Button>
 
                     <input
@@ -312,14 +315,14 @@ const CuisineManage = () => {
                     <table className="table">
                       <thead>
                         <tr>
-                          <th>S. No</th>
-                          <th>Image</th>
+                          <th>{t("S_no")}</th>
+                          <th>{t("Image")}</th>
                           <th>Item Name (en)</th>
-                          <th>Item Name (ar)</th>
-                          <th>Category</th>
-                          <th>CPrice</th>
-                          <th>Addons</th>
-                          <th>Action</th>
+                          <th>{t("IName")} (ar)</th>
+                          <th>{t("Cate")}</th>
+                          <th>{t("Price")}</th>
+                          <th>{t("Addon")}</th>
+                          <th>{t("Action")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -348,7 +351,7 @@ const CuisineManage = () => {
                                     `/restaurant/dashboard/menu/edit-cuisine/${itm?._id}`
                                   );
                                 }}>
-                                Edit
+                                {t("Edit")}
                               </a>
                             </td>
                           </tr>
@@ -385,7 +388,7 @@ const CuisineManage = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Add New Cuisines
+                {t("AddCuis")}
               </h5>
               <button
                 type="button"
@@ -402,7 +405,7 @@ const CuisineManage = () => {
                   onSubmit={handleSubmit(onSubmit)}>
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Display Name
+                      Name (en)
                     </label>
                     <input
                       {...register("name", { required: true })}
@@ -419,29 +422,32 @@ const CuisineManage = () => {
                       </small>
                     )}
                   </div>
-                  {/* <div className="col-12 form-group position-relative">
-                    <label className="set_label" htmlFor="">
-                      Main Ingredients.
-                    </label>
-                    <input
-                      {...register("mainIngredients", { required: true })}
-                      type="text"
-                      className={classNames("form-control", {
-                        "is-invalid": errors.mainIngredients,
-                      })}
-                      name="mainIngredients"
-                      placeholder="Enter mainIngredients"
-                    />
-                    {errors.mainIngredients && (
-                      <small className="errorText  ">
-                        {errors.mainIngredients?.message}
-                      </small>
-                    )}
-                  </div> */}
 
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Select Category
+                      {t("Name")} (ar)
+                    </label>
+                    <input
+                      {...register("name_ar", { required: true })}
+                      type="text"
+                      lang="ar"
+                      dir="rtl"
+                      className={classNames("form-control", {
+                        "is-invalid": errors.name_ar,
+                      })}
+                      name="name_ar"
+                      placeholder="اكتب شيئا باللغة العربية"
+                    />
+                    {errors.name_ar && (
+                      <small className="errorText  ">
+                        {errors.name_ar?.message}
+                      </small>
+                    )}
+                  </div>
+
+                  <div className="col-12 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      {t("Select")} {t("Cate")}
                     </label>
 
                     <select
@@ -454,7 +460,10 @@ const CuisineManage = () => {
                       })}
                       name="categoryId"
                       aria-label="Default select example">
-                      <option selected="">Select Category</option>
+                      <option selected="">
+                        {" "}
+                        {t("Select")} {t("Cate")}..
+                      </option>
                       {cates?.map((itm, id) => (
                         <option value={itm?._id}>{itm?.name}</option>
                       ))}
@@ -467,7 +476,7 @@ const CuisineManage = () => {
                   </div>
                   <div className="col-12 form-group position-relative">
                     <label className=" mb-1" htmlFor="">
-                       Select Addon
+                      {t("Select")} {t("AddOn")}
                     </label>
                     <Select
                       isMulti
@@ -501,7 +510,7 @@ const CuisineManage = () => {
 
                   <div className="col-6 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Price
+                      {t("Price")}
                     </label>
                     <input
                       {...register("price", { required: true })}
@@ -518,10 +527,9 @@ const CuisineManage = () => {
                       </small>
                     )}
                   </div>
-             
 
                   <div className="form-group col-12 choose_file position-relative">
-                    <label htmlFor="upload_video"> Upload Image</label>
+                    <label htmlFor="upload_video">{t("Upload")}</label>
                     <input
                       type="file"
                       className="form-control"
@@ -541,7 +549,7 @@ const CuisineManage = () => {
                       </Button>
                     ) : (
                       <button className="small_bts_bg" type="submit">
-                        Add
+                        {t("Upload")}
                       </button>
                     )}
 

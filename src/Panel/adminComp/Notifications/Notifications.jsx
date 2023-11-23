@@ -3,6 +3,7 @@ import Profile from "../Dashboard/Profile";
 import Sidebar from "../Dashboard/Sidebar";
 import { GetAllNotifications } from "../adminLogin/httpServicesAdmin/adminApis";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 const Notifications = () => {
   const [slide, setSlide] = useState("NotiM");
@@ -35,7 +36,7 @@ const Notifications = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>All Notifications</h2>
+                <h2>{t('Notification')}</h2>
               </div>
 
               <div className="col-12 mb-4">
@@ -45,7 +46,7 @@ const Notifications = () => {
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search by Transaction Id"
+                      placeholder={t("SOrderId")}
                       onChange={(e) => {
                         getNotifications(e.target.value);
                       }}
@@ -67,10 +68,12 @@ const Notifications = () => {
                       <table className="table">
                         <thead>
                           <tr>
-                            <th>Date</th>
-                            <th>Order Id</th>
-                            <th>Title</th>
-                            <th>Description</th>
+                            <th>{t("Date")}</th>
+                            <th>{t("OrderId")}</th>
+                            <th>Title (en)</th>
+                            <th>{t("Title")}</th>
+                            <th>Description (en)</th>
+                            <th>{t("Desc")}</th>
 
                             {/* <th>Action</th> */}
                           </tr>
@@ -91,7 +94,9 @@ const Notifications = () => {
                                 </a>
                               </td>
                               <td>{item?.title_en}</td>
+                              <td>{item?.title_ar}</td>
                               <td>{item?.description_en}</td>
+                              <td>{item?.description_ar}</td>
                             </tr>
                           ))}
                         </tbody>

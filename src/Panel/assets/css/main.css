@@ -14,6 +14,7 @@ a {
     overflow: hidden;
     display: block;
   }
+
   p,
   h1,
   h2,
@@ -25,6 +26,43 @@ a {
   }
   a {
     text-decoration: none !important;
+  }
+  .ArabicRtl .sider_bar .accordion-button img {
+    margin-right: 0;
+    margin-left: 10px;
+    max-width: 18px;
+    transition: 0.3s all;
+    margin-top: -4px;
+  }
+  .ArabicRtl .sider_bar .accordion-button {
+    font-size: 18px;
+  }
+
+  .ArabicRtl .sider_bar .accordion-button.collapsed img {
+    filter: unset;
+  }
+  .ArabicRtl .sider_bar .accordion-button.collapsed::after {
+    transform: rotate(90deg);
+    margin-right: 5px;
+  }
+  .ArabicRtl .sider_bar .accordion-button:not(.collapsed)::after {
+    transform: rotate(0deg);
+    filter: invert(5) brightness(30.5);
+    margin-right: 5px;
+  }
+  .ArabicRtl .sider_bar .accordion-button.collapsed {
+    background-color: #fff !important;
+    color: #282c36 !important;
+  }
+  .ArabicRtl .search_bt {
+    border-radius: 14px 0 0 14px;
+    position: absolute !important;
+    top: 0 !important;
+    left: 12px !important;
+  }
+  .ArabicRtl .search_part .form-group .form-control {
+    border-radius: 14px;
+    padding-right: 70px;
   }
   .onboarding_left {
     background-image: url(../../assets/img/onboarding_bg.png);
@@ -441,6 +479,22 @@ a {
     color: #fff !important;
     transition: 0.3s all;
   }
+  .sider_bar:dir(rtl) .accordion-button {
+    box-shadow: unset !important;
+    border: 0;
+    border-radius: 0 30px 30px 0 !important;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 15px 22px;
+    font-family: "Gilroy" !important;
+    font-weight: 500;
+    font-style: normal;
+    background-color: #000 !important;
+    color: #fff !important;
+    transition: 0.3s all;
+  }
+
   .sider_bar .accordion-button img {
     filter: brightness(10.5);
     max-width: 16px;
@@ -839,7 +893,7 @@ a {
     width: 220px;
   }
   .small_bts_bg:hover {
-    background-color: #ff7622 !important; 
+    background-color: #ff7622 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
   }
@@ -1780,7 +1834,14 @@ canvas {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  background-image: linear-gradient(to bottom, #FD6452, #FC6D49, #FA7641, #F78039, #F38931);
+  background-image: linear-gradient(
+    to bottom,
+    #fd6452,
+    #fc6d49,
+    #fa7641,
+    #f78039,
+    #f38931
+  );
 }
 
 .QrStyleOP2 {
@@ -1789,8 +1850,15 @@ canvas {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  background-image: linear-gradient(to bottom, #FD6452, #FC6D49, #FA7641, #F78039, #F38931);
+  background-image: linear-gradient(
+    to bottom,
+    #fd6452,
+    #fc6d49,
+    #fa7641,
+    #f78039,
+    #f38931
+  );
 }
-.mt-8{
+.mt-8 {
   margin-top: 8rem !important;
 }

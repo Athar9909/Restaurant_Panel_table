@@ -6,6 +6,7 @@ import {
   exportTransactionData,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 
 const AllTransactions = () => {
@@ -58,7 +59,7 @@ const AllTransactions = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>All Transactions</h2>
+                <h2>{t('AllTransaction')}</h2>
               </div>
 
               <div className="col-5 mb-4 mt-5">
@@ -68,7 +69,7 @@ const AllTransactions = () => {
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search by Transaction Id"
+                      placeholder={t('STrans')}
                       onChange={(e) => {
                         getTransactions(e.target.value);
                       }}
@@ -88,7 +89,7 @@ const AllTransactions = () => {
                   className="form-design py-4 px-3  row align-items-end justify-content-between"
                   action="">
                   <div className="form-group mb-0 col-4">
-                    <label htmlFor="">From</label>
+                    <label htmlFor="">{t('from')}</label>
                     <input
                       type="date"
                       className="form-control"
@@ -99,7 +100,7 @@ const AllTransactions = () => {
                     />
                   </div>
                   <div className="form-group mb-0 col-4">
-                    <label htmlFor="">To</label>
+                    <label htmlFor="">{t('To')}</label>
                     <input
                       type="date"
                       className="form-control"
@@ -115,7 +116,7 @@ const AllTransactions = () => {
                         getTransactions();
                       }}
                       className="comman_btn text-decoration-none">
-                      <span>Search</span>
+                      <span>{t('Search')}</span>
                     </a>
                   </div>
                 </form>
@@ -124,11 +125,11 @@ const AllTransactions = () => {
                 <div className="mt-1">
                   <a className="comman_btn" onClick={() => ExportTransaction()}>
                     <strong>
-                      <i class="fa-solid fa-file-export mx-1"></i>Export
+                      <i class="fa-solid fa-file-export mx-1"></i>{t('Exp')}
                     </strong>
                   </a>
                 </div>
-              </div>
+            </div>
               <div className="col-12">
                 <div className="row">
                   <div className="col-12 table_comman mt-3">
@@ -136,12 +137,12 @@ const AllTransactions = () => {
                       <table className="table">
                         <thead>
                           <tr>
-                            <th>Order Date</th>
-                            <th>Order Id</th>
-                            <th>Table Id</th>
-                            <th>Transaction Id</th>
-                            <th>Order Type</th>
-                            <th>Total</th>
+                            <th>{t('Date')}</th>
+                            <th>{t('OrderId')}</th>
+                            <th>{t('TableN')}</th>
+                            <th>{t('TransId')}</th>
+                            <th>{t('OrderType')}</th>
+                            <th>{t('Total')}</th>
                             {/* <th>Action</th> */}
                           </tr>
                         </thead>

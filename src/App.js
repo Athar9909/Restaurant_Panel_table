@@ -23,10 +23,17 @@ import ResetPassword from "./Panel/adminComp/adminLogin/ResetPassword";
 import Notifications from "./Panel/adminComp/Notifications/Notifications";
 import ManageDiscount from "./Panel/adminComp/Discount/ManageDiscount";
 import PromoManage from "./Panel/adminComp/Discount/PromoManage";
+import { useState } from "react";
+import Cookies from "js-cookie";
 
 function App() {
+  const [currentLangCode, setCurrentLangCode] = useState(
+    Cookies.get("i18next") || "en"
+  );
+
   return (
-    <div className="App">
+    <div
+      className={currentLangCode === "ar" ? "App ArabicRtl" : "App"}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />

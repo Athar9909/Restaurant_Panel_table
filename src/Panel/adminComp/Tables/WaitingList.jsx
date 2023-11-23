@@ -11,6 +11,7 @@ import Profile from "../Dashboard/Profile";
 import Swal from "sweetalert2";
 import { QRCode } from "react-qrcode-logo";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 const WaitingList = () => {
   const [slide, setSlide] = useState("TableM");
@@ -69,7 +70,7 @@ const WaitingList = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>Waiting Table List</h2>
+                <h2>{t("WaitingT")}</h2>
               </div>
               <div className="col-12 mb-4">
                 <form action="#" className="row search_part">
@@ -78,7 +79,7 @@ const WaitingList = () => {
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search by Customer name"
+                      placeholder={t("SCustN")}
                       onChange={(e) => {
                         getAllWaitingTables(e.target.value);
                       }}
@@ -96,7 +97,7 @@ const WaitingList = () => {
                         data-bs-toggle="modal"
                         data-bs-target="#promocode"
                         className="comman_btn">
-                        <strong>Generate Waiting QR</strong>
+                        <strong>{t("GenWQr")}</strong>
                       </a>
 
                       <a
@@ -117,12 +118,13 @@ const WaitingList = () => {
                       <table className="table">
                         <thead>
                           <tr>
-                            <th>S. No</th>
-                            <th>Time</th>
-                            <th>Customer Name</th>
-                            <th>Mobile Number</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>{t("S_no")}</th>
+                            <th>{t("Time")}</th>
+                            <th>Customer Name (en)</th>
+                            <th>{t("CustN")} (ar)</th>
+                            <th>{t("No_")}</th>
+                            <th>{t("Status")}</th>
+                            <th>{t("Action")}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -131,6 +133,7 @@ const WaitingList = () => {
                               <td>{idx + 1}</td>
 
                               <td>{itm?.createdAt?.slice(0, 10)}</td>
+                              <td>{itm?.name}</td>
                               <td>{itm?.name}</td>
                               <td>{itm?.phone_number}</td>
 
@@ -153,7 +156,7 @@ const WaitingList = () => {
                                       }
                                     );
                                   }}>
-                                  Edit
+                                  {t("Edit")}
                                 </a>
                               </td>
                             </tr>
@@ -190,7 +193,7 @@ const WaitingList = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Add Waiting Table QR
+                {t("AddWaitingQR")}
               </h5>
               <button
                 type="button"
@@ -205,7 +208,7 @@ const WaitingList = () => {
                 <form className="row comman_dashboard_form" action="#">
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Select Branch
+                      {t("Select")} {t("Branch")}
                     </label>
 
                     <select
@@ -215,7 +218,10 @@ const WaitingList = () => {
                       onChange={(e) => {
                         setSelectBranch(e.target.value);
                       }}>
-                      <option selected="">Select Branch</option>
+                      <option selected="">
+                        {t("Select")} {t("Branch")}
+                      </option>
+
                       {branch?.map((itm, id) => (
                         <option value={itm?._id}>
                           {itm?.restaurantId?.restaurant_name}
@@ -229,7 +235,7 @@ const WaitingList = () => {
                       onClick={() => {
                         GenerateQR();
                       }}>
-                      Generate QR
+                      {t("GenQr")}
                     </a>
                     <button className="d-none" type="reset" id="reset1">
                       reset

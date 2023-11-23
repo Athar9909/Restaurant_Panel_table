@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { Button } from "antd";
+import { t } from "i18next";
 
 const AddOn = () => {
   const [slide, setSlide] = useState("MenuM");
@@ -82,6 +83,7 @@ const AddOn = () => {
 
     const res = await AddNewAddOn({
       name: data?.name,
+      name_ar: data?.name_ar,
       options: formValues,
     });
     if (!res?.data.error) {
@@ -115,7 +117,7 @@ const AddOn = () => {
         <div className="admin_main_part">
           <div className="row">
             <div className="col-12 heading_main mb-4">
-              <h2>AddOn Management</h2>
+              <h2>{t("AddOn")}</h2>
             </div>
             <div className="col-12 mb-4">
               <form action="#" className="row search_part">
@@ -124,7 +126,7 @@ const AddOn = () => {
                     className="form-control"
                     type="text"
                     id=""
-                    placeholder="Search by Addon name"
+                    placeholder={t("SAddOn")}
                     onChange={(e) => {
                       getAllAddons(e.target.value);
                     }}
@@ -139,7 +141,7 @@ const AddOn = () => {
                       className="comman_btn"
                       data-bs-toggle="modal"
                       data-bs-target="#additem">
-                      <strong>+ Add New Addon</strong>
+                      <strong>+ {t("AddAddon")}</strong>
                     </a>
                   </div>
                 </div>
@@ -152,13 +154,16 @@ const AddOn = () => {
                     <table className="table">
                       <thead>
                         <tr>
-                          <th>S.No</th>
-                          <th>Name</th>
-                          <th>Options</th>
+                          <th>{t("S_no")}</th>
+
+                          <th>Item Name (en)</th>
+                          <th>{t("IName")} (ar)</th>
+                          <th>Options (en)</th>
+                          <th>{t("OptionsN")} (ar)</th>
                           {/* <th>Max Limit</th> */}
                           {/* <th>Type</th> */}
-                          <th>Created At</th>
-                          <th>Action</th>
+                          <th>{t("Date")}</th>
+                          <th>{t("Action")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -166,9 +171,15 @@ const AddOn = () => {
                           <tr>
                             <td>{ind + 1}</td>
                             <td>{itm?.name}</td>
+                            <td>{itm?.name_ar}</td>
                             <td>
                               {itm?.options?.map((i, d) => (
                                 <li>{i.name}</li>
+                              ))}
+                            </td>
+                            <td>
+                              {itm?.options?.map((i, d) => (
+                                <li>{i.name_ar}</li>
                               ))}
                             </td>
                             <td>{itm?.createdAt?.slice(0, 10)}</td>
@@ -181,7 +192,7 @@ const AddOn = () => {
                                     `/restaurant/dashboard/menu/edit-addOn/${itm?._id}`
                                   );
                                 }}>
-                                Edit
+                                {t("Edit")}
                               </a>
                             </td>
                           </tr>
@@ -214,11 +225,11 @@ const AddOn = () => {
         tabIndex={-1}
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true">
-        <div className="modal-dialog modal-lg modal-dialog-centered ">
+        <div className="modal-dialog modal-xl modal-dialog-centered ">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Add New AddOn
+                {t("AddAddon")}
               </h5>
               <button
                 type="button"
@@ -235,7 +246,7 @@ const AddOn = () => {
                   onSubmit={handleSubmit(onSubmit)}>
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Option Name
+                      Option Name (en)
                     </label>
                     <input
                       {...register("name", { required: true })}
@@ -252,7 +263,27 @@ const AddOn = () => {
                       </small>
                     )}
                   </div>
-
+                  <div className="col-12 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      {t("Name")} (ar)
+                    </label>
+                    <input
+                      {...register("name_ar", { required: true })}
+                      type="text"
+                      lang="ar"
+                      dir="rtl"
+                      className={classNames("form-control", {
+                        "is-invalid": errors.name_ar,
+                      })}
+                      name="name_ar"
+                      placeholder="اكتب شيئا باللغة العربية"
+                    />
+                    {errors.name_ar && (
+                      <small className="errorText  ">
+                        {errors.name_ar?.message}
+                      </small>
+                    )}
+                  </div>
                   <div className="col-12 form-group position-relative">
                     <div className="form-group  col-12">
                       {(formValues || [])?.map((item, index) => (
@@ -268,18 +299,31 @@ const AddOn = () => {
                               required
                             />
                           </div>
-                          <div className="form-group  col-5 mt-1">
+                          <div className="form-group mb-3 col-6 mt-1">
+                            <input
+                              type="text"
+                              name="name_ar"
+                              lang="ar"
+                              dir="rtl"
+                              className="form-control"
+                              placeholder={t("OptionsN")}
+                              value={item?.name_ar || ""}
+                              onChange={(e) => handleChange(e, index)}
+                              required
+                            />
+                          </div>
+                          <div className="form-group  col-8 mt-1">
                             <input
                               type="text"
                               name="price"
                               className="form-control"
-                              placeholder="Enter Price"
+                              placeholder={t("Price")}
                               value={item?.price || ""}
                               onChange={(e) => handleChange(e, index)}
                               required
                             />
                           </div>
-                          <div className="form-group col-1  rmv_btn">
+                          <div className="form-group col-2  rmv_btn">
                             <button
                               className="comman_btn mt-1"
                               type="button"
@@ -298,7 +342,7 @@ const AddOn = () => {
                           className="comman_btn fs-6 px-4 py-3"
                           type="button"
                           onClick={() => addFormFields()}>
-                          + Add More
+                          + {t("AddMore")}
                         </button>
                       </div>
 
@@ -321,7 +365,7 @@ const AddOn = () => {
                       </Button>
                     ) : (
                       <button className="small_bts_bg" type="submit">
-                        + Add AddOn
+                        + {t("AddAddon")}
                       </button>
                     )}
 

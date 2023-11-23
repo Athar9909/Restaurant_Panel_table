@@ -9,11 +9,13 @@ import Profile from "../Dashboard/Profile";
 import Swal from "sweetalert2";
 import { QRCode } from "react-qrcode-logo";
 import { Button, Pagination } from "antd";
+import { t } from "i18next";
 const ManualTable = () => {
   const [slide, setSlide] = useState("TableM");
   const [sideBar, setSideBar] = useState();
   const [tables, setTables] = useState([]);
   const [tableName, setTableName] = useState([]);
+  const [tableNameAr, setTableNameAr] = useState([]);
   const [branch, setBranch] = useState([]);
   const [selectBranch, setSelectBranch] = useState([]);
   const [previewImg, setPreviewImg] = useState("");
@@ -47,6 +49,7 @@ const ManualTable = () => {
     setLoader(true);
     const { data } = await AddNewQR({
       name: tableName,
+      name_ar: tableNameAr,
       branchId: selectBranch,
     });
     if (!data?.error) {
@@ -76,7 +79,7 @@ const ManualTable = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>Manual Table Management</h2>
+                <h2>{t("ManualT")}</h2>
               </div>
               <div className="col-12 mb-4">
                 <form action="#" className="row search_part">
@@ -85,7 +88,7 @@ const ManualTable = () => {
                       className="form-control"
                       type="text"
                       id=""
-                      placeholder="Search by Table name"
+                      placeholder={t("SManual")}
                       onChange={(e) => {
                         getAllTables(e.target.value);
                       }}
@@ -103,7 +106,7 @@ const ManualTable = () => {
                         className="comman_btn"
                         data-bs-toggle="modal"
                         data-bs-target="#promocode">
-                        <strong>+Add Table</strong>
+                        <strong>+ {t("AddTable")}</strong>
                       </a>
                     </div>
                   </div>
@@ -117,9 +120,10 @@ const ManualTable = () => {
                       <table className="table">
                         <thead>
                           <tr>
-                            <th>S. No</th>
+                            <th>{t("S_no")}</th>
                             <th>Table Name</th>
-                            <th>QR code</th>
+                            <th>{t("TableN")} (ar)</th>
+                            <th>{t("QR_Code")}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -127,6 +131,7 @@ const ManualTable = () => {
                             <tr>
                               <td>{idx + 1}</td>
                               <td>{itm?.name}</td>
+                              <td>{itm?.name_ar}</td>
 
                               <td>
                                 <a
@@ -192,7 +197,7 @@ const ManualTable = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Add New Table
+                {t("AddTable")}
               </h5>
               <button
                 type="button"
@@ -205,7 +210,7 @@ const ManualTable = () => {
             <div className="modal-body">
               <div className="add_item_form">
                 <form className="row comman_dashboard_form" action="#">
-                  <div className="col-12 form-group position-relative">
+                  <div className="col-6 form-group position-relative">
                     <label className="set_label" htmlFor="">
                       Table Name
                     </label>
@@ -218,9 +223,25 @@ const ManualTable = () => {
                       }}
                     />
                   </div>
+
+                  <div className="col-6 form-group position-relative">
+                    <label className="set_label" htmlFor="">
+                      {t("TableN")} (ar)
+                    </label>
+                    <input
+                      type="text"
+                      lang="ar"
+                      dir="rtl"
+                      className="form-control"
+                      placeholder={t("TableN")}
+                      onChange={(e) => {
+                        setTableNameAr(e.target.value);
+                      }}
+                    />
+                  </div>
                   <div className="col-12 form-group position-relative">
                     <label className="set_label" htmlFor="">
-                      Select Branch
+                      {t("Select")} {t("Branch")}
                     </label>
 
                     <select
@@ -230,7 +251,9 @@ const ManualTable = () => {
                       onChange={(e) => {
                         setSelectBranch(e.target.value);
                       }}>
-                      <option selected="">Select Branch</option>
+                      <option selected="">
+                        {t("Select")} {t("Branch")}
+                      </option>
                       {branch?.map((itm, id) => (
                         <option value={itm?._id}>
                           {itm?.restaurantId?.restaurant_name}
@@ -252,7 +275,7 @@ const ManualTable = () => {
                         onClick={() => {
                           GenerateQR();
                         }}>
-                        Generate QR
+                      {t("GenQr")}
                       </a>
                     )}
 
