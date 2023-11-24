@@ -1,10 +1,12 @@
 import { Carousel } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { adminLogin } from "./httpServicesAdmin/adminApis";
 import classNames from "classnames";
 import Swal from "sweetalert2";
+import i18next from "i18next";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,6 +17,11 @@ const Login = () => {
   } = useForm();
 
   let AdminData = JSON.parse(localStorage.getItem("AdminSave"));
+  useEffect(() => {
+    i18next.changeLanguage("en");
+    Cookies.set("i18next", "en");
+    document.body.dir = "ltr";
+  }, []);
 
   function togglePassword() {
     var x = document.getElementById("password-Input");
@@ -320,7 +327,9 @@ const Login = () => {
                     <option value="+685">Samoa (+685)</option>
                     <option value="+378">San Marino (+378)</option>
                     <option value="+239">Sao Tome and Principe (+239)</option>
-                    <option value="+966" selected>Saudi Arabia (+966)</option>
+                    <option value="+966" selected>
+                      Saudi Arabia (+966)
+                    </option>
                     <option value="+221">Senegal (+221)</option>
                     <option value="+381">Serbia (+381)</option>
                     <option value="+248">Seychelles (+248)</option>
@@ -360,7 +369,7 @@ const Login = () => {
                     {...register("phone_number", { required: true })}
                     type="number"
                     placeholder="Enter Registered Number"
-                    style={{  
+                    style={{
                       width: "60%",
                     }}
                     className={classNames("form-control", {

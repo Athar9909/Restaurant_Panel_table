@@ -111,6 +111,12 @@ i18next
           RestOwn: "Owner Name",
           UpLogo: "Upload Logo",
           NoFile: "No File Choosen",
+          Active:"Active",
+          Inactive:"InActive",
+          ZitexBan:"ZitexBanner",
+          AddBan:"Add Banner",
+          Pen:"Pending",
+          Comp:"Completed"
         },
       },
       ar: {
@@ -216,6 +222,12 @@ i18next
           RestOwn: "اسم المالك",
           UpLogo: "تحميل الشعار",
           NoFile: "لم تقم باختيار ملف",
+          Active:"مفعل",
+          Inactive:"غير مفعل",
+          ZitexBan:" اللافتة",
+          AddBan:"اضافة لافتة",
+          Pen:"قيد التحضير",
+          Comp:"مكتمل"
         },
       },
     },

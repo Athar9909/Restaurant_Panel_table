@@ -64,6 +64,15 @@ a {
     border-radius: 14px;
     padding-right: 70px;
   }
+  .ArabicRtl .modal-header .btn-close {
+    padding: calc(var(--bs-modal-header-padding-y) * 0.5)
+      calc(var(--bs-modal-header-padding-x) * 0.5);
+    margin: calc(-0.5 * var(--bs-modal-header-padding-y))
+      calc(-0.5 * var(--bs-modal-header-padding-x))
+      calc(-0.5 * var(--bs-modal-header-padding-y)) auto;
+    position: relative;
+    right: 80%;
+  }
   .onboarding_left {
     background-image: url(../../assets/img/onboarding_bg.png);
     height: 100vh;

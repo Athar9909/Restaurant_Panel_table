@@ -127,7 +127,7 @@ const EditProfile = () => {
           <div className="admin_main_part">
             <div className="row">
               <div className="col-12 heading_main mb-4">
-                <h2>{t("EditPro")}</h2>
+                <h2>{t("EditProfile")}</h2>
               </div>
               <form
                 className="row Comman_design_box comman_dashboard_form"

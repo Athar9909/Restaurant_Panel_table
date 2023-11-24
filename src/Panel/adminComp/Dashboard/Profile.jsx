@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { GetProfileDetail } from "../adminLogin/httpServicesAdmin/adminApis";
+import {
+  ChnageLanguage,
+  GetProfileDetail,
+} from "../adminLogin/httpServicesAdmin/adminApis";
 import Cookies from "js-cookie";
 import i18next from "i18next";
 
@@ -26,6 +29,13 @@ const Profile = ({ slide, getBarClick, getBar }) => {
       document.body.dir = "ltr";
     }
   }, [currentLangCode]);
+
+  const ChangeLang = async (lng) => {
+    await ChnageLanguage({
+      language: lng,
+      deviceId: "123",
+    });
+  };
 
   const getProfile = async (key) => {
     const { data } = await GetProfileDetail();
@@ -102,7 +112,8 @@ const Profile = ({ slide, getBarClick, getBar }) => {
               onClick={() => {
                 i18next.changeLanguage(currentLangCode === "en" ? "ar" : "en");
                 setCurrentLangCode(currentLangCode === "en" ? "ar" : "en");
-                window.location.reload(false);
+                ChangeLang(currentLangCode === "en" ? "Arabic" : "English");
+                // window.location.reload(false);
               }}>
               <img
                 className="mx-2"
