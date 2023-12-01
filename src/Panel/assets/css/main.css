@@ -73,6 +73,18 @@ a {
     position: relative;
     right: 80%;
   }
+
+  .ArabicRtl .sider_bar .accordion-button i {
+    position: relative;
+    right: 0;
+    margin-right: 0;
+    margin-left: 10px;
+    max-width: 18px;
+    transition: 0.3s all;
+    margin-top: -4px;
+}
+
+
   .onboarding_left {
     background-image: url(../../assets/img/onboarding_bg.png);
     height: 100vh;

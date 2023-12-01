@@ -312,7 +312,11 @@ const Sidebar = ({ slide, getBarClick, getBar }) => {
               data-bs-target="#collapse9"
               aria-expanded="true"
               aria-controls="collapse9">
-              <i class={"fa fa-bell me-3"} aria-hidden="true"></i>
+              <img
+                width={11}
+                src={require("../../assets/img/dollar.png")}
+                alt=""
+              />{" "}
               {t("Notification")}
             </button>
           </h2>

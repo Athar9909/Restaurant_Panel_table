@@ -14,13 +14,16 @@ const Profile = ({ slide, getBarClick, getBar }) => {
   const width = window.innerWidth;
   const [sideBar, setSideBar] = useState(width < 768 ? false : true);
   const [profile, setProfile] = useState();
-  const [currentLangCode, setCurrentLangCode] = useState(
-    Cookies.get("i18next") || "en"
-  );
+
   useEffect(() => {
     setSlideState(slide);
     getProfile();
   }, []);
+  
+  const [currentLangCode, setCurrentLangCode] = useState(
+    Cookies.get("i18next") || "en"
+  );
+ 
 
   useEffect(() => {
     if (currentLangCode === "ar") {
@@ -113,7 +116,7 @@ const Profile = ({ slide, getBarClick, getBar }) => {
                 i18next.changeLanguage(currentLangCode === "en" ? "ar" : "en");
                 setCurrentLangCode(currentLangCode === "en" ? "ar" : "en");
                 ChangeLang(currentLangCode === "en" ? "Arabic" : "English");
-                // window.location.reload(false);
+                window.location.reload(false);
               }}>
               <img
                 className="mx-2"
