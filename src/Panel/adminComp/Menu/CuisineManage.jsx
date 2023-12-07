@@ -8,6 +8,7 @@ import {
   AllCategories,
   AllCousines,
   CsvImport,
+  DeleteCuisine,
   exportCuisines,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Swal from "sweetalert2";
@@ -152,6 +153,19 @@ const CuisineManage = () => {
       ]);
     } else {
       setLoader2(false);
+    }
+  };
+
+  const DeleteItem = async (id) => {
+    const { data } = await DeleteCuisine(id);
+    if (!data?.error) {
+      Swal.fire({
+        title: data?.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+      getAllCuisines();
     }
   };
 
@@ -352,6 +366,13 @@ const CuisineManage = () => {
                                   );
                                 }}>
                                 {t("Edit")}
+                              </a>
+                              <a
+                                className="table_btn_border ms-1"
+                                onClick={() => {
+                                  DeleteItem(itm?._id);
+                                }}>
+                                {t("Delete")}
                               </a>
                             </td>
                           </tr>

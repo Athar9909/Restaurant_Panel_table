@@ -4,6 +4,7 @@ import Profile from "../Dashboard/Profile";
 import {
   AddNewCategory,
   AllCategories,
+  DeleteCategory,
   EditCategoryStatus,
 } from "../adminLogin/httpServicesAdmin/adminApis";
 import Swal from "sweetalert2";
@@ -61,6 +62,19 @@ const CategoryManage = () => {
     if (!data.error) {
       Swal.fire({
         title: data.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#e25829",
+      });
+      getAllCategories();
+    }
+  };
+
+  const DeleteItem = async (id) => {
+    const { data } = await DeleteCategory(id);
+    if (!data?.error) {
+      Swal.fire({
+        title: data?.message,
         icon: "success",
         confirmButtonText: "Okay",
         confirmButtonColor: "#e25829",
@@ -241,6 +255,11 @@ const CategoryManage = () => {
                                   )
                                 }>
                                 {t("Edit")}
+                              </a>
+                              <a
+                                className="table_btn_border ms-1"
+                                onClick={() => DeleteItem(itm?._id)}>
+                                {t("Delete")}
                               </a>
                             </td>
                           </tr>
