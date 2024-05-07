@@ -330,7 +330,7 @@ const ManualTable = () => {
                   eyeRadius={15}
                   logoPaddingStyle="square"
                   logoPadding={5}
-                  value={`https://zitex.techgropsedev.com/${previewImg}`}
+                  value={`https://webapp.techgropsedev.com/${previewImg}`}
                 />
                 {/* <img src={previewImg} className="border"></img> */}
               </a>
